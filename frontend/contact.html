@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label for="sujet">Sujet <span class="required">*</span></label>
                         <input type="text" id="sujet" name="sujet" required 
-                               placeholder="De quoi voulez-vous parler ?">
+                               placeholder="SPARTIAAATE.... QUEL EST VOTRE METIER ?">
                         <span class="error-message" id="sujet-error"></span>
                     </div>
                     
@@ -48,8 +48,25 @@
                         <span class="error-message" id="message-error"></span>
                     </div>
                     
+                    <!-- Faux Captcha -->
+                    <div class="form-group captcha-container" id="captchaContainer">
+                        <label>Vérification de sécurité <span class="required">*</span></label>
+                        <div class="fake-captcha" id="fakeCaptcha">
+                            <div class="captcha-checkbox" id="captchaCheckbox">
+                                <div class="captcha-spinner" id="captchaSpinner"></div>
+                                <span class="captcha-checkmark" id="captchaCheckmark">✓</span>
+                            </div>
+                            <span class="captcha-text" id="captchaText">Je ne suis pas un robot</span>
+                            <div class="captcha-logo">
+                                <span class="captcha-logo-text">reCAPTCHA</span>
+                                <span class="captcha-logo-sub">Privacy - Terms</span>
+                            </div>
+                        </div>
+                        <div class="captcha-timer" id="captchaTimer"></div>
+                    </div>
+
                     <div class="form-group">
-                        <button type="submit" id="submitBtn" class="submit-btn">
+                        <button type="submit" id="submitBtn" class="submit-btn" disabled>
                             <span class="btn-text">Envoyer le message</span>
                             <span class="btn-emoji">🚀</span>
                         </button>
@@ -58,9 +75,6 @@
             </div>
         </section>
         
-        <div class="easter-egg-hint">
-            💡 Astuce : Essayez de taper le Konami Code... ou de faire trembler votre écran...
-        </div>
     </main>
     
     <footer>
