@@ -54,6 +54,12 @@ document.addEventListener('DOMContentLoaded', function() {
         screenInterface.style.left = screenLeft + 'px';
         screenInterface.style.width = screenWidth + 'px';
         screenInterface.style.height = screenHeight + 'px';
+        
+        // Ajuster la taille des polices en fonction de la taille de l'écran
+        const baseFontSize = Math.min(screenWidth, screenHeight);
+        screenInterface.style.setProperty('--screen-width', screenWidth + 'px');
+        screenInterface.style.setProperty('--screen-height', screenHeight + 'px');
+        screenInterface.style.setProperty('--base-font', baseFontSize + 'px');
     }
     
     // Attendre que l'image soit chargée
