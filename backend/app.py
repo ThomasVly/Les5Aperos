@@ -15,6 +15,11 @@ def index():
     """Page d'accueil"""
     return render_template('index.html')
 
+@app.route('/activity')
+def activity():
+    """Page d'activité principale"""
+    return render_template('activity.html')
+
 @app.route('/api/hello')
 def hello():
     """Exemple d'endpoint API"""
