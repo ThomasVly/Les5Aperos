@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Les5Aperos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🎉 Formulaire de Contact Épique 🎉</h1>
+        <p class="subtitle">Préparez-vous à vivre une expérience... inoubliable</p>
+    </header>
+    
+    <main>
+        <section id="contact-form-section">
+            <div class="form-container">
+                <h2>Envoyez-nous un message !</h2>
+                <p class="intro">Psst... Ce formulaire cache des secrets. Osez-vous les découvrir ? 👀</p>
+                
+                <form id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="nom">Nom <span class="required">*</span></label>
+                        <input type="text" id="nom" name="nom" required 
+                               placeholder="Votre nom (ou votre nom de super-héros)">
+                        <span class="error-message" id="nom-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="votre@email.com">
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sujet">Sujet <span class="required">*</span></label>
+                        <input type="text" id="sujet" name="sujet" required 
+                               placeholder="De quoi voulez-vous parler ?">
+                        <span class="error-message" id="sujet-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" rows="6" required 
+                                  placeholder="Écrivez votre message ici... Soyez créatif !"></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" id="submitBtn" class="submit-btn">
+                            <span class="btn-text">Envoyer le message</span>
+                            <span class="btn-emoji">🚀</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+        <div class="easter-egg-hint">
+            💡 Astuce : Essayez de taper le Konami Code... ou de faire trembler votre écran...
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Les5Aperos - INSA</p>
+        <p><a href="/" class="contact-link">🏠 Retour à l'accueil</a></p>
+    </footer>
+    
+    <!-- Modal de confirmation -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+</body>
+</html>
