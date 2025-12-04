@@ -3,6 +3,56 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contactForm');
     const modal = document.getElementById('successModal');
     const closeBtn = document.querySelector('.close');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Faux Captcha
+    let captchaVerified = false;
+    const fakeCaptcha = document.getElementById('fakeCaptcha');
+    const captchaSpinner = document.getElementById('captchaSpinner');
+    const captchaCheckmark = document.getElementById('captchaCheckmark');
+    const captchaText = document.getElementById('captchaText');
+    const captchaTimer = document.getElementById('captchaTimer');
+    
+    fakeCaptcha.addEventListener('click', function() {
+        if (captchaVerified || captchaSpinner.classList.contains('active')) return;
+        
+        captchaSpinner.classList.add('active');
+        captchaText.textContent = 'Vérification en cours...';
+        
+        let timeLeft = 2;
+        captchaTimer.textContent = `⏳ Analyse comportementale... ${timeLeft}s restantes`;
+        
+        const countdown = setInterval(() => {
+            timeLeft--;
+            const messages = [
+                'Analyse des pixels...',
+                'Vérification de l\'ADN numérique...',
+                'Consultation des serveurs de la NASA...',
+                'Interrogation de ChatGPT...',
+                'Calcul de Pi...',
+                'Téléchargement de plus de RAM...',
+                'Négociation avec les robots...',
+                'Vérification que vous n\'êtes pas un chat...'
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            captchaTimer.textContent = `⏳ ${randomMsg} ${timeLeft}s`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                captchaSpinner.classList.remove('active');
+                captchaCheckmark.classList.add('active');
+                captchaText.textContent = 'Vérifié !';
+                captchaTimer.textContent = '✅ Félicitations, vous êtes probablement humain !';
+                captchaVerified = true;
+                submitBtn.disabled = false;
+                
+                // Rires moqueurs
+                const laughAudio = new Audio('https://www.myinstants.com/media/sounds/evil-laugh.mp3');
+                laughAudio.volume = 0.5;
+                laughAudio.play().catch(() => {});
+            }
+        }, 1000);
+    });
     
     // Konami Code Easter Egg
     let konamiCode = [];
@@ -24,11 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     header.addEventListener('click', function() {
         clickCount++;
-        
         if (clickCount === 1) {
-            clickTimer = setTimeout(() => {
-                clickCount = 0;
-            }, 500);
+            clickTimer = setTimeout(() => clickCount = 0, 500);
         } else if (clickCount === 3) {
             clearTimeout(clickTimer);
             clickCount = 0;
@@ -36,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Validation du formulaire
+    // Validation et soumission du formulaire
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -51,9 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const response = await fetch('/api/contact', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
                 
@@ -72,71 +117,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Fermeture du modal
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-    
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
     window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
+        if (e.target === modal) modal.style.display = 'none';
     });
     
-    // Fonction de validation
+    // Validation du formulaire
     function validateForm() {
         let isValid = true;
+        const fields = ['nom', 'email', 'sujet', 'message'];
         
-        const nom = document.getElementById('nom');
-        const email = document.getElementById('email');
-        const sujet = document.getElementById('sujet');
-        const message = document.getElementById('message');
-        
-        // Reset errors
         document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
         
-        if (nom.value.trim() === '') {
-            showError('nom', 'Le nom est requis');
-            isValid = false;
-        }
-        
-        if (email.value.trim() === '') {
-            showError('email', 'L\'email est requis');
-            isValid = false;
-        } else if (!isValidEmail(email.value)) {
-            showError('email', 'L\'email n\'est pas valide');
-            isValid = false;
-        }
-        
-        if (sujet.value.trim() === '') {
-            showError('sujet', 'Le sujet est requis');
-            isValid = false;
-        }
-        
-        if (message.value.trim() === '') {
-            showError('message', 'Le message est requis');
-            isValid = false;
-        } else if (message.value.trim().length < 10) {
-            showError('message', 'Le message doit contenir au moins 10 caractères');
-            isValid = false;
-        }
+        fields.forEach(field => {
+            const el = document.getElementById(field);
+            const value = el.value.trim();
+            
+            if (value === '') {
+                showError(field, `Le ${field} est requis`);
+                isValid = false;
+            } else if (field === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                showError(field, "L'email n'est pas valide");
+                isValid = false;
+            } else if (field === 'message' && value.length < 10) {
+                showError(field, 'Le message doit contenir au moins 10 caractères');
+                isValid = false;
+            }
+        });
         
         return isValid;
     }
     
     function showError(fieldId, message) {
-        const errorElement = document.getElementById(fieldId + '-error');
-        errorElement.textContent = message;
+        document.getElementById(fieldId + '-error').textContent = message;
         document.getElementById(fieldId).style.borderColor = '#e74c3c';
     }
     
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-    
-    // Modal de succès
+    // Modals
     function showSuccessModal(nom) {
-        const modalBody = document.getElementById('modalBody');
-        modalBody.innerHTML = `
+        document.getElementById('modalBody').innerHTML = `
             <div class="success-animation">
                 <span class="emoji">🎉</span>
                 <h2>Félicitations ${nom} !</h2>
@@ -155,8 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showErrorModal() {
-        const modalBody = document.getElementById('modalBody');
-        modalBody.innerHTML = `
+        document.getElementById('modalBody').innerHTML = `
             <div class="success-animation">
                 <span class="emoji">😢</span>
                 <h2 style="color: #e74c3c;">Oups !</h2>
@@ -166,63 +184,53 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.style.display = 'block';
     }
     
-    // Easter Egg: Konami Code
+    // Easter Eggs
     function activateKonamiEasterEgg() {
-        document.body.classList.add('rainbow');
-        alert('🎮 KONAMI CODE ACTIVÉ ! Vous avez débloqué le mode Arc-en-ciel ! 🌈');
-        setTimeout(() => {
-            document.body.classList.remove('rainbow');
-        }, 10000);
+        const mainSection = document.querySelector('main');
+        mainSection.classList.add('rainbow-background');
+        setTimeout(() => mainSection.classList.remove('rainbow-background'), 10000);
     }
     
-    // Easter Egg: Shake
     function activateShakeEasterEgg() {
-        document.querySelector('.form-container').classList.add('shake');
-        setTimeout(() => {
-            document.querySelector('.form-container').classList.remove('shake');
-        }, 500);
-        alert('🎊 Vous avez trouvé l\'Easter Egg du triple-clic ! 🎊');
+        const container = document.querySelector('.form-container');
+        container.classList.add('shake');
+        setTimeout(() => container.classList.remove('shake'), 500);
     }
     
     // Confetti animation
     function createConfetti() {
         const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
-        const confettiCount = 50;
         
-        for (let i = 0; i < confettiCount; i++) {
+        for (let i = 0; i < 50; i++) {
             setTimeout(() => {
                 const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.top = '-10px';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animation = 'confetti-fall 3s linear';
-                confetti.style.zIndex = '9999';
-                
+                Object.assign(confetti.style, {
+                    position: 'fixed',
+                    left: Math.random() * 100 + '%',
+                    top: '-10px',
+                    width: '10px',
+                    height: '10px',
+                    backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+                    animation: 'confetti-fall 3s linear',
+                    zIndex: '9999'
+                });
                 document.body.appendChild(confetti);
-                
-                setTimeout(() => {
-                    confetti.remove();
-                }, 3000);
+                setTimeout(() => confetti.remove(), 3000);
             }, i * 30);
         }
     }
     
-    // Easter Egg: Messages spéciaux
-    const messageField = document.getElementById('message');
-    messageField.addEventListener('input', function() {
-        const text = this.value.toLowerCase();
-        
-        if (text.includes('konami')) {
-            this.style.background = 'linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3)';
-            this.style.backgroundSize = '400% 400%';
-            this.style.animation = 'rainbow 3s ease infinite';
-            this.style.color = 'white';
+    // Easter Egg: Message spécial
+    document.getElementById('message').addEventListener('input', function() {
+        if (this.value.toLowerCase().includes('evereast solutions')) {
+            Object.assign(this.style, {
+                background: 'linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3)',
+                backgroundSize: '400% 400%',
+                animation: 'rainbow 3s ease infinite',
+                color: 'white'
+            });
         } else {
-            this.style.background = 'white';
-            this.style.color = '#333';
+            Object.assign(this.style, { background: 'white', color: '#333' });
         }
     });
 });
