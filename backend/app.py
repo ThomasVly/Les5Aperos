@@ -3,26 +3,27 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-# Obtenir le chemin absolu du dossier frontend
+from config import Config, FRONTEND_DIR
+from routes import register_blueprints
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-FRONTEND_DIR = BASE_DIR / 'frontend'
 
-app = Flask(__name__, 
-            template_folder=str(FRONTEND_DIR),
-            static_folder=str(FRONTEND_DIR))
 
-@app.route('/')
-def index():
-    """Page d'accueil"""
-    return render_template('index.html')
+def create_app():
+    """Factory function pour créer l'application Flask"""
+    app = Flask(
+        __name__,
+        template_folder=str(FRONTEND_DIR),
+        static_folder=str(FRONTEND_DIR)
+    )
+    
+    app.config.from_object(Config)
+    register_blueprints(app)
+    
+    return app
 
-@app.route('/api/hello')
-def hello():
-    """Exemple d'endpoint API"""
-    return jsonify({
-        'message': 'Hello from Flask!',
-        'status': 'success'
-    })
+
+app = create_app()
 
 @app.route('/contact')
 def contact():
@@ -70,4 +71,8 @@ def submit_contact():
         }), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(
+        debug=Config.DEBUG,
+        host=Config.HOST,
+        port=Config.PORT
+    )

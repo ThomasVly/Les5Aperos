@@ -77,16 +77,6 @@ footer {
     width: 100%;
 }
 
-footer a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-footer a:hover {
-    color: #3498db;
-}
-
 .activity-link {
     display: inline-block;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
