@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask
 
 from config import Config, FRONTEND_DIR
 from routes import register_blueprints
