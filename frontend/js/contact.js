@@ -5,6 +5,88 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close');
     const submitBtn = document.getElementById('submitBtn');
     
+    // ==================== TRACKING STATISTIQUES ====================
+    const startTime = Date.now();
+    let totalCharactersTyped = 0;
+    let otisWatched = false;
+    let rgpdReminded = false;
+    let piDecimalsKnown = 0;
+    let lawnHeightPreferred = 50;
+    let userFormData = { nom: '', email: '', sujet: '', message: '' };
+    
+    // Tracker tous les caractères tapés
+    document.addEventListener('keypress', function() {
+        totalCharactersTyped++;
+    });
+    
+    // Disparition progressive des entrées si l'utilisateur attend trop
+    let inactivityTimer = null;
+    let deletionInterval = null;
+    const INACTIVITY_DELAY = 10000; // 10 secondes avant de commencer à effacer
+    const DELETE_SPEED = 150; // Vitesse de suppression (ms par caractère)
+    const formFields = ['nom', 'email', 'sujet', 'message'];
+    let currentFieldIndex = 0;
+    
+    function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        clearInterval(deletionInterval);
+        currentFieldIndex = 0;
+        
+        // Ne démarre le timer que si au moins un champ a du contenu
+        const hasContent = formFields.some(f => document.getElementById(f).value.length > 0);
+        if (hasContent) {
+            inactivityTimer = setTimeout(startDeletion, INACTIVITY_DELAY);
+        }
+    }
+    
+    function startDeletion() {
+        deletionInterval = setInterval(() => {
+            // Trouver le champ actuel avec du contenu
+            while (currentFieldIndex < formFields.length) {
+                const field = document.getElementById(formFields[currentFieldIndex]);
+                if (field.value.length > 0) {
+                    // Supprimer le dernier caractère
+                    field.value = field.value.slice(0, -1);
+                    return;
+                }
+                currentFieldIndex++;
+            }
+            // Tous les champs sont vides
+            clearInterval(deletionInterval);
+        }, DELETE_SPEED);
+    }
+    
+    // Écouter les événements sur tous les champs du formulaire
+    formFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        field.addEventListener('input', resetInactivityTimer);
+        field.addEventListener('focus', resetInactivityTimer);
+    });
+    
+    // Easter Egg: Bulle Evereast Solutions
+    const evereastKeywords = ['evereast', 'solutions', 'evereast-solutions', 'evereast solutions'];
+    const evereastBubble = document.getElementById('evereastBubble');
+    const closeBubble = document.getElementById('closeBubble');
+    let bubbleShown = false;
+    
+    function checkEvereast(value) {
+        const lowerValue = value.toLowerCase();
+        return evereastKeywords.some(keyword => lowerValue.includes(keyword));
+    }
+    
+    ['nom', 'email'].forEach(fieldId => {
+        document.getElementById(fieldId).addEventListener('input', function() {
+            if (!bubbleShown && checkEvereast(this.value)) {
+                evereastBubble.classList.add('visible');
+                bubbleShown = true;
+            }
+        });
+    });
+    
+    closeBubble.addEventListener('click', () => {
+        evereastBubble.classList.remove('visible');
+    });
+    
     // Faux Captcha
     let captchaVerified = false;
     const fakeCaptcha = document.getElementById('fakeCaptcha');
@@ -19,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         captchaSpinner.classList.add('active');
         captchaText.textContent = 'Vérification en cours...';
         
-        let timeLeft = 2;
+        let timeLeft = 30;
         captchaTimer.textContent = `⏳ Analyse comportementale... ${timeLeft}s restantes`;
         
         const countdown = setInterval(() => {
@@ -41,17 +123,104 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(countdown);
                 captchaSpinner.classList.remove('active');
                 captchaCheckmark.classList.add('active');
-                captchaText.textContent = 'Vérifié !';
-                captchaTimer.textContent = '✅ Félicitations, vous êtes probablement humain !';
+                captchaText.textContent = 'Inutile !';
+                captchaTimer.textContent = '✅ Félicitations, vous avez attendu pour rien !';
                 captchaVerified = true;
                 submitBtn.disabled = false;
                 
                 // Rires moqueurs
-                const laughAudio = new Audio('https://www.myinstants.com/media/sounds/evil-laugh.mp3');
-                laughAudio.volume = 0.5;
+                const laughAudio = new Audio('https://www.myinstants.com/media/sounds/sitcom-laughing-1.mp3');
+                laughAudio.volume = 1;
                 laughAudio.play().catch(() => {});
             }
         }, 1000);
+    });
+    
+    // Fausse erreur sur le sujet
+    const sujetField = document.getElementById('sujet');
+    const sujetError = document.getElementById('sujet-error');
+    let sujetWarningShown = false;
+    let originalSujet = '';
+    
+    sujetField.addEventListener('blur', function() {
+        if (this.value.trim().length > 0 && !sujetWarningShown) {
+            sujetError.textContent = "Est-ce que vous êtes sûr que vous voulez nous contacter pour ça ? Ça m'a pas l'air très intéressant...";
+            sujetError.style.color = '#e67e22';
+            this.style.borderColor = '#e67e22';
+            sujetWarningShown = true;
+            originalSujet = this.value;
+            
+            // Vérifie après 5 secondes si le sujet a changé
+            setTimeout(() => {
+                if (sujetField.value === originalSujet) {
+                    sujetError.textContent = "Bon, si tu y tiens...";
+                    sujetError.style.color = '#27ae60';
+                    sujetField.style.borderColor = '#27ae60';
+                } else {
+                    sujetError.textContent = '';
+                    sujetField.style.borderColor = '';
+                }
+            }, 5000);
+        }
+    });
+    
+    // Easter Egg Otis - Tirade au début du message
+    const messageField = document.getElementById('message');
+    const otisModal = document.getElementById('otisModal');
+    const closeOtis = document.getElementById('closeOtis');
+    const otisVideo = document.getElementById('otisVideo');
+    const otisTirade = document.getElementById('otisTirade');
+    let otisShown = false;
+    let otisFinished = false;
+    
+    const tirade = "Mais, vous savez, moi je ne crois pas qu'il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd'hui avec vous, je dirais que c'est d'abord des rencontres, des gens qui m'ont tendu la main, peut-être à un moment où je ne pouvais pas, où j'étais seul chez moi. Et c'est assez curieux de se dire que les hasards, les rencontres forgent une destinée… Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite, le beau geste, parfois on ne trouve pas l'interlocuteur en face, je dirais, le miroir qui vous aide à avancer. Alors ce n'est pas mon cas, comme je le disais là, puisque moi au contraire, j'ai pu ; et je dis merci à la vie, je lui dis merci, je chante la vie, je danse la vie… Je ne suis qu'amour ! Et finalement, quand beaucoup de gens aujourd'hui me disent : « Mais comment fais-tu pour avoir cette humanité ? » Eh bien je leur réponds très simplement, je leur dis que c'est ce goût de l'amour, ce goût donc qui m'a poussé aujourd'hui à entreprendre une construction mécanique, mais demain, qui sait, peut-être simplement à me mettre au service de la communauté, à faire le don, le don de soi…";
+    
+    messageField.addEventListener('input', function() {
+        if (!otisShown && this.value.length === 1) {
+            otisShown = true;
+            
+            // Petit délai pour laisser l'utilisateur commencer à taper
+            setTimeout(() => {
+                otisModal.style.display = 'block';
+                closeOtis.style.display = 'none';
+                otisVideo.src = 'https://www.youtube.com/embed/YFLaKa3Kxe0?autoplay=1&enablejsapi=1';
+                otisTirade.textContent = '';
+                
+                // Attendre 4s pour le chargement de la vidéo
+                setTimeout(() => {
+                    const totalDuration = 60000; // 60 secondes
+                    const charDelay = totalDuration / tirade.length;
+                    let currentIndex = 0;
+                    
+                    const tiradeInterval = setInterval(() => {
+                        if (currentIndex < tirade.length) {
+                            otisTirade.textContent += tirade[currentIndex];
+                            currentIndex++;
+                            otisTirade.scrollTop = otisTirade.scrollHeight;
+                        } else {
+                            clearInterval(tiradeInterval);
+                            otisFinished = true;
+                            otisWatched = true;
+                            closeOtis.style.display = 'block';
+                        }
+                    }, charDelay);
+                }, 4000);
+            }, 2000); // Délai de 2s avant l'apparition de la popup
+        }
+    });
+    
+    closeOtis.addEventListener('click', () => {
+        if (otisFinished) {
+            otisModal.style.display = 'none';
+            otisVideo.src = '';
+        }
+    });
+    
+    window.addEventListener('click', (e) => {
+        if (e.target === otisModal && otisFinished) {
+            otisModal.style.display = 'none';
+            otisVideo.src = '';
+        }
     });
     
     // Konami Code Easter Egg
@@ -105,9 +274,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const data = await response.json();
                 
                 if (data.status === 'success') {
-                    showSuccessModal(formData.nom);
+                    userFormData = { ...formData };
+                    showSecondForm(formData.nom);
                     form.reset();
-                    createConfetti();
                 }
             } catch (error) {
                 console.error('Erreur:', error);
@@ -115,6 +284,148 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // ==================== DEUXIÈME FORMULAIRE ====================
+    const secondFormSection = document.getElementById('secondFormSection');
+    const secondForm = document.getElementById('secondContactForm');
+    const ageInput = document.getElementById('age');
+    const ageDisplay = document.getElementById('ageDisplay');
+    const lawnSlider = document.getElementById('lawnHeight');
+    const lawnGrass = document.getElementById('lawnGrass');
+    const lawnValue = document.getElementById('lawnValue');
+    const cguCheckbox = document.getElementById('cguCheckbox');
+    const bloodTypeModal = document.getElementById('bloodTypeModal');
+    const rgpdModal = document.getElementById('rgpdModal');
+    const bloodTypeSelect = document.getElementById('bloodType');
+    
+    // Variable pour stocker le nom de l'utilisateur
+    let userName = '';
+    
+    // Les décimales de Pi pour validation (100 premières décimales)
+    const PI_DECIMALS = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
+    
+    // Afficher le deuxième formulaire
+    function showSecondForm(nom) {
+        userName = nom; // Stocker le nom pour plus tard
+        document.getElementById('contact-form-section').style.display = 'none';
+        secondFormSection.style.display = 'block';
+        secondFormSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Afficher la popup RGPD dès qu'un groupe sanguin est sélectionné
+    bloodTypeSelect.addEventListener('change', function() {
+        if (this.value) {
+            rgpdReminded = true;
+            rgpdModal.style.display = 'block';
+        }
+    });
+    
+    // Gestion de l'âge avec les décimales de Pi
+    ageInput.addEventListener('input', function() {
+        const value = this.value.replace(/[^0-9.]/g, '');
+        this.value = value;
+        
+        if (value.startsWith('3.')) {
+            const decimals = value.substring(2);
+            let validDecimals = '';
+            
+            for (let i = 0; i < decimals.length; i++) {
+                if (decimals[i] === PI_DECIMALS[i]) {
+                    validDecimals += decimals[i];
+                } else {
+                    break;
+                }
+            }
+            
+            const age = validDecimals.length;
+            piDecimalsKnown = age;
+            ageDisplay.textContent = `Votre âge : ${age} ans 🎂`;
+            
+            if (age >= 18) {
+                ageDisplay.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+            } else if (age >= 10) {
+                ageDisplay.style.background = 'linear-gradient(135deg, #f39c12 0%, #e67e22 100%)';
+            } else {
+                ageDisplay.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        } else if (value === '3') {
+            ageDisplay.textContent = 'Votre âge : 0 ans (ajoutez un point et les décimales de π)';
+        } else {
+            ageDisplay.textContent = 'Votre âge : 0 ans (commencez par 3.)';
+            ageDisplay.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+        }
+    });
+    
+    // Gestion du slider de pelouse
+    lawnSlider.addEventListener('input', function() {
+        const value = this.value;
+        lawnHeightPreferred = value;
+        lawnGrass.style.height = value + '%';
+        lawnValue.textContent = value + ' cm';
+    });
+    
+    // Gestion de la case CGU (50% de chance de ne pas se cocher)
+    cguCheckbox.addEventListener('click', function(e) {
+        if (Math.random() < 0.5) {
+            e.preventDefault();
+            this.checked = false;
+            document.getElementById('cgu-error').textContent = "Oups, ça n'a pas marché ! Réessayez... 🎲";
+            setTimeout(() => {
+                document.getElementById('cgu-error').textContent = '';
+            }, 2000);
+        }
+    });
+    
+    // Gestion du deuxième formulaire
+    secondForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const bloodType = document.getElementById('bloodType').value;
+        const cguChecked = cguCheckbox.checked;
+        
+        // Validation CGU
+        if (!cguChecked) {
+            document.getElementById('cgu-error').textContent = "Vous devez accepter les CGU !";
+            return;
+        }
+        
+        // Si groupe sanguin non rempli et RGPD pas encore vu
+        if (!bloodType && !rgpdReminded) {
+            bloodTypeModal.style.display = 'block';
+            return;
+        }
+        
+        // Si tout est OK, afficher le succès
+        finalSuccess();
+    });
+    
+    // Gestion des boutons du modal groupe sanguin
+    document.getElementById('bloodNoBtn').addEventListener('click', function() {
+        bloodTypeModal.style.display = 'none';
+        rgpdReminded = true;
+        rgpdModal.style.display = 'block';
+    });
+    
+    document.getElementById('bloodYesBtn').addEventListener('click', function() {
+        bloodTypeModal.style.display = 'none';
+        rgpdReminded = true;
+        rgpdModal.style.display = 'block';
+    });
+    
+    // Fermeture du modal RGPD (retour au formulaire)
+    document.getElementById('closeRgpd').addEventListener('click', function() {
+        rgpdModal.style.display = 'none';
+    });
+    
+    document.getElementById('closeRgpdBtn').addEventListener('click', function() {
+        rgpdModal.style.display = 'none';
+    });
+    
+    function finalSuccess() {
+        secondFormSection.style.display = 'none';
+        showSuccessModal(userName || 'Visiteur mystérieux');
+        createConfetti();
+    }
     
     // Fermeture du modal
     closeBtn.addEventListener('click', () => modal.style.display = 'none');
@@ -155,22 +466,101 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Modals
     function showSuccessModal(nom) {
+        const endTime = Date.now();
+        const timeSpent = Math.floor((endTime - startTime) / 1000);
+        const minutes = Math.floor(timeSpent / 60);
+        const seconds = timeSpent % 60;
+        const timeFormatted = minutes > 0 ? `${minutes}min ${seconds}s` : `${seconds}s`;
+        
+        // Appliquer des styles au modal pour le scroll
+        const modalContent = modal.querySelector('.modal-content');
+        modalContent.style.maxHeight = '60vh';
+        modalContent.style.overflowY = 'auto';
+        modalContent.style.scrollbarWidth = 'none';
+        modalContent.style.msOverflowStyle = 'none';
+        
         document.getElementById('modalBody').innerHTML = `
+            <style>
+                .modal-content::-webkit-scrollbar { display: none; }
+            </style>
             <div class="success-animation">
                 <span class="emoji">🎉</span>
                 <h2>Félicitations ${nom} !</h2>
                 <p>Votre message a été envoyé avec succès !</p>
-                <p style="font-style: italic; color: #7f8c8d; margin-top: 1rem;">
-                    Peut-être recevrez-vous le message tant attendu... 👀
-                </p>
-                <button onclick="document.getElementById('successModal').style.display='none'" 
-                        style="margin-top: 1rem; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                
+                <div style="text-align: left; margin-top: 1rem; padding: 0.8rem; background: #f8f9fa; border-radius: 10px;">
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem; font-size: 1rem;">📊 Récapitulatif de votre expérience</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                        <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">⏱️ Temps passé : <strong>${timeFormatted}</strong></li>
+                        <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">⌨️ Caractères tapés : <strong>${totalCharactersTyped}</strong></li>
+                        <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">${otisWatched ? '✅' : '❌'} Récital d'Otis</li>
+                        <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">${rgpdReminded ? '✅' : '❌'} Rappel RGPD</li>
+                        <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">🥧 Décimales de π connues : <strong>${piDecimalsKnown}</strong></li>
+                        <li style="padding: 0.3rem 0;">🌱 Taille d'herbe préférée : <strong>${lawnHeightPreferred} cm</strong></li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: left; margin-top: 0.8rem; padding: 0.8rem; background: #e8f5e9; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <h3 style="color: #27ae60; margin-bottom: 0.5rem; font-size: 1rem;">📋 Section sérieuse</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                        <li style="padding: 0.2rem 0;"><strong>Nom :</strong> ${userFormData.nom}</li>
+                        <li style="padding: 0.2rem 0;"><strong>Email :</strong> ${userFormData.email}</li>
+                        <li style="padding: 0.2rem 0;"><strong>Sujet :</strong> ${userFormData.sujet}</li>
+                        <li style="padding: 0.2rem 0;"><strong>Message :</strong> ${userFormData.message.length > 80 ? userFormData.message.substring(0, 80) + '...' : userFormData.message}</li>
+                    </ul>
+                </div>
+                
+                <button onclick="window.location.href='/activity'" 
+                        style="margin-top: 0.8rem; padding: 10px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                         color: white; border: none; border-radius: 25px; cursor: pointer;">
                     Fermer
                 </button>
             </div>
         `;
         modal.style.display = 'block';
+        
+        // Badge médaille si temps < 2 minutes
+        if (timeSpent < 120) {
+            showBadgeNotification();
+        }
+    }
+    
+    // Afficher un badge style Steam en bas à droite
+    function showBadgeNotification() {
+        const badge = document.createElement('div');
+        badge.id = 'speedBadge';
+        badge.innerHTML = `
+            <div class="steam-achievement">
+                <div class="steam-achievement-icon">
+                    <span>🏃</span>
+                </div>
+                <div class="steam-achievement-content">
+                    <div class="steam-achievement-title">Speed Runner</div>
+                    <div class="steam-achievement-desc">🏆 Formulaire complété en moins de 2 min</div>
+                    <div class="steam-achievement-progress">
+                        <div class="steam-achievement-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(badge);
+        
+        // Retirer le badge après 5 secondes
+        setTimeout(() => {
+            const badgeEl = document.getElementById('speedBadge');
+            if (badgeEl) {
+                const achievementDiv = badgeEl.querySelector('.steam-achievement');
+                if (achievementDiv) {
+                    achievementDiv.classList.add('slide-out');
+                    setTimeout(() => {
+                        if (document.getElementById('speedBadge')) {
+                            document.getElementById('speedBadge').remove();
+                        }
+                    }, 400);
+                }
+            }
+        }, 5000);
     }
     
     function showErrorModal() {
