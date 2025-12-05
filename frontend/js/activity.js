@@ -163,7 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Gestion des boutons
     if (btnYes) {
-        btnYes.addEventListener('click', enterGameMode);
+        btnYes.addEventListener('click', function() {
+            // Rediriger vers le bureau
+            window.location.href = '/bureau';
+        });
     }
     
     if (btnNo) {
