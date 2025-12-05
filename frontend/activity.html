@@ -6,6 +6,8 @@
     <title>Activité Principale - Les5Aperos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dialog.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/intro.css') }}">
 </head>
 <body class="activity-page">
     
@@ -48,7 +50,26 @@
         </div>
     </section>
 
+    <!-- Introduction type terminal dans le screen-interface -->
+    <!-- L'intro sera ajoutée dynamiquement par JavaScript -->
+
+    <!-- Bouton de debug -->
+    <button class="debug-toggle" id="debug-toggle">🐛 DEBUG</button>
+    <div class="debug-panel" id="debug-panel">
+        <h3>PANNEAU DE DEBUG</h3>
+        <button class="debug-btn" id="debug-intro">Lancer Intro</button>
+        <button class="debug-btn" id="debug-mail">Test Mail</button>
+        <button class="debug-btn" id="debug-choice">Test Choix</button>
+        <button class="debug-btn" id="debug-narrative">Test Narratif</button>
+        <button class="debug-btn" id="debug-notification">Test Notification</button>
+        <button class="debug-btn" id="debug-chat">Test Chat</button>
+    </div>
+    
+    <!-- Bouton Quitter toujours visible -->
+    <button class="quit-btn" id="quit-btn" style="display: none;">QUITTER</button>
+
         
+    <script src="{{ url_for('static', filename='js/dialog.js') }}"></script>
     <script src="{{ url_for('static', filename='js/activity.js') }}"></script>
 </body>
 </html>

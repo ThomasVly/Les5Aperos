@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Boîtes de Dialogue - Les5Aperos</title>
+    <link rel="stylesheet" href="css/dialog.css">
+    <style>
+        /* Import de la font pixel */
+        @font-face {
+            font-family: 'MultiTypePixel';
+            src: url('src/multitype-pixel/MultiTypePixel DisplayBold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: 'MultiTypePixel', 'Courier New', monospace;
+            color: #00ff00;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .demo-title {
+            font-size: 24px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .demo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .demo-btn {
+            background: #000;
+            border: 3px solid #00ff00;
+            color: #00ff00;
+            padding: 12px 24px;
+            font-family: 'MultiTypePixel', 'Courier New', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .demo-btn:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+        }
+
+        /* Container pour simuler l'écran d'ordinateur */
+        .screen-simulation {
+            position: relative;
+            width: 80vw;
+            height: 60vh;
+            max-width: 1000px;
+            max-height: 700px;
+            background: rgba(0, 10, 0, 1);
+            border: 4px solid #00ff00;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 0, 0.5),
+                inset 0 0 60px rgba(0, 255, 0, 0.1);
+        }
+
+        /* Effet scanlines */
+        .screen-simulation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-title">DÉMO BOÎTES DE DIALOGUE RÉTRO</div>
+    
+    <div class="demo-buttons">
+        <button class="demo-btn" onclick="testMail()">Mail</button>
+        <button class="demo-btn" onclick="testChoice()">Choix Multiple</button>
+        <button class="demo-btn" onclick="testNarrative()">Narratif</button>
+        <button class="demo-btn" onclick="testNotification()">Notification</button>
+        <button class="demo-btn" onclick="testChat()">Chat</button>
+        <button class="demo-btn" onclick="startGame()">Démarrer Scénario 1</button>
+    </div>
+
+    <!-- Écran simulé -->
+    <div class="screen-simulation" id="screen">
+        <!-- Les dialogues apparaîtront ici -->
+    </div>
+
+    <script src="js/scenarios.js"></script>
+    <script src="js/dialog.js"></script>
+    <script>
+        // Initialiser le gestionnaire avec le screen simulé
+        const dialogManager = new DialogManager();
+        
+        // Modifier le container pour utiliser notre écran de démo
+        dialogManager.container = document.getElementById('screen');
+
+        // Test d'un mail
+        function testMail() {
+            dialogManager.showMail({
+                title: "MAIL REÇU",
+                from: "test@example.com",
+                subject: "Ceci est un test",
+                content: "Bonjour,\n\nCeci est un exemple de boîte de dialogue type mail avec du texte formaté.\n\nCordialement,\nL'équipe Les5Aperos",
+                choices: [
+                    { text: "Répondre", action: "reply" },
+                    { text: "Ignorer", action: "close" }
+                ],
+                scenarioId: "test_mail"
+            });
+        }
+
+        // Test d'un choix multiple
+        function testChoice() {
+            dialogManager.showChoice({
+                title: "DÉCISION IMPORTANTE",
+                content: "Vous devez faire un choix crucial pour l'avenir du lycée. Que décidez-vous ?",
+                choices: [
+                    { text: "Option A", action: "choice_a" },
+                    { text: "Option B", action: "choice_b" },
+                    { text: "Option C", action: "choice_c" }
+                ],
+                scenarioId: "test_choice"
+            });
+        }
+
+        // Test d'un dialogue narratif
+        function testNarrative() {
+            dialogManager.showNarrative({
+                title: "HISTOIRE",
+                content: [
+                    "Il était une fois, dans un lycée numérique...",
+                    "Les ordinateurs étaient vieux, mais pleins d'histoires à raconter.",
+                    "Aujourd'hui commence une nouvelle aventure."
+                ],
+                choices: [
+                    { text: "Continuer", action: "continue" }
+                ],
+                scenarioId: "test_narrative"
+            });
+        }
+
+        // Test d'une notification
+        function testNotification() {
+            dialogManager.showNotification({
+                title: "ALERTE",
+                icon: "⚠️",
+                content: "Ceci est une notification importante de type système.",
+                choices: [
+                    { text: "OK", action: "close" }
+                ],
+                scenarioId: "test_notification"
+            });
+        }
+
+        // Test d'un chat
+        function testChat() {
+            dialogManager.showChat({
+                title: "CHAT INTERNE",
+                messages: [
+                    { sender: "Technicien", text: "Bonjour, j'ai un problème avec le serveur." },
+                    { sender: "Vous", text: "Quel est le problème exactement ?" },
+                    { sender: "Technicien", text: "Il fait des bruits bizarres et sent le brûlé..." }
+                ],
+                choices: [
+                    { text: "Appeler les pompiers", action: "emergency" },
+                    { text: "Ignorer", action: "close" }
+                ],
+                scenarioId: "test_chat"
+            });
+        }
+
+        // Démarrer le vrai scénario 1
+        function startGame() {
+            const scenario = scenarios['scenario1'];
+            dialogManager.showMail({
+                title: scenario.title,
+                from: scenario.from,
+                subject: scenario.subject,
+                content: scenario.content,
+                choices: scenario.choices,
+                scenarioId: 'scenario1'
+            });
+        }
+
+        // Gérer la navigation entre scénarios
+        dialogManager.on('nextScenario', function(scenarioId, choice) {
+            const scenario = scenarios[scenarioId];
+            if (!scenario) {
+                console.error('Scénario introuvable:', scenarioId);
+                return;
+            }
+            
+            setTimeout(() => {
+                switch(scenario.type) {
+                    case 'mail':
+                        dialogManager.showMail({
+                            title: scenario.title,
+                            from: scenario.from,
+                            subject: scenario.subject,
+                            content: scenario.content,
+                            choices: scenario.choices,
+                            scenarioId: scenarioId
+                        });
+                        break;
+                    case 'notification':
+                        dialogManager.showNotification({
+                            title: scenario.title,
+                            icon: scenario.icon,
+                            content: scenario.content,
+                            choices: scenario.choices,
+                            scenarioId: scenarioId
+                        });
+                        break;
+                    case 'chat':
+                        dialogManager.showChat({
+                            title: scenario.title,
+                            messages: scenario.messages,
+                            choices: scenario.choices,
+                            scenarioId: scenarioId
+                        });
+                        break;
+                    case 'narrative':
+                        dialogManager.showNarrative({
+                            title: scenario.title,
+                            content: scenario.content,
+                            choices: scenario.choices,
+                            scenarioId: scenarioId
+                        });
+                        break;
+                }
+            }, 300);
+        });
+
+        // Gérer le restart
+        dialogManager.on('restart', function() {
+            dialogManager.resetGame();
+            alert('Jeu réinitialisé !');
+        });
+
+        // Log des choix
+        dialogManager.on('choice_a', (choice, scenarioId) => {
+            console.log('Choix A sélectionné pour', scenarioId);
+        });
+        
+        dialogManager.on('choice_b', (choice, scenarioId) => {
+            console.log('Choix B sélectionné pour', scenarioId);
+        });
+    </script>
+</body>
+</html>
