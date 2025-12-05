@@ -34,13 +34,23 @@ def play():
         scenario_id = session['scenario']
         scenario = ScenarioService.get_scenario(scenario_id)
     
-    # Si c'est une fin, afficher le template ending
+    # Si c'est une fin, générer le bilan personnalisé
     if scenario.get('ending'):
+        history = session.get('history', [])
+        score = session.get('score', {})
+        
+        # Générer le bilan détaillé basé sur l'historique
+        detailed_report = generate_detailed_report(history, score, scenario_id)
+        
+        # Injecter le bilan dans le contenu du scénario
+        scenario_with_report = scenario.copy()
+        scenario_with_report['detailed_report'] = detailed_report
+        
         return render_template(
             'ending.html',
-            scenario=scenario,
-            history=session.get('history', []),
-            score=session.get('score', {})
+            scenario=scenario_with_report,
+            history=history,
+            score=score
         )
     
     # Sinon afficher le scénario
@@ -49,6 +59,50 @@ def play():
         scenario=scenario,
         scenario_id=scenario_id
     )
+
+
+def generate_detailed_report(history, score, ending_scenario):
+    """Génère un rapport détaillé basé sur l'historique des choix"""
+    bad_choices = []
+    good_choices = []
+    neutral_choices = []
+    
+    # Analyser chaque choix
+    for entry in history:
+        effect = entry.get('effect', 'neutral')
+        scenario_name = entry.get('scenario_name', '')
+        choice_text = entry.get('choice_text', '')
+        scenario_id = entry.get('scenario_id', '')
+        
+        # Récupérer les détails du scénario et du choix
+        scenario_data = ScenarioService.get_scenario(scenario_id)
+        if scenario_data and 'choices' in scenario_data:
+            for choice in scenario_data['choices']:
+                if choice.get('text') == choice_text:
+                    nird_impact = choice.get('nird_impact', {})
+                    
+                    choice_analysis = {
+                        'scenario_name': scenario_name,
+                        'choice_text': choice_text,
+                        'effect': effect,
+                        'nird_impact': nird_impact
+                    }
+                    
+                    if effect == 'bad':
+                        bad_choices.append(choice_analysis)
+                    elif effect == 'good':
+                        good_choices.append(choice_analysis)
+                    else:
+                        neutral_choices.append(choice_analysis)
+                    break
+    
+    return {
+        'bad_choices': bad_choices,
+        'good_choices': good_choices,
+        'neutral_choices': neutral_choices,
+        'total_choices': len(history),
+        'score': score
+    }
 
 
 @game_bp.route('/game/choose', methods=['POST'])
