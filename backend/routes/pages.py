@@ -18,3 +18,7 @@ def activity():
 def visualizer():
     """Page du visualiseur"""
     return render_template('visualizer.html')
+
+@pages_bp.route('/bureau')
+def bureau():
+    return render_template('bureau.html')
