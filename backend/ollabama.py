@@ -36,7 +36,7 @@ def ollama_chat(message, option=""):
     if option:
         messages.append({
             'role': 'system',
-            'content': f"{option}. Reste toujours maladroit et à côté de la plaque. Maximum 10 lignes."
+            'content': f"{option}. Reste toujours maladroit et à côté de la plaque. Réponds en 3-4 phrases courtes."
         })
 
     # Ajoute le message utilisateur
@@ -55,4 +55,16 @@ def ollama_chat(message, option=""):
         }
     )
 
-    return response['message']['content']
+    text= response['message']['content']
+
+    if len(text) > 200:
+        sentences = text.split('. ')
+        truncated = ''
+        for sentence in sentences:
+            if len(truncated + sentence) < 200:
+                truncated += sentence + '. '
+            else:
+                break
+        return truncated.strip()
+
+    return text
