@@ -70,3 +70,8 @@ def submit_contact():
             'status': 'error',
             'message': str(e)
         }), 500
+
+@pages_bp.route('/nird')
+def nird():
+    """Page de la démarche NIRD"""
+    return render_template('nird.html')

@@ -223,9 +223,14 @@ class DialogManager {
 
     // Gérer un choix
     handleChoice(choice, scenarioId) {
+        console.log('handleChoice appelé:', choice.action, 'Callbacks disponibles:', Object.keys(this.callbacks));
+        
         // Callback personnalisé
         if (this.callbacks[choice.action]) {
+            console.log('Exécution du callback pour:', choice.action);
             this.callbacks[choice.action](choice, scenarioId);
+        } else {
+            console.warn('Aucun callback trouvé pour:', choice.action);
         }
         
         // Actions par défaut
