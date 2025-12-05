@@ -13,3 +13,8 @@ def index():
 def activity():
     """Page d'activité principale"""
     return render_template('activity.html')
+
+@pages_bp.route('/visualizer')
+def visualizer():
+    """Page du visualiseur"""
+    return render_template('visualizer.html')

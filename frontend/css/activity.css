@@ -125,12 +125,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
     overflow: hidden;
+    pointer-events: none;
     
     /* Animation d'allumage */
     animation: screen-power-on 2s ease-out forwards;
+}
+
+/* Réactiver les clics pour le contenu à l'intérieur */
+.screen-interface > * {
+    pointer-events: auto;
 }
 
 /* Animation d'allumage façon vieux CRT */
@@ -221,6 +227,7 @@
     background: rgba(0, 255, 0, 0.3);
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
     z-index: 12;
+    pointer-events: none;
     animation: scan-line 2s ease-out forwards;
 }
 
