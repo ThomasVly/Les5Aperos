@@ -402,3 +402,33 @@ body.game-active .screen-interface {
     background: currentColor;
     color: black;
 }
+
+
+/* --- LEADERBOARD & INPUT --- */
+#player-pseudo {
+    background: black;
+    border: 2px solid currentColor;
+    color: white;
+    padding: calc(var(--base-font, 300px) * 0.02);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: calc(var(--base-font, 300px) * 0.04);
+    width: 50%;
+    text-align: center;
+    margin-right: 10px;
+}
+
+#leaderboard-container {
+    margin-top: 15px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid currentColor;
+    padding: 10px;
+    font-size: calc(var(--base-font, 300px) * 0.03);
+}
+
+#leaderboard-table { width: 100%; border-collapse: collapse; }
+#leaderboard-table td { padding: 3px; text-align: left; }
+#leaderboard-table td:last-child { text-align: right; }
+.retro-btn-action.small { font-size: calc(var(--base-font, 300px) * 0.025); padding: 5px; }
