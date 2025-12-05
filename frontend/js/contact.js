@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let rgpdReminded = false;
     let piDecimalsKnown = 0;
     let lawnHeightPreferred = 50;
+    let enchantmentFieldStolen = false;
     let userFormData = { nom: '', email: '', sujet: '', message: '' };
     
     // Tracker tous les caractères tapés
@@ -495,6 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">⌨️ Caractères tapés : <strong>${totalCharactersTyped}</strong></li>
                         <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">${otisWatched ? '✅' : '❌'} Récital d'Otis</li>
                         <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">${rgpdReminded ? '✅' : '❌'} Rappel RGPD</li>
+                        <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">${enchantmentFieldStolen ? '✅' : '❌'} Vol de champ mystérieux</li>
                         <li style="padding: 0.3rem 0; border-bottom: 1px solid #eee;">🥧 Décimales de π connues : <strong>${piDecimalsKnown}</strong></li>
                         <li style="padding: 0.3rem 0;">🌱 Taille d'herbe préférée : <strong>${lawnHeightPreferred} cm</strong></li>
                     </ul>
@@ -563,6 +565,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
+    // Afficher le succès "À votre santé"
+    function showCheersBadge() {
+        const badge = document.createElement('div');
+        badge.id = 'cheersBadge';
+        badge.innerHTML = `
+            <div class="steam-achievement cheers-achievement">
+                <div class="steam-achievement-icon">
+                    <span>🍻</span>
+                </div>
+                <div class="steam-achievement-content">
+                    <div class="steam-achievement-title">À votre santé !</div>
+                    <div class="steam-achievement-desc">🎉 Vous avez découvert le code secret des 5Apéros</div>
+                    <div class="steam-achievement-progress">
+                        <div class="steam-achievement-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(badge);
+        
+        // Retirer le badge après 5 secondes
+        setTimeout(() => {
+            const badgeEl = document.getElementById('cheersBadge');
+            if (badgeEl) {
+                const achievementDiv = badgeEl.querySelector('.steam-achievement');
+                if (achievementDiv) {
+                    achievementDiv.classList.add('slide-out');
+                    setTimeout(() => {
+                        if (document.getElementById('cheersBadge')) {
+                            document.getElementById('cheersBadge').remove();
+                        }
+                    }, 400);
+                }
+            }
+        }, 5000);
+    }
+    
     function showErrorModal() {
         document.getElementById('modalBody').innerHTML = `
             <div class="success-animation">
@@ -623,4 +663,180 @@ document.addEventListener('DOMContentLoaded', function() {
             Object.assign(this.style, { background: 'white', color: '#333' });
         }
     });
+
+    // ==================== EASTER EGG 5APERO - TRINQUER ====================
+    let cheersTriggered = false;
+    
+    function triggerCheers() {
+        if (cheersTriggered) return;
+        cheersTriggered = true;
+        
+        // Créer le container pour l'animation
+        const cheersOverlay = document.createElement('div');
+        cheersOverlay.id = 'cheersOverlay';
+        cheersOverlay.innerHTML = `
+            <div class="beer-left">🍺</div>
+            <div class="beer-right">🍺</div>
+        `;
+        document.body.appendChild(cheersOverlay);
+        
+        // Ajouter les styles
+        const style = document.createElement('style');
+        style.textContent = `
+            #cheersOverlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                pointer-events: none;
+                z-index: 99999;
+                overflow: hidden;
+            }
+            .beer-left, .beer-right {
+                position: absolute;
+                font-size: 600px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .beer-left {
+                left: -700px;
+                animation: beerFromLeft 0.6s ease-out forwards;
+            }
+            .beer-right {
+                right: -700px;
+                transform: translateY(-50%) scaleX(-1);
+                animation: beerFromRight 0.6s ease-out forwards;
+            }
+            @keyframes beerFromLeft {
+                0% { left: -700px; transform: translateY(-50%) rotate(-20deg); }
+                70% { left: calc(50% - 400px); transform: translateY(-50%) rotate(10deg); }
+                85% { left: calc(50% - 350px); transform: translateY(-50%) rotate(-5deg); }
+                100% { left: calc(50% - 380px); transform: translateY(-50%) rotate(15deg); }
+            }
+            @keyframes beerFromRight {
+                0% { right: -700px; transform: translateY(-50%) scaleX(-1) rotate(20deg); }
+                70% { right: calc(50% - 400px); transform: translateY(-50%) scaleX(-1) rotate(-10deg); }
+                85% { right: calc(50% - 350px); transform: translateY(-50%) scaleX(-1) rotate(5deg); }
+                100% { right: calc(50% - 380px); transform: translateY(-50%) scaleX(-1) rotate(-15deg); }
+            }
+            #cheersOverlay.clink .beer-left,
+            #cheersOverlay.clink .beer-right {
+                animation: clinkShake 0.3s ease-in-out;
+            }
+            @keyframes clinkShake {
+                0%, 100% { transform: translateY(-50%) rotate(15deg); }
+                25% { transform: translateY(-50%) rotate(20deg) scale(1.1); }
+                50% { transform: translateY(-50%) rotate(10deg); }
+                75% { transform: translateY(-50%) rotate(18deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Effet de choc après l'approche
+        setTimeout(() => {
+            cheersOverlay.classList.add('clink');
+            
+            // Ajouter un son de "clink" visuel avec des étoiles
+            for (let i = 0; i < 10; i++) {
+                const star = document.createElement('div');
+                star.textContent = '✨';
+                star.style.cssText = `
+                    position: fixed;
+                    left: 50%;
+                    top: 50%;
+                    font-size: ${80 + Math.random() * 120}px;
+                    z-index: 100000;
+                    pointer-events: none;
+                    animation: starBurst 0.8s ease-out forwards;
+                    --tx: ${(Math.random() - 0.5) * 800}px;
+                    --ty: ${(Math.random() - 0.5) * 800}px;
+                `;
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 800);
+            }
+            
+            // Ajouter l'animation des étoiles
+            const starStyle = document.createElement('style');
+            starStyle.textContent = `
+                @keyframes starBurst {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                    100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(starStyle);
+        }, 600);
+        
+        // Retirer l'overlay après l'animation
+        setTimeout(() => {
+            cheersOverlay.style.transition = 'opacity 0.5s';
+            cheersOverlay.style.opacity = '0';
+            setTimeout(() => cheersOverlay.remove(), 500);
+        }, 2000);
+        
+        // Afficher le succès après l'animation
+        setTimeout(() => {
+            showCheersBadge();
+        }, 2500);
+    }
+    
+    // Écouter tous les inputs pour détecter "5apero"
+    document.addEventListener('input', function(e) {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+            const value = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (value.includes('5apero')) {
+                triggerCheers();
+            }
+        }
+    });
+
+    // ==================== CHAMP ENCHANTEMENT MINECRAFT ====================
+    const enchantmentGroup = document.getElementById('enchantmentGroup');
+    const enchantmentInput = document.getElementById('enchantment');
+    
+    if (enchantmentGroup && enchantmentInput) {
+        let handTriggered = false;
+        
+        // Détecter quand la souris s'approche du champ
+        enchantmentGroup.addEventListener('mouseenter', function() {
+            if (handTriggered) return;
+            handTriggered = true;
+            enchantmentFieldStolen = true;
+            
+            // La main arrive
+            enchantmentGroup.classList.add('hand-approaching');
+            
+            // Après l'approche, la main attrape le champ
+            setTimeout(() => {
+                enchantmentGroup.classList.remove('hand-approaching');
+                enchantmentGroup.classList.add('hand-grabbing');
+                
+                // Le champ disparaît
+                setTimeout(() => {
+                    enchantmentGroup.classList.remove('hand-grabbing');
+                    enchantmentGroup.classList.add('field-gone');
+                }, 500);
+            }, 800);
+        });
+        
+        // Aussi sur focus (pour les utilisateurs clavier/tactile)
+        enchantmentInput.addEventListener('focus', function() {
+            if (handTriggered) return;
+            handTriggered = true;
+            enchantmentFieldStolen = true;
+            
+            enchantmentGroup.classList.add('hand-approaching');
+            
+            setTimeout(() => {
+                enchantmentGroup.classList.remove('hand-approaching');
+                enchantmentGroup.classList.add('hand-grabbing');
+                this.blur(); // Retirer le focus
+                
+                setTimeout(() => {
+                    enchantmentGroup.classList.remove('hand-grabbing');
+                    enchantmentGroup.classList.add('field-gone');
+                }, 500);
+            }, 800);
+        });
+    }
 });

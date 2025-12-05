@@ -1,5 +1,22 @@
 /* Styles spécifiques à la page de contact */
 
+/* Police personnalisée */
+@font-face {
+    font-family: 'Renogare';
+    src: url('../src/Renogare.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Background pixel art */
+body {
+    background-image: url('../src/Bg-pixel-art.png');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 /* Bouton retour au bureau */
 .back-to-bureau {
     position: absolute;
@@ -57,6 +74,7 @@ header {
     color: #2c3e50;
     font-weight: bold;
     font-size: 0.9rem;
+    font-family: 'Renogare', Arial, sans-serif;
 }
 
 .required {
@@ -71,7 +89,7 @@ header {
     border-radius: 6px;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    font-family: Arial, sans-serif;
+    font-family: 'Renogare', Arial, sans-serif;
 }
 
 .form-group input:focus,
@@ -98,7 +116,7 @@ header {
 .submit-btn {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #3498db;
     color: white;
     border: none;
     border-radius: 50px;
@@ -106,11 +124,13 @@ header {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: 'Renogare', Arial, sans-serif;
 }
 
 .submit-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 5px 20px rgba(52, 152, 219, 0.5);
+    background: #2980b9;
 }
 
 .submit-btn:active {
@@ -1002,5 +1022,118 @@ main {
     .easter-egg-hint {
         margin-top: 0.4rem;
         padding: 0.3rem 0.5rem;
+    }
+}
+
+/* ================================
+   Champ Enchantement Minecraft
+   ================================ */
+
+.enchantment-group {
+    position: relative;
+    overflow: visible;
+}
+
+.enchantment-label {
+    font-family: 'Segoe UI Symbol', 'Noto Sans Symbols', sans-serif;
+    font-size: 1.1rem;
+    color: #5b2d8c;
+    text-shadow: 0 0 5px rgba(91, 45, 140, 0.5);
+    letter-spacing: 2px;
+}
+
+.enchantment-input {
+    font-family: 'Segoe UI Symbol', 'Noto Sans Symbols', sans-serif;
+    background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%);
+    color: #a855f7;
+    border: 2px solid #7c3aed !important;
+    text-shadow: 0 0 8px rgba(168, 85, 247, 0.8);
+    letter-spacing: 1px;
+}
+
+.enchantment-input::placeholder {
+    color: rgba(168, 85, 247, 0.5);
+}
+
+.enchantment-input:focus {
+    border-color: #a855f7 !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.6) !important;
+}
+
+/* Main qui attrape */
+.grabbing-hand {
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    transition: none;
+}
+
+/* Animation de la main qui arrive */
+.enchantment-group.hand-approaching .grabbing-hand {
+    animation: handApproach 0.8s ease-out forwards;
+}
+
+/* Animation de la main qui attrape et emmène le champ */
+.enchantment-group.hand-grabbing .grabbing-hand {
+    opacity: 1;
+    right: 10px;
+    animation: handGrab 0.5s ease-in forwards;
+}
+
+.enchantment-group.hand-grabbing .enchantment-input,
+.enchantment-group.hand-grabbing .enchantment-label {
+    animation: fieldGrabbed 0.5s ease-in forwards;
+}
+
+.enchantment-group.field-gone .enchantment-input,
+.enchantment-group.field-gone .enchantment-label,
+.enchantment-group.field-gone .grabbing-hand {
+    display: none;
+}
+
+.enchantment-group.field-gone::after {
+    content: "Le champ a été volé ! 🖐️";
+    display: block;
+    padding: 10px;
+    background: #f8d7da;
+    color: #721c24;
+    border-radius: 6px;
+    text-align: center;
+    font-style: italic;
+}
+
+@keyframes handApproach {
+    0% {
+        opacity: 0;
+        right: -100px;
+    }
+    100% {
+        opacity: 1;
+        right: 10px;
+    }
+}
+
+@keyframes handGrab {
+    0% {
+        right: 10px;
+    }
+    100% {
+        right: -300px;
+    }
+}
+
+@keyframes fieldGrabbed {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(200%);
+        opacity: 0;
     }
 }
