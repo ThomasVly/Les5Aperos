@@ -6,6 +6,7 @@
     <title>Activité Principale - Les5Aperos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/intro.css') }}">
 </head>
 <body class="activity-page">
     
@@ -47,6 +48,9 @@
             </div>
         </div>
     </section>
+    
+    <!-- Bouton Quitter -->
+    <button class="quit-btn" id="quit-btn" style="display: none;">QUITTER</button>
         
     <script src="{{ url_for('static', filename='js/activity.js') }}"></script>
 </body>

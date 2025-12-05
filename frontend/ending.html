@@ -1,52 +1,56 @@
-{% extends "base.html" %}
-
-{% block title %}Fin - Jeu Narratif{% endblock %}
-
-{% block content %}
-<div class="scenario-window ending">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ scenario.name }} - Les5Aperos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dialog.css') }}">
+</head>
+<body class="activity-page">
     
-    <!-- Header -->
-    <div class="scenario-header">
-        <span class="scenario-type">FIN</span>
-    </div>
-    
-    <!-- Titre -->
-    {% if scenario.title %}
-    <div class="scenario-title">
-        {{ scenario.title }}
-    </div>
-    {% endif %}
-    
-    <!-- Contenu -->
-    <div class="scenario-content">
-        {{ scenario.content | replace('\n', '<br>') | safe }}
-    </div>
-    
-    <!-- Score -->
-    <div class="ending-score">
-        <h3>Votre score</h3>
-        <div class="score-grid">
-            <div class="score-item good">
-                <span class="score-label">Bons choix</span>
-                <span class="score-value">{{ score.good }}</span>
-            </div>
-            <div class="score-item bad">
-                <span class="score-label">Mauvais choix</span>
-                <span class="score-value">{{ score.bad }}</span>
-            </div>
+    <!-- Background GIF -->
+    <div class="background-gif-container">
+        <div class="tenor-gif-embed" data-postid="22552632" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%">
+            <a href="https://tenor.com/view/sunset-retro-retro-synthwave-gif-22552632">Sunset Retro Retro GIF</a>
+            from <a href="https://tenor.com/search/sunset+retro-gifs">Sunset Retro GIFs</a>
         </div>
     </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
     
-    <!-- Historique (placeholder pour récap futur) -->
-    <div class="ending-history">
-        <h3>Récapitulatif</h3>
-        <p><em>À venir : résumé de vos choix...</em></p>
-    </div>
+    <!-- Overlay -->
+    <div class="overlay"></div>
     
-    <!-- Actions -->
-    <div class="ending-actions">
-        <a href="/game/reset" class="btn-restart">Recommencer</a>
-    </div>
+    <!-- Ordinateur en mode jeu -->
+    <section class="computer-section">
+        <div class="computer-wrapper game-mode">
+            <img src="{{ url_for('static', filename='src/Computer_pixel_art.png') }}" 
+                 alt="Computer Pixel Art" 
+                 class="computer-image">
+            
+            <!-- Interface sur l'écran (dialogs injectés ici) -->
+            <div class="screen-interface"></div>
+        </div>
+    </section>
     
-</div>
-{% endblock %}
+    <!-- Bouton Quitter -->
+    <button class="quit-btn" id="quit-btn">MENU</button>
+    
+    <!-- Données du scénario pour JavaScript -->
+    <script type="application/json" id="scenario-data">
+        {{ scenario | tojson }}
+    </script>
+    <script type="application/json" id="score-data">
+        {{ score | tojson }}
+    </script>
+    <script>
+        window.scenarioData = JSON.parse(document.getElementById('scenario-data').textContent);
+        window.gameScore = JSON.parse(document.getElementById('score-data').textContent);
+        window.isEnding = true;
+    </script>
+    
+    <script src="{{ url_for('static', filename='js/dialog.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ending.js') }}"></script>
+</body>
+</html>
