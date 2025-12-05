@@ -2,7 +2,10 @@
 
 ## Accéder au visualizer
 
-Ouvrez votre navigateur à l'adresse : `http://localhost:5000/visualizer`
+**En ligne :** [https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/visualizer](https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/visualizer)
+
+**En local :** `http://localhost:5000/visualizer`
+
 Ou cliquez sur la tuile correspondante depuis le `/bureau`
 
 ## Fonctionnalités

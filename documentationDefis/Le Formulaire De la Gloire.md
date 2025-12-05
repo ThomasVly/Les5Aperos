@@ -4,7 +4,10 @@
 
 ## Accéder au formulaire
 
-Ouvrez votre navigateur à l'adresse : `http://localhost:5000/contact`
+**En ligne :** [https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/contact](https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/contact)
+
+**En local :** `http://localhost:5000/contact`
+
 Ou cliquez sur le bouton "?" en bas a droite de l'écran depuis le `/bureau`
 
 ## 🎯 Aperçu

@@ -1,5 +1,13 @@
 # Jeu Interactif - Documentation
 
+## 🌐 Accès
+
+**En ligne :** [https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/game/reset](https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/game/reset)
+
+**En local :** `http://localhost:5000/game/reset`
+
+---
+
 ## 📋 Table des matières
 - [Vue d'ensemble](#vue-densemble)
 - [Structure du jeu](#structure-du-jeu)

@@ -5,6 +5,14 @@
 
 Sujet : NIRD vs Big Tech (Goliath)
 
+## 🌐 Accès
+
+**En ligne :** [https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/zerguemContreGoliath](https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/zerguemContreGoliath)
+
+**En local :** `http://localhost:5000/zerguemContreGoliath`
+
+---
+
 ## 🎮 Procédure d'Activation du Jeu (Zerguèm)
 Pour accéder au jeu de défense "Zerguèm de la nuit", suivez cette procédure :
 

@@ -1,0 +1,83 @@
+# 🎮 DÉFI : On veut du gros pixel ! ✨👾🕹️
+## Équipe : Les5Apéros - INSA Hauts de France
+
+---
+
+## 🌐 URL du site déployé
+
+**https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/activity**
+
+---
+
+## 🖥️ Notre approche Rétro Gaming
+
+### La majorité du site est conçu dans le style rétro !
+
+Notre production adopte une esthétique **100% rétro gaming** sur la majorité des pages :
+
+### 🎨 Éléments visuels pixel art
+
+1. **Ordinateur Pixel Art** (`Computer_pixel_art.png`)
+   - Un ordinateur CRT vintage en pixel art est présent sur les pages majeures
+   - L'interface utilisateur s'affiche DANS l'écran de l'ordinateur
+   - Animation d'allumage façon vieux moniteur CRT (clignotement, scan lines)
+
+2. **Background Pixel Art** (`Bg-pixel-art.png`)
+   - Fond d'écran pixelisé représentant un mur avec un cadre
+   - Ambiance rétro cohérente sur toutes les pages
+
+3. **Police Pixel** (`MultiTypePixel`)
+   - Différentes variantes de polices pixel art utilisées
+   - Rendu `image-rendering: pixelated` pour un effet authentique
+
+### 📺 Pages à visiter
+
+| Page | Description | Style Rétro |
+|------|-------------|-------------|
+| `/bureau` | Bureau Windows XP pixelisé | Icônes de bureau, interface desktop rétro |
+| `/visualizer` | Lecteur audio style WinAmp | Interface Windows XP, boutons 3D classiques |
+| `/chatbot` | Chatbot dans un terminal | Interface DOS/terminal vintage |
+| `/zerguemContreGoliath` | Mini-jeu arcade | Shoot'em up style années 80, laser pixelisé |
+| `/game/reset` | Jeu interactif narratif | Dialogues style RPG pixel art |
+
+### ✨ Effets rétro spéciaux
+
+- **Scan lines CRT** : Lignes horizontales simulant un vieux moniteur
+- **Animation d'allumage** : Effet de boot d'écran cathodique
+- **Glitch effects** : Effets de perturbation vidéo vintage
+- **Couleurs néon** : Palette de couleurs inspirée des arcades 80s
+- **Sons 8-bit** : Effets sonores chiptune
+
+### 🕹️ Easter Eggs Rétro
+
+- **Konami Code** sur `/contact` : ↑↑↓↓←→←→BA → Background arc-en-ciel
+---
+
+## 📁 Fichiers Pixel Art
+
+```
+frontend/src/
+├── Computer_pixel_art.png      # Ordinateur CRT pixelisé
+├── Bg-pixel-art.png            # Background pixel art
+├── multitype-pixel/            # 27 polices pixel art
+│   ├── MultiTypePixel Regular.otf
+│   ├── MultiTypePixel Bold.otf
+│   └── ... (25 autres variantes)
+└── favicon_io/                 # Favicon pixelisé
+```
+
+---
+
+## 🎯 Comment visualiser
+
+1. **Accédez à** : https://les5aperos-app.thankfuldesert-9c4e98f2.westeurope.azurecontainerapps.io/activity
+2. **Cliquez sur** "NEW GAME" pour entrer dans l'univers
+3. **Explorez** le bureau virtuel pixelisé
+4. **Testez** les différentes applications (Sonneries Explorer, Chat Bot, Laser Game...)
+
+Chaque interaction se fait À L'INTÉRIEUR de l'écran de l'ordinateur pixel art, 
+créant une expérience immersive de jeu dans le jeu ! 🎮
+
+---
+
+*Les5Apéros - Nuit de l'Info 2025 - INSA Hauts de France*
