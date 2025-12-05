@@ -8,26 +8,9 @@ La page `/contact` est un formulaire de contact interactif avec de nombreux **ea
 
 ---
 
-## 🥚 Easter Eggs & Fonctionnalités Cachées
+## Evenements et happenings
 
-### 1. 🎮 Konami Code
-**Comment le déclencher :** Tapez la séquence de touches légendaire :
-```
-↑ ↑ ↓ ↓ ← → ← → B A
-```
-
-**Effet :** L'arrière-plan de la page devient un arc-en-ciel animé pendant 10 secondes.
-
----
-
-### 2. 🖱️ Triple Clic sur le Titre
-**Comment le déclencher :** Cliquez rapidement 3 fois sur le titre "Formulaire de Contact des 5Apéros" dans le header.
-
-**Effet :** Le formulaire entier se met à trembler (effet shake).
-
----
-
-### 3. 🏃 Succès "Speed Runner" (Style Steam)
+### 1. 🏃 Succès "Speed Runner" (Style Steam)
 **Comment le déclencher :** Complétez les deux formulaires en **moins de 2 minutes**.
 
 **Effet :** Une notification style Steam/achievement apparaît en bas à droite de l'écran avec :
@@ -38,7 +21,7 @@ La page `/contact` est un formulaire de contact interactif avec de nombreux **ea
 
 ---
 
-### 4. 🏢 Bulle Evereast Solutions
+### 2. 🏢 Bulle Evereast Solutions
 **Comment le déclencher :** Tapez "evereast", "solutions" ou "evereast solutions" dans le champ **Nom** ou **Email**.
 
 **Effet :** Une bulle apparaît avec :
@@ -50,7 +33,7 @@ La page `/contact` est un formulaire de contact interactif avec de nombreux **ea
 
 ---
 
-### 5. 🎬 Easter Egg Otis (Astérix & Obélix : Mission Cléopâtre)
+### 3. 🎬 Easter Egg Otis (Astérix & Obélix : Mission Cléopâtre)
 **Comment le déclencher :** Commencez à taper dans le champ **Message** (dès le premier caractère).
 
 **Effet :** Après 2 secondes, une popup modale apparaît avec :
@@ -63,7 +46,7 @@ La page `/contact` est un formulaire de contact interactif avec de nombreux **ea
 
 ---
 
-### 6. ⏳ Faux Captcha Trollesque
+### 4. ⏳ Faux Captcha Trollesque
 **Comment le déclencher :** Cliquez sur le captcha "Je ne suis pas un robot".
 
 **Effet :**
@@ -81,7 +64,7 @@ La page `/contact` est un formulaire de contact interactif avec de nombreux **ea
 
 ---
 
-### 7. 😒 Critique du Sujet
+### 5. 😒 Critique du Sujet
 **Comment le déclencher :** Remplissez le champ **Sujet** et cliquez ailleurs (blur).
 
 **Effet :**
@@ -90,7 +73,7 @@ La page `/contact` est un formulaire de contact interactif avec de nombreux **ea
 
 ---
 
-### 8. 🗑️ Effacement par Inactivité
+### 6. 🗑️ Effacement par Inactivité
 **Comment le déclencher :** Ne touchez à rien pendant **10 secondes** après avoir commencé à remplir un champ.
 
 **Effet :** Les caractères de vos champs s'effacent progressivement, un par un (150ms par caractère), en commençant par le premier champ non-vide.
@@ -101,7 +84,22 @@ La page `/contact` est un formulaire de contact interactif avec de nombreux **ea
 
 Après avoir validé le premier formulaire, un deuxième apparaît avec encore plus de surprises :
 
-### 9. 🥧 Âge en Décimales de Pi
+### 7. 🔮 Champ d'Enchantement Minecraft (Vol Mystérieux)
+**Fonctionnement :** Un champ mystérieux écrit en **caractères de table d'enchantement Minecraft** (Standard Galactic Alphabet) apparaît en haut du deuxième formulaire.
+
+**Comment le déclencher :** Survolez le champ ou essayez de cliquer dessus.
+
+**Effet :** 
+- Une main 🖐️ apparaît depuis le côté droit de l'écran
+- La main attrape le champ et le label
+- Elle les emmène hors de l'écran
+- Message final : "Le champ a été volé ! 🖐️"
+
+> Le label affiche "ᔑリ∷ᒷᔑꖎ ᓵ𝙹↸ᒷ" et le placeholder "ℸ ̣ ||!¡ᒷ ||𝙹⚍∷ ᒲᒷᓭᓭᔑ⊣ᒷ"
+
+---
+
+### 8. 🥧 Âge en Décimales de Pi
 **Fonctionnement :** Pour indiquer votre âge, vous devez écrire les décimales de π (Pi).
 
 - `3.14` → 2 ans (2 décimales correctes)
@@ -112,7 +110,7 @@ Le nombre de décimales correctes = votre âge affiché.
 
 ---
 
-### 10. 🩸 Groupe Sanguin & RGPD
+### 9. 🩸 Groupe Sanguin & RGPD
 **Comment le déclencher :** 
 - Sélectionnez n'importe quel groupe sanguin, **OU**
 - Essayez de soumettre sans remplir le groupe sanguin
@@ -125,14 +123,14 @@ Le nombre de décimales correctes = votre âge affiché.
 
 ---
 
-### 11. 🌱 Slider de Hauteur de Pelouse
+### 10. 🌱 Slider de Hauteur de Pelouse
 **Fonctionnement :** Un slider vertical vous demande à quelle hauteur vous tondez votre pelouse (0-100 cm).
 
 **Effet visuel :** L'herbe dans le visuel change de hauteur en temps réel selon la valeur du slider.
 
 ---
 
-### 12. 🎲 Case CGU Capricieuse
+### 11. 🎲 Case CGU Capricieuse
 **Comment le déclencher :** Essayez de cocher la case "J'accepte les CGU".
 
 **Effet :** **50% de chance** que la case refuse de se cocher !
@@ -142,20 +140,54 @@ Le nombre de décimales correctes = votre âge affiché.
 
 ---
 
-### 13. 🎉 Modal de Succès Final
+### 12. 🎉 Récapitulatif Final
 **Après avoir tout validé :**
 
 Un récapitulatif complet de votre expérience apparaît avec :
 - ⏱️ Temps passé
 - ⌨️ Nombre de caractères tapés
-- ✅/❌ Si vous avez regardé la tirade d'Otis
-- ✅/❌ Si vous avez reçu le rappel RGPD
+- ✅ Si vous avez regardé la tirade d'Otis
+- ✅ Si vous avez reçu le rappel RGPD
+- ✅ Vol de champ mystérieux
 - 🥧 Nombre de décimales de π connues
 - 🌱 Hauteur d'herbe préférée
 - 📋 Récapitulatif sérieux (Nom, Email, Sujet, Message)
 - 🎊 Animation de confettis
 
 ---
+
+## 🥚 Easter Eggs & Fonctionnalités Cachées
+
+### 1. 🍻 Code Secret "5Apéro"
+**Comment le déclencher :** Tapez "5Apero" (ou "5apéro", "5apero", "5APERO") dans **n'importe quel champ** du formulaire.
+
+**Effet ÉPIQUE :**
+1. Deux **ÉNORMES** bières 🍺 arrivent des côtés de l'écran
+2. Elles s'entrechoquent au centre pour **TRINQUER**
+3. Des étoiles ✨ géantes explosent au point d'impact
+4. Un succès Steam "**À votre santé !**" 🍻 apparaît avec le message :
+   - "🎉 Vous avez découvert le code secret des 5Apéros"
+
+> C'est le **MAGNUM OPUS** du formulaire !
+
+---
+
+
+### 1. 🎮 Konami Code
+**Comment le déclencher :** Tapez la séquence de touches légendaire :
+```
+↑ ↑ ↓ ↓ ← → ← → B A
+```
+
+**Effet :** L'arrière-plan de la page devient un arc-en-ciel animé pendant 10 secondes.
+
+---
+
+### 2. 🖱️ Triple Clic sur le Titre
+**Comment le déclencher :** Cliquez rapidement 3 fois sur le titre "Formulaire de Contact des 5Apéros" dans le header.
+
+**Effet :** Le formulaire entier se met à trembler (effet shake).
+
 
 ## 🔗 Liens Cachés
 
@@ -166,53 +198,6 @@ Un récapitulatif complet de votre expérience apparaît avec :
 | Lien CGU | [Rickroll](https://www.youtube.com/watch?v=dQw4w9WgXcQ) 🎵 |
 | Rappel RGPD | [CNIL - Article 9](https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre2#Article9) |
 
----
-
-## 📊 Statistiques Trackées
-
-Le formulaire suit en arrière-plan :
-- `startTime` : Moment de chargement de la page
-- `totalCharactersTyped` : Tous les caractères tapés
-- `otisWatched` : A-t-on regardé la vidéo d'Otis jusqu'au bout
-- `rgpdReminded` : A-t-on vu le rappel RGPD
-- `piDecimalsKnown` : Nombre de décimales de π correctes
-- `lawnHeightPreferred` : Hauteur de pelouse choisie
-
----
-
-## 🛠️ Technologies Utilisées
-
-- **HTML5** : Structure des modals et formulaires
-- **CSS3** : Animations (shake, rainbow, confetti, achievements Steam)
-- **JavaScript Vanilla** : Toute la logique des easter eggs
-- **API Fetch** : Envoi réel du formulaire au backend (`/api/contact`)
-
----
-
-## 📁 Fichiers Concernés
-
-```
-frontend/
-├── contact.html          # Structure HTML
-├── css/
-│   └── contact.css       # Styles spécifiques
-└── js/
-    └── contact.js        # Logique des easter eggs (627 lignes)
-```
-
----
-
-## 🎮 Speedrun Guide
-
-Pour obtenir le badge "Speed Runner" :
-1. Remplissez rapidement Nom, Email, Sujet, Message
-2. Cliquez sur le captcha mais ne l'attendez pas (il s'active tout seul après 30s)
-3. Soumettez le premier formulaire
-4. Entrez `3.141592653589793238` pour 18 ans
-5. Spammez la case CGU jusqu'à ce qu'elle se coche
-6. Soumettez !
-
-**Objectif : < 2 minutes** ⏱️
 
 ---
 
