@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnYes) {
         btnYes.addEventListener('click', function() {
             // Rediriger vers le jeu
-            window.location.href = '/game';
+            window.location.href = '/bureau';
         });
     }
     
