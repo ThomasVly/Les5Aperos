@@ -1,5 +1,29 @@
 /* Style Wikipedia pour la page NIRD */
 
+/* Bouton retour au bureau */
+.back-to-bureau {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #3366cc;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    z-index: 1000;
+    transition: background 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.back-to-bureau:hover {
+    background: #2255bb;
+    color: white;
+    font-weight: bold;
+}
+
 * {
     margin: 0;
     padding: 0;

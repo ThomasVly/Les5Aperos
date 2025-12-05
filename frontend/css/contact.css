@@ -1,5 +1,29 @@
 /* Styles spécifiques à la page de contact */
 
+/* Bouton retour au bureau */
+.back-to-bureau {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.back-to-bureau:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+header {
+    position: relative;
+}
+
 .subtitle {
     font-size: 1rem;
     margin-top: 0.3rem;
