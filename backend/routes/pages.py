@@ -1,10 +1,9 @@
-from flask import Blueprint, app, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request
 import os
 from pathlib import Path
 from datetime import datetime
-from flask import Blueprint, render_template, request, jsonify
 
-from backend.chatbot import chatbot
+from chatbot import chatbot
 
 pages_bp = Blueprint('pages', __name__)
 

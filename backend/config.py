@@ -11,3 +11,7 @@ class Config:
     DEBUG = True
     HOST = '0.0.0.0'
     PORT = 5000
+    
+    # Mode fake Ollama (pour dev sans GPU/Ollama)
+    # Mettre à False en production ou si Ollama est disponible
+    FAKE_OLLAMA = os.environ.get('FAKE_OLLAMA', 'true').lower() == 'true'
