@@ -20,6 +20,11 @@ def activity():
     """Page d'activité principale"""
     return render_template('activity.html')
 
+@app.route('/zerguemContreGoliath')
+def zerguem():
+    """Page du jeu Laser Game intégrée dans l'ordi"""
+    return render_template('zerguem.html')
+
 @app.route('/api/hello')
 def hello():
     """Exemple d'endpoint API"""

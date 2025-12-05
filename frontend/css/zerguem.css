@@ -1,0 +1,383 @@
+
+/* =========================================
+   1. STYLES DE L'INTERFACE DE JEU (HUD & ÉLÉMENTS)
+   ========================================= */
+
+/* Style du HUD (Score et Vie en haut) */
+#game-hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 50, 0, 0.8);
+    color: #0f0; /* Vert hacker */
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 14px; /* Ajuste si besoin selon la taille de l'écran */
+    z-index: 20;
+    border-bottom: 1px solid #0f0;
+    display: none; /* Caché au début */
+    box-sizing: border-box;
+}
+
+/* Le curseur viseur */
+.game-mode {
+    cursor: crosshair !important;
+}
+
+/* Écran de démarrage (Overlay central) */
+#start-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #0f0;
+    width: 80%;
+    z-index: 30;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 15px #0f0;
+}
+
+#start-btn {
+    background: #0f0;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+#start-btn:hover {
+    background: #fff;
+}
+
+/* Animation texte clignotant */
+.blink-text {
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Bouton retour (en haut à gauche de la page) */
+.retro-btn {
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-family: sans-serif;
+    border: 2px solid white;
+    font-size: 12px;
+    display: inline-block;
+}
+.retro-btn:hover {
+    background: #555;
+}
+
+/* Les Virus / Popups (Ennemis) */
+.virus-popup {
+    position: absolute;
+    width: 60px;
+    height: 50px;
+    background: #ccc;
+    border: 2px outset #fff;
+    box-shadow: 2px 2px 0 #000;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    cursor: crosshair;
+    user-select: none;
+    animation: popScale 0.2s ease-out;
+}
+
+.virus-header {
+    background: #000080; /* Bleu Windows 95 */
+    height: 15px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2px;
+}
+
+.virus-close {
+    color: white;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: bold;
+}
+
+.virus-body {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* Animation d'apparition du virus */
+@keyframes popScale {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+/* Effet quand on touche un virus */
+.hit-effect {
+    transform: scale(1.5);
+    opacity: 0;
+    transition: all 0.1s;
+}
+
+/* =========================================
+   2. LAYOUT & ANIMATION (ORDINATEUR & ZOOM)
+   ========================================= */
+
+.computer-section {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.computer-wrapper {
+    position: relative;
+    pointer-events: auto;
+
+    /* C'est ici qu'on définit "Où" on zoome */
+    /* 50% = Centre horizontal */
+    /* 30% = On vise le tiers haut de l'image (là où est l'écran) */
+    transform-origin: 50% 30%;
+
+    /* Animation fluide de 1.5 seconde */
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.computer-image {
+    display: block;
+    width: auto;
+    max-width: 100vw;
+    max-height: 100vh;
+    /* Plus besoin d'opacité ou de z-index complexe */
+}
+
+/* L'écran vert suit naturellement le zoom du wrapper */
+.screen-interface {
+    /* Tes réglages actuels pour l'image 1 (NE LES CHANGE PAS) */
+    position: absolute;
+    /* Exemple de tes valeurs : */
+    top: 8.5%; left: 16.8%; width: 66.4%; height: 59.5%;
+
+    background-color: #008080;
+    overflow: hidden;
+    z-index: 5;
+}
+
+
+/* =========================================
+   3. ÉTAT ACTIVÉ (QUAND LE JEU DÉMARRE)
+   ========================================= */
+
+/* Agrandissement du wrapper pour remplir l'écran */
+body.game-active .computer-wrapper {
+
+    transform: scale(1.2) translateY(4%);
+}
+
+body.game-active .screen-interface {
+    /* Crosshair rouge SVG encodé en base64 pour éviter un fichier externe */
+    cursor: crosshair;
+    color: red;
+}
+
+#laser-beam {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    /* Dimensions de base */
+    width: 4px;
+    margin-left: -2px; /* Centrage pivot */
+
+    /* Couleur Cœur */
+    background: rgba(255, 230, 230, 1);
+
+    transform-origin: bottom center;
+    pointer-events: none;
+    z-index: 4;
+    display: none;
+
+    /* Arrondir le bout */
+    border-radius: 2px 2px 0 0;
+
+    /* Lumière initiale */
+    box-shadow:
+        0 0 4px #fff,
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 100px 20px rgba(255, 0, 0, 0.4);
+
+    mix-blend-mode: screen;
+}
+
+/* ACTIVATION */
+#laser-beam.active {
+    display: block;
+    animation: laserPulse 0.08s infinite;
+}
+
+/* L'ANIMATION SANS CONFLIT */
+/* On ne touche PLUS à 'transform' ici ! On joue sur width et opacity */
+@keyframes laserPulse {
+    0% {
+        opacity: 0.8;
+        width: 4px; margin-left: -2px;
+        box-shadow: 0 0 4px #fff, 0 0 10px #f00, 0 0 60px 10px rgba(255, 0, 0, 0.2);
+    }
+    25% {
+        opacity: 1;
+        width: 6px; margin-left: -3px; /* Plus large = on ajuste la marge pour rester centré */
+        box-shadow: 0 0 8px #fff, 0 0 20px #f00, 0 0 150px 40px rgba(255, 0, 0, 0.6);
+    }
+    30% {
+        opacity: 0.6;
+        width: 3px; margin-left: -1.5px;
+        box-shadow: 0 0 2px #fff, 0 0 5px #f00, 0 0 40px 5px rgba(255, 0, 0, 0.1);
+    }
+    60% {
+        opacity: 0.9;
+        width: 5px; margin-left: -2.5px;
+        box-shadow: 0 0 5px #fff, 0 0 15px #f00, 0 0 90px 20px rgba(255, 0, 0, 0.4);
+    }
+    100% {
+        opacity: 0.8;
+        width: 4px; margin-left: -2px;
+        box-shadow: 0 0 4px #fff, 0 0 10px #f00, 0 0 70px 15px rgba(255, 0, 0, 0.3);
+    }
+}
+
+
+/* --- EFFET DE BRÛLURE DU VIRUS --- */
+.virus-popup.burning {
+    /* Le virus devient rouge feu/orange */
+    background-color: #ff4500 !important;
+    border-color: #ffff00 !important;
+
+    /* Il tremble */
+    animation: burnShake 0.2s infinite;
+
+    /* Il rétrécit et disparaît */
+    transform: scale(0.8);
+    opacity: 0.8;
+    transition: all 0.2s;
+}
+
+@keyframes burnShake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    25% { transform: translate(-1px, -2px) rotate(-1deg); }
+    50% { transform: translate(-3px, 0px) rotate(1deg); }
+    75% { transform: translate(3px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -1px) rotate(-1deg);}}
+
+
+/* --- COUCHE DE DÉGÂTS (FLASH OVERLAY) --- */
+#damage-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Le clic traverse */
+    z-index: 50; /* Au-dessus de tout */
+    opacity: 0; /* Invisible par défaut */
+}
+
+/* L'ANIMATION FLASH VIOLENT */
+@keyframes flashRedWhite {
+    0% {
+        background-color: #ff0000; /* Rouge */
+        opacity: 0.8; /* Légère transparence pour garder un effet "écran" ou 1 pour opaque */
+    }
+    50% {
+        background-color: #ffffff; /* Blanc */
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0; /* Disparaît totalement */
+    }
+}
+
+/* Classe d'activation */
+#damage-overlay.active {
+    animation: flashRedWhite 0.1s linear forwards;
+}
+
+
+/* --- ÉCRAN DE FIN DE JEU --- */
+#end-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 4px double; /* Bordure style rétro */
+    text-align: center;
+    z-index: 100;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* Style VICTOIRE */
+#end-screen.win {
+    border-color: #0f0;
+    color: #0f0;
+    box-shadow: 0 0 15px #0f0;
+}
+#end-screen.win h2 { text-shadow: 0 0 5px #0f0; }
+
+/* Style DÉFAITE */
+#end-screen.lose {
+    border-color: #f00;
+    color: #f00;
+    box-shadow: 0 0 15px #f00;
+}
+#end-screen.lose h2 { text-shadow: 0 0 5px #f00; }
+
+/* Le bouton d'action */
+.retro-btn-action {
+    margin-top: 20px;
+    background: transparent;
+    border: 2px solid currentColor; /* Prend la couleur du parent (Rouge ou Vert) */
+    color: currentColor;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.retro-btn-action:hover {
+    background: currentColor;
+    color: black;
+}
+
+
+
