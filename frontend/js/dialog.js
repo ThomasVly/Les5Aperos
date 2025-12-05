@@ -33,6 +33,7 @@ class DialogManager {
         
         try {
             const dialog = this.createDialogBox(data.title);
+            dialog.classList.add('mail-dialog');
             
             const mailHeader = document.createElement('div');
             mailHeader.className = 'mail-header';
@@ -67,6 +68,7 @@ class DialogManager {
     // Créer une boîte de dialogue avec choix multiples
     showChoice(data) {
         const dialog = this.createDialogBox(data.title);
+        dialog.classList.add('choice-dialog');
         
         const content = document.createElement('div');
         content.className = 'narrative-content';
@@ -88,6 +90,7 @@ class DialogManager {
     // Créer une boîte de dialogue narrative (description)
     showNarrative(data) {
         const dialog = this.createDialogBox(data.title);
+        dialog.classList.add('narrative-dialog');
         
         const content = document.createElement('div');
         content.className = 'narrative-content';
@@ -120,6 +123,7 @@ class DialogManager {
     // Créer une notification
     showNotification(data) {
         const dialog = this.createDialogBox(data.title);
+        dialog.classList.add('notification-dialog');
         
         const icon = document.createElement('div');
         icon.className = 'notification-icon';
@@ -147,6 +151,7 @@ class DialogManager {
     // Créer une boîte de chat
     showChat(data) {
         const dialog = this.createDialogBox(data.title);
+        dialog.classList.add('chat-dialog');
         
         const body = dialog.querySelector('.dialog-body');
         
@@ -177,6 +182,24 @@ class DialogManager {
     createDialogBox(title) {
         const dialog = document.createElement('div');
         dialog.className = 'dialog-box';
+        
+        // Ajouter la barre de progression
+        const progressContainer = document.createElement('div');
+        progressContainer.className = 'dialog-progress';
+        const progressBar = document.createElement('div');
+        progressBar.className = 'dialog-progress-bar';
+        
+        // Calculer le pourcentage de progression (estimé sur 14 scénarios totaux)
+        const totalScenarios = 14;
+        const currentScenario = parseInt(sessionStorage.getItem('scenarioCount') || '0') + 1;
+        const progress = Math.min((currentScenario / totalScenarios) * 100, 100);
+        progressBar.style.width = progress + '%';
+        
+        progressContainer.appendChild(progressBar);
+        dialog.appendChild(progressContainer);
+        
+        // Mettre à jour le compteur
+        sessionStorage.setItem('scenarioCount', currentScenario);
         
         const header = document.createElement('div');
         header.className = 'dialog-header';
@@ -282,19 +305,24 @@ class DialogManager {
             return;
         }
         
+        // Si un dialogue existe déjà, faire un fondu de sortie
         if (this.currentDialog) {
-            this.container.removeChild(this.currentDialog);
+            this.currentDialog.style.animation = 'dialog-fade-out 0.2s ease-out forwards';
+            setTimeout(() => {
+                this.container.innerHTML = '';
+                this.container.appendChild(dialog);
+                this.currentDialog = dialog;
+                dialog.style.animation = 'dialog-appear 0.3s ease-out';
+            }, 200);
+        } else {
+            this.container.innerHTML = '';
+            this.container.appendChild(dialog);
+            this.currentDialog = dialog;
+            dialog.style.animation = 'dialog-appear 0.3s ease-out';
         }
         
-        this.container.innerHTML = '';
-        this.container.appendChild(dialog);
         this.container.classList.add('active');
-        this.currentDialog = dialog;
-        
         console.log('Dialogue affiché avec succès', this.container);
-        
-        // Animation d'apparition
-        dialog.style.animation = 'dialog-appear 0.3s ease-out';
     }
 
     // Fermer la boîte de dialogue

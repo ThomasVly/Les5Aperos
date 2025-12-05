@@ -144,10 +144,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Passer en mode jeu
     function enterGameMode() {
+        // 1. Ajouter la classe pour déclencher l'animation de zoom
         computerWrapper.classList.add('game-mode');
         gameMenu.style.display = 'none';
-        quitBtn.style.display = 'block';
-        showIntro();
+        
+        // 2. Attendre la fin de l'animation de zoom (1.5s) avant de rediriger
+        setTimeout(() => {
+            window.location.href = '/game';
+        }, 1500);
     }
     
     // Quitter le mode jeu

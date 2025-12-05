@@ -55,6 +55,11 @@
                     window.scenarioData = {};
                 }
             })();
+            
+            // Réinitialiser le compteur au premier scénario
+            if (window.scenarioData && window.scenarioData.name === 'Clavier en détresse') {
+                sessionStorage.setItem('scenarioCount', '0');
+            }
         </script>
         
         <script src="{{ url_for('static', filename='js/dialog.js') }}"></script>
