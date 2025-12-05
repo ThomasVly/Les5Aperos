@@ -1,0 +1,166 @@
+{
+  "scenario_1": {
+    "name": "Clavier en détresse",
+    "type": "mail",
+    "source": "Étudiant anonyme",
+    "title": "Objet : SOS - La touch  st part i n vacanccs",
+    "content": "Bonjour Monsiur l Provisur,\n\nJ vous contact car j'ai prdu dux touchs sur mon clavir. Impossibl d'écrir corrctmnt mon rapport d stag, surtout dpuis qu la touch E a décidé d fair séccssion.\n\nRésultat : mon txt rssml à un xrcic d cryptographi façon Da Vinci Cod, t mêm moi j n comprds plus c qu j'ai écrit. Mon maîtr d stag pns qu j'ai inventé un nouvau langag.\n\nCordialmnt (nfin, cordialmnt sans ls...),\nUn·e étudiant·e au bout du rouleau (de scotch et de patience)\n\nPS : J'ai ssayé d tapér avc un stylo sur l'écran, ça n march pas.",
+    "choices": [
+      {
+        "text": "Faire réparer le clavier",
+        "response": "Bonjour,\n\nJ'ai bien reçu votre message (décodage effectué avec succès).\n\nJe transmets immédiatement à notre service technique. On devrait pouvoir récupérer des touches sur un ancien clavier.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_1A",
+        "effect": "good"
+      },
+      {
+        "text": "Fournir un clavier neuf",
+        "response": "Bonjour,\n\nProblème résolu : vous pouvez passer à l'intendance récupérer un clavier tout neuf.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_1B",
+        "effect": "neutral"
+      }
+    ]
+  },
+  "scenario_1A": {
+    "name": "Clavier réparé",
+    "type": "mail",
+    "source": "Technicien réseau",
+    "title": "RE: Clavier en détresse – Mission accomplie",
+    "content": "Bonjour,\n\nSUCCÈS ! J'ai retrouvé deux touches E et N dans les archives du sous-sol.\n\nL'étudiant a maintenant un clavier style Frankenstein qui fonctionne parfaitement.\n\nPetite réflexion : si on organisait un mini-stock de pièces détachées, ça éviterait de jouer à l'archéologue numérique à chaque fois.\n\nQu'en dites-vous ?\n\nCordialement,\nVotre technicien",
+    "choices": [
+      {
+        "text": "Lancer le projet reconditionnement",
+        "next": "scenario_2A",
+        "effect": "good"
+      }
+    ]
+  },
+  "scenario_1B": {
+    "name": "Demandes matériel",
+    "type": "mail",
+    "source": "Gestionnaire",
+    "title": "RE: Demandes de matériel",
+    "content": "Bonjour,\n\nClavier neuf livré. C'est la cinquième demande ce mois-ci.\n\nLe budget se porte bien à 30% consommé. Je continue de surveiller.\n\nCordialement,\nLa gestionnaire",
+    "choices": [
+      {
+        "text": "Explorer le réemploi",
+        "next": "scenario_2A",
+        "effect": "good"
+      }
+    ]
+  },
+  "scenario_2A": {
+    "name": "Opération Phénix",
+    "type": "mail",
+    "source": "Technicien réseau",
+    "title": "Eurêka ! Idée pour le parc informatique",
+    "content": "Bonjour,\n\nJ'ai eu une idée : mettre en place une clinique pour matériel fatigué !\n\n📋 Recensement des machines encore viables\n🔧 Reconditionnement\n🐧 Installation de systèmes légers (Linux)\n♻️ Réaffectation\n\nJ'appelle ça l'Opération Phénix.\n\nQu'en dites-vous ?\n\nCordialement,\nVotre technicien",
+    "choices": [
+      {
+        "text": "Lancer le projet",
+        "response": "C'est parti ! Lancez l'inventaire.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_3",
+        "effect": "good"
+      }
+    ]
+  },
+  "scenario_3": {
+    "name": "Appel Google",
+    "type": "chat",
+    "source": "Kévin, Google for Education",
+    "title": "Appel entrant : Google for Education",
+    "content": "Bonjour ! Kévin à l'appareil, champion de la vente cloud chez Google !\n\nON VOUS PROPOSE :\n📧 Gmail pour tous\n☁️ Google Drive illimité\n📝 Suite Google complète\n\n💰 GRATUIT pour l'éducation !\n\n87% des lycées sont déjà chez nous. Alors ?",
+    "choices": [
+      {
+        "text": "Demander documentation complète",
+        "response": "Merci Kévin. J'aimerais d'abord voir la documentation complète et comparer avec d'autres solutions.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_microsoft",
+        "effect": "good"
+      },
+      {
+        "text": "Accepter l'offre",
+        "response": "Banco ! Lancez l'activation.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_lenteur",
+        "effect": "bad"
+      }
+    ]
+  },
+  "scenario_microsoft": {
+    "name": "Appel Microsoft",
+    "type": "chat",
+    "source": "Charline, Responsable communication",
+    "title": "Partenariat Microsoft Office",
+    "content": "Salut Arnaud, c'est Charline.\n\nMicrosoft nous propose 1 an d'Office gratuit pour tout le monde.\n\nOn utilise LibreOffice actuellement. Qu'en penses-tu ?",
+    "choices": [
+      {
+        "text": "Accepter l'offre",
+        "response": "Excellente idée ! Supportons les PME !",
+        "next": "scenario_lenteur",
+        "effect": "bad"
+      },
+      {
+        "text": "Refuser l'offre",
+        "response": "Les logiciels actuels fonctionnent très bien et sont gratuits pour toujours.",
+        "next": "scenario_lenteur",
+        "effect": "good"
+      }
+    ]
+  },
+  "scenario_lenteur": {
+    "name": "Ordinateurs lents",
+    "type": "mail",
+    "source": "Jean-Paul Inome, Professeur",
+    "title": "Problème de performance salle 109",
+    "content": "Bonjour,\n\nLes ordinateurs de ma salle sont très lents. Serait-ce possible de les changer ?\n\nCordialement,\nJean-Paul",
+    "choices": [
+      {
+        "text": "Remplacer les ordinateurs",
+        "response": "Nous allons remplacer les ordinateurs.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_windows10",
+        "effect": "neutral"
+      },
+      {
+        "text": "Envoyer maintenance",
+        "response": "Nous allons envoyer un technicien vérifier. On peut peut-être prolonger leur durée de vie.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_windows10",
+        "effect": "good"
+      }
+    ]
+  },
+  "scenario_windows10": {
+    "name": "Fin de Windows 10",
+    "type": "mail",
+    "source": "Cellule numérique du rectorat",
+    "title": "⚠️ ALERTE - Windows 10 tire sa révérence",
+    "content": "Bonjour,\n\n🪦 WINDOWS 10 VA MOURIR en octobre 2025.\n\nPlus de mises à jour de sécurité après cette date.\n\nQue comptez-vous faire ?\n\nCordialement,\nLa Cellule Numérique",
+    "choices": [
+      {
+        "text": "Reconditionnement + Linux",
+        "response": "Nous allons reconditionner et installer Linux sur les machines compatibles.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_fin_good",
+        "effect": "good"
+      },
+      {
+        "text": "Renouvellement du parc",
+        "response": "Nous allons renouveler tout le parc avec du Windows 11.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_fin_bad",
+        "effect": "bad"
+      }
+    ]
+  },
+  "scenario_fin_good": {
+    "name": "Fin - Approche durable",
+    "type": "notification",
+    "source": "Système",
+    "title": "Bravo !",
+    "content": "🌱 FÉLICITATIONS !\n\nVous avez privilégié une approche durable et responsable :\n\n✅ Réemploi du matériel\n✅ Systèmes libres et ouverts\n✅ Budget maîtrisé\n✅ Indépendance numérique\n\nVotre lycée est un exemple de sobriété numérique !",
+    "ending": true
+  },
+  "scenario_fin_bad": {
+    "name": "Fin - Dépendance",
+    "type": "notification",
+    "source": "Système",
+    "title": "Fin du parcours",
+    "content": "📊 BILAN DE VOS CHOIX :\n\n❌ Budget fortement sollicité\n❌ Dépendance aux géants du numérique\n❌ Matériel jeté prématurément\n❌ Données hébergées à l'étranger\n\nVotre lycée suit le modèle consumériste classique.\n\nÀ réfléchir pour la prochaine fois...",
+    "ending": true
+  }
+}
