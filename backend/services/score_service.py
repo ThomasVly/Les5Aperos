@@ -1,9 +1,11 @@
 import sqlite3
+import os
 from pathlib import Path
 
-# Chemin vers la DB (à la racine de backend)
+# Chemin vers la DB - utilise DB_PATH env var si défini (pour Azure Files), sinon local
 BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / 'scores.db'
+DB_DIR = Path(os.environ.get('DB_PATH', str(BASE_DIR)))
+DB_PATH = DB_DIR / 'scores.db'
 
 
 def init_db():

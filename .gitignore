@@ -148,3 +148,5 @@ Thumbs.db
 .env.example
 /contacts
 frontend/src/favicon_io.zip
+containerapp.yaml
+containerapp-update.yaml
