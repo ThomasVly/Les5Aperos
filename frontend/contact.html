@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Les5Aperos</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='src/favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='src/favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='src/favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='src/favicon_io/site.webmanifest') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='src/favicon_io/favicon.ico') }}">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Formulaire de Contact des 5Apéros </h1>
+    </header>
+    
+    <main>
+        <section id="contact-form-section">
+            <div class="form-container">
+                <h2>Envoyez-nous un message !</h2>
+                <p class="intro">Ce formulaire est spécial... Ne soyez pas surpris, c'est vous qui l'avez demandé ! 👀</p>
+                
+                <form id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="nom">Nom <span class="required">*</span></label>
+                        <input type="text" id="nom" name="nom" required 
+                               placeholder="Votre nom">
+                        <span class="error-message" id="nom-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="votre@email.com">
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sujet">Sujet <span class="required">*</span></label>
+                        <input type="text" id="sujet" name="sujet" required 
+                               placeholder="Pourquoi vous nous contactez ? ">
+                        <span class="error-message" id="sujet-error"></span>
+
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" rows="6" required 
+                                  placeholder="Écrivez votre message ici... Soyez créatif !"></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    
+                    <!-- Faux Captcha -->
+                    <div class="form-group captcha-container" id="captchaContainer">
+                        <label>Vérification de sécurité <span class="required">*</span></label>
+                        <div class="fake-captcha" id="fakeCaptcha">
+                            <div class="captcha-checkbox" id="captchaCheckbox">
+                                <div class="captcha-spinner" id="captchaSpinner"></div>
+                                <span class="captcha-checkmark" id="captchaCheckmark">✓</span>
+                            </div>
+                            <span class="captcha-text" id="captchaText">Je ne suis pas un robot</span>
+                            <div class="captcha-logo">
+                                <span class="captcha-logo-text">reCAPTCHA</span>
+                                <span class="captcha-logo-sub">Privacy - Terms</span>
+                            </div>
+                        </div>
+                        <div class="captcha-timer" id="captchaTimer"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" id="submitBtn" class="submit-btn" disabled>
+                            <span class="btn-text">Envoyer le message</span>
+                            <span class="btn-emoji">🚀</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Bulle Evereast -->
+    <div id="evereastBubble" class="evereast-bubble">
+        <span class="bubble-text">Vous venez d'ici ?</span>
+        <a href="https://evereast-solutions.com/" target="_blank" class="bubble-link">evereast-solutions.com</a>
+        <span class="bubble-close" id="closeBubble">&times;</span>
+    </div>
+
+    <!-- Modal Otis -->
+    <div id="otisModal" class="modal otis-modal">
+        <div class="modal-content otis-content">
+            <span class="close" id="closeOtis">&times;</span>
+            <p class="otis-intro">C'est pas très intéressant tout ça, vous feriez mieux de vous inspirer de ces belles paroles :</p>
+            <div class="otis-video">
+                <iframe id="otisVideo" width="100%" height="250" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="otis-tirade" id="otisTirade"></div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Deuxième formulaire (affiché après le premier) -->
+    <div id="secondFormSection" class="form-container second-form-container" style="display: none;">
+        <h2>Encore quelques petites infos... 🤔</h2>
+        <p class="intro">Promis, c'est la dernière étape !</p>
+        
+        <form id="secondContactForm" novalidate>
+            <div class="form-group">
+                <label for="age">Âge <span class="required">*</span></label>
+                <input type="text" id="age" name="age" required 
+                       placeholder="Écrivez les décimales de π (ex: 3.14 = 3 ans)">
+                <span class="age-display" id="ageDisplay">Votre âge : 0 ans</span>
+                <span class="error-message" id="age-error"></span>
+            </div>
+            
+            <div class="form-group">
+                <label for="bloodType">Groupe sanguin</label>
+                <select id="bloodType" name="bloodType">
+                    <option value="">-- Sélectionnez --</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+                <span class="error-message" id="bloodType-error"></span>
+            </div>
+            
+            <div class="form-group lawn-group">
+                <label>À quelle hauteur tondez-vous votre pelouse ? 🌱</label>
+                <div class="lawn-slider-container">
+                    <div class="lawn-display" id="lawnDisplay">
+                        <div class="lawn-grass" id="lawnGrass"></div>
+                        <div class="lawn-ground"></div>
+                    </div>
+                    <input type="range" id="lawnHeight" name="lawnHeight" 
+                           min="0" max="100" value="50" 
+                           orient="vertical" class="lawn-slider">
+                    <span class="lawn-value" id="lawnValue">50 cm</span>
+                </div>
+            </div>
+            
+            <div class="form-group cgu-group">
+                <div class="cgu-container">
+                    <input type="checkbox" id="cguCheckbox" name="cgu">
+                    <label for="cguCheckbox" class="cgu-label">
+                        J'accepte les <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="cgu-link">Conditions Générales d'Utilisation</a>
+                    </label>
+                </div>
+                <span class="error-message" id="cgu-error"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="submitBtn2" class="submit-btn">
+                    <span class="btn-text">Terminer</span>
+                    <span class="btn-emoji">✨</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal groupe sanguin -->
+    <div id="bloodTypeModal" class="modal">
+        <div class="modal-content blood-modal-content">
+            <h2>Vous nous faites pas confiance ? 😢</h2>
+            <div class="blood-modal-buttons">
+                <button id="bloodNoBtn" class="blood-btn blood-btn-no">Non</button>
+                <button id="bloodYesBtn" class="blood-btn blood-btn-yes">Si si, mais je connais pas mon groupe sanguin</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal RGPD -->
+    <div id="rgpdModal" class="modal">
+        <div class="modal-content rgpd-modal-content">
+            <span class="close" id="closeRgpd">&times;</span>
+            <h2>📜 Règlement RGPD</h2>
+            <p class="rgpd-text">
+                Peu importe votre confiance, nous ne sommes pas habilités à recueillir ce type d'informations.
+            </p>
+            <p class="rgpd-link-container">
+                <a href="https://www.cnil.fr/fr/reglement-europeen-protection-donnees/chapitre2#Article9" target="_blank" class="rgpd-link">
+                    📋 En savoir plus sur les données médicales (RGPD Art. 9)
+                </a>
+            </p>
+            <button id="closeRgpdBtn" class="submit-btn" style="margin-top: 1rem;">
+                J'ai compris
+            </button>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+</body>
+</html>

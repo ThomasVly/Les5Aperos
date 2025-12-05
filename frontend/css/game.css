@@ -1,0 +1,184 @@
+/* ===========================================
+   GAME - Styles de base pour le jeu narratif
+   =========================================== */
+
+.game-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Fenêtre de scénario */
+.scenario-window {
+    background: #1a1a2e;
+    border: 2px solid #4a4a6a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.scenario-header {
+    background: #2a2a4e;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4a4a6a;
+}
+
+.scenario-type {
+    background: #4a4a6a;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.scenario-source {
+    color: #aaa;
+    font-size: 0.875rem;
+}
+
+.scenario-title {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    border-bottom: 1px solid #3a3a5a;
+}
+
+.scenario-content {
+    padding: 1.5rem;
+    color: #ddd;
+    line-height: 1.6;
+    min-height: 150px;
+}
+
+/* Choix */
+.scenario-choices {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 1px solid #3a3a5a;
+    background: #252545;
+}
+
+.choice-form {
+    margin: 0;
+}
+
+.choice-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #3a3a6a;
+    border: 1px solid #5a5a8a;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.choice-btn:hover {
+    background: #4a4a8a;
+    border-color: #6a6aaa;
+    transform: translateX(4px);
+}
+
+.choice-btn:active {
+    transform: translateX(2px);
+}
+
+/* Ending */
+.scenario-window.ending {
+    border-color: #6a6a2a;
+}
+
+.ending-score {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #3a3a5a;
+}
+
+.ending-score h3 {
+    margin: 0 0 1rem 0;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.score-grid {
+    display: flex;
+    gap: 1rem;
+}
+
+.score-item {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.score-item.good {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+.score-item.bad {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.5);
+}
+
+.score-label {
+    display: block;
+    font-size: 0.875rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.score-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.ending-history {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #3a3a5a;
+}
+
+.ending-history h3 {
+    margin: 0 0 0.5rem 0;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.ending-history p {
+    color: #888;
+    margin: 0;
+}
+
+.ending-actions {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #3a3a5a;
+    text-align: center;
+}
+
+.btn-restart {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #4a4a8a;
+    border: 1px solid #6a6aaa;
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-restart:hover {
+    background: #5a5a9a;
+}

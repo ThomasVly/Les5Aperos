@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les5Aperos</title>
+    <title>{% block title %}Jeu Narratif{% endblock %}</title>
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='src/favicon_io/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='src/favicon_io/favicon-32x32.png') }}">
@@ -12,25 +12,14 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='src/favicon_io/favicon.ico') }}">
     <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="/css/game.css">
+    {% block head %}{% endblock %}
 </head>
 <body>
-    <header>
-        <h1>Bienvenue sur Les5Aperos</h1>
-    </header>
-    
-    <main>
-        <section id="content">
-            <h2>Projet Nuit de l'Info</h2>
-            <p>Ceci est la page d'accueil du projet.</p>
-            <a href="/activity" class="activity-link">🎮 Accéder à l'activité principale</a>
-        </section>
+    <main class="game-container">
+        {% block content %}{% endblock %}
     </main>
     
-    <footer>
-        <p>&copy; 2025 Les5Aperos - INSA</p>
-        <p><a href="/contact" class="contact-link">📧 Contactez-nous</a> | <a href="/nird" class="nird-link">🌱 Démarche NIRD</a></p>
-    </footer>
-    
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>

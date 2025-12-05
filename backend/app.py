@@ -1,37 +1,28 @@
-from flask import Flask, render_template, jsonify
-import os
-from pathlib import Path
+from flask import Flask
 
-# Obtenir le chemin absolu du dossier frontend
-BASE_DIR = Path(__file__).resolve().parent.parent
-FRONTEND_DIR = BASE_DIR / 'frontend'
+from config import Config, FRONTEND_DIR
+from routes import register_blueprints
 
-app = Flask(__name__, 
-            template_folder=str(FRONTEND_DIR),
-            static_folder=str(FRONTEND_DIR))
 
-@app.route('/')
-def index():
-    """Page d'accueil"""
-    return render_template('index.html')
+def create_app():
+    """Factory function pour créer l'application Flask"""
+    app = Flask(
+        __name__,
+        template_folder=str(FRONTEND_DIR),
+        static_folder=str(FRONTEND_DIR)
+    )
+    
+    app.config.from_object(Config)
+    register_blueprints(app)
+    
+    return app
 
-@app.route('/activity')
-def activity():
-    """Page d'activité principale"""
-    return render_template('activity.html')
 
-@app.route('/zerguemContreGoliath')
-def zerguem():
-    """Page du jeu Laser Game intégrée dans l'ordi"""
-    return render_template('zerguem.html')
-
-@app.route('/api/hello')
-def hello():
-    """Exemple d'endpoint API"""
-    return jsonify({
-        'message': 'Hello from Flask!',
-        'status': 'success'
-    })
+app = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(
+        debug=Config.DEBUG,
+        host=Config.HOST,
+        port=Config.PORT
+    )

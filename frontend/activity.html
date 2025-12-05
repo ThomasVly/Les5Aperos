@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activité Principale - Les5Aperos</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='src/favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='src/favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='src/favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='src/favicon_io/site.webmanifest') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='src/favicon_io/favicon.ico') }}">
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/intro.css') }}">
 </head>
 <body class="activity-page">
     
@@ -35,11 +43,21 @@
             
             <!-- Interface sur l'écran de l'ordinateur -->
             <div class="screen-interface">
-                <!-- Contenu de l'interface ici -->
+                <!-- Menu principal -->
+                <div class="game-menu">
+                    <h1 class="menu-title">NEW GAME</h1>
+                    <p class="menu-subtitle">FROM LES 5APEROS</p>
+                    <div class="menu-buttons">
+                        <button class="menu-btn" id="btn-yes">YES</button>
+                        <button class="menu-btn" id="btn-no">NO</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
+    
+    <!-- Bouton Quitter -->
+    <button class="quit-btn" id="quit-btn" style="display: none;">QUITTER</button>
         
     <script src="{{ url_for('static', filename='js/activity.js') }}"></script>
 </body>
