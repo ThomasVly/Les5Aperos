@@ -1,5 +1,11 @@
 // Script pour afficher un scénario via DialogManager
 document.addEventListener('DOMContentLoaded', () => {
+    // Ne pas exécuter sur la page de fin
+    if (window.isEnding) {
+        console.log('Page de fin détectée, scenario.js ne s\'exécute pas');
+        return;
+    }
+    
     console.log('Chargement du scénario...');
     
     const dialogManager = new DialogManager();
@@ -20,44 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Préparer les choix avec soumission de formulaire
-    const choices = scenario.choices ? scenario.choices.map((choice, index) => ({
-        text: choice.text,
-        action: `choice_${index}`
-    })) : [];
-    
-    // Enregistrer les callbacks AVANT d'afficher les dialogs pour chaque choix
-    choices.forEach((choice, index) => {
-        dialogManager.on(`choice_${index}`, async () => {
-            console.log('Choix sélectionné:', index, choice);
-            
-            // Envoyer le choix via AJAX
-            try {
-                const formData = new FormData();
-                formData.append('choice', index);
-                
-                const response = await fetch('/game/choose', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Erreur lors du chargement du scénario');
-                }
-                
-                const data = await response.json();
-                console.log('Nouveau scénario reçu:', data);
-                
-                // Charger le nouveau scénario
-                loadScenario(data.scenario, dialogManager);
-                
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Erreur lors du chargement du scénario');
-            }
-        });
-    });
-    
     // Charger le premier scénario
     loadScenario(scenario, dialogManager);
 });
@@ -77,6 +45,9 @@ function loadScenario(scenario, dialogManager) {
         text: choice.text,
         action: `choice_${index}`
     })) : [];
+    
+    // Nettoyer les anciens callbacks et enregistrer les nouveaux
+    dialogManager.callbacks = {}; // Reset des callbacks
     
     // Enregistrer les callbacks pour chaque choix
     choices.forEach((choice, index) => {
@@ -99,6 +70,9 @@ function loadScenario(scenario, dialogManager) {
                 
                 const data = await response.json();
                 console.log('Nouveau scénario reçu:', data);
+                console.log('Type du scénario:', data.scenario?.type);
+                console.log('Ending?', data.scenario?.ending);
+                console.log('Choices:', data.scenario?.choices);
                 
                 // Charger le nouveau scénario
                 loadScenario(data.scenario, dialogManager);

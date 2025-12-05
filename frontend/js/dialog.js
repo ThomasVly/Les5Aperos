@@ -109,11 +109,12 @@ class DialogManager {
         const body = dialog.querySelector('.dialog-body');
         body.appendChild(content);
         
-        // Bouton pour continuer
-        const footer = this.createFooter([{
+        // Utiliser les choix fournis ou bouton Continuer par défaut
+        const choices = (data.choices && data.choices.length > 0) ? data.choices : [{
             text: 'Continuer',
             action: 'continue'
-        }], data.scenarioId);
+        }];
+        const footer = this.createFooter(choices, data.scenarioId);
         dialog.appendChild(footer);
         
         this.show(dialog);
@@ -137,11 +138,12 @@ class DialogManager {
         body.appendChild(icon);
         body.appendChild(text);
         
-        // Bouton OK
-        const footer = this.createFooter([{
+        // Utiliser les choix fournis ou bouton OK par défaut
+        const choices = (data.choices && data.choices.length > 0) ? data.choices : [{
             text: 'OK',
             action: 'close'
-        }], data.scenarioId);
+        }];
+        const footer = this.createFooter(choices, data.scenarioId);
         dialog.appendChild(footer);
         
         this.show(dialog);
