@@ -119,11 +119,74 @@ userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();
 });
 
-// Calcul responsive de la taille de base
-function updateFontSize() {
-    const screenWidth = document.querySelector('.screen-interface').offsetWidth;
-    document.documentElement.style.setProperty('--base-font', `${screenWidth}px`);
+// Système responsive basé sur l'image de l'ordinateur
+function adjustScreenPosition() {
+    const computerImage = document.querySelector('.computer-image');
+    const screenInterface = document.querySelector('.screen-interface');
+    const wrapper = document.querySelector('.computer-wrapper');
+    
+    if (!computerImage || !screenInterface || !wrapper) return;
+    
+    const imgNaturalWidth = computerImage.naturalWidth;
+    const imgNaturalHeight = computerImage.naturalHeight;
+    
+    if (imgNaturalWidth === 0 || imgNaturalHeight === 0) return;
+    
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const imgAspect = imgNaturalWidth / imgNaturalHeight;
+    const containerAspect = wrapperRect.width / wrapperRect.height;
+    
+    let displayedWidth, displayedHeight, offsetX, offsetY;
+    
+    if (containerAspect > imgAspect) {
+        // Contrainte par la hauteur
+        displayedHeight = wrapperRect.height;
+        displayedWidth = displayedHeight * imgAspect;
+        offsetX = (wrapperRect.width - displayedWidth) / 2; // Centré horizontalement
+        offsetY = 0; // En bas (object-position: bottom)
+    } else {
+        // Contrainte par la largeur
+        displayedWidth = wrapperRect.width;
+        displayedHeight = displayedWidth / imgAspect;
+        offsetX = 0;
+        offsetY = wrapperRect.height - displayedHeight; // En bas
+    }
+    
+    // Définir les variables CSS
+    const baseFont = Math.min(displayedWidth, displayedHeight);
+    document.documentElement.style.setProperty('--base-font', `${baseFont}px`);
+    document.documentElement.style.setProperty('--screen-width', `${displayedWidth}px`);
+    document.documentElement.style.setProperty('--screen-height', `${displayedHeight}px`);
+    
+    // Pourcentages de positionnement de l'écran sur l'image originale
+    const screenTopPercent = 8.5 / 100;
+    const screenLeftPercent = 16.8 / 100;
+    const screenWidthPercent = 66.4 / 100;
+    const screenHeightPercent = 59.5 / 100;
+    
+    // Positionner l'interface de l'écran
+    screenInterface.style.top = `${offsetY + displayedHeight * screenTopPercent}px`;
+    screenInterface.style.left = `${offsetX + displayedWidth * screenLeftPercent}px`;
+    screenInterface.style.width = `${displayedWidth * screenWidthPercent}px`;
+    screenInterface.style.height = `${displayedHeight * screenHeightPercent}px`;
 }
 
-window.addEventListener('resize', updateFontSize);
-window.addEventListener('load', updateFontSize);
+// Initialisation
+const computerImage = document.querySelector('.computer-image');
+const wrapper = document.querySelector('.computer-wrapper');
+
+if (computerImage) {
+    if (computerImage.complete && computerImage.naturalWidth > 0) {
+        adjustScreenPosition();
+    } else {
+        computerImage.addEventListener('load', adjustScreenPosition);
+    }
+}
+
+// ResizeObserver pour détecter les changements de taille du wrapper
+if (wrapper && typeof ResizeObserver !== 'undefined') {
+    const resizeObserver = new ResizeObserver(adjustScreenPosition);
+    resizeObserver.observe(wrapper);
+}
+
+window.addEventListener('resize', adjustScreenPosition);

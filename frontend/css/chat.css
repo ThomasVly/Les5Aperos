@@ -26,13 +26,14 @@
     pointer-events: none;
 }
 
-.background-gif-container .tenor-gif-embed {
+.background-gif-container .background-image {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     min-width: 177.78vh;
     min-height: 56.25vw;
 }
@@ -49,23 +50,32 @@
 
 .computer-section {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     width: 100%;
     height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .computer-wrapper {
     position: relative;
-    width: 95vw;
-    height: 95vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
 }
 
 .computer-image {
-    width: 100%;
+    width: auto;
     height: 100%;
+    max-width: 100vw;
     object-fit: contain;
+    object-position: bottom center;
     image-rendering: pixelated;
+    display: block;
 }
 
 /* Interface de chat sur l'écran */
@@ -125,7 +135,7 @@
 .chat-header {
     background: rgba(0, 20, 0, 0.8);
     padding: calc(var(--base-font, 200px) * 0.02);
-    border-bottom: 2px solid #00ff00;
+    border-bottom: calc(var(--base-font, 200px) * 0.004) solid #00ff00;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -144,12 +154,12 @@
 .status-indicator {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: calc(var(--base-font, 200px) * 0.015);
 }
 
 .status-dot {
-    width: 10px;
-    height: 10px;
+    width: calc(var(--base-font, 200px) * 0.02);
+    height: calc(var(--base-font, 200px) * 0.02);
     background: #00ff00;
     border-radius: 50%;
     animation: pulse 2s infinite;
@@ -178,7 +188,7 @@
 }
 
 .chat-messages::-webkit-scrollbar {
-    width: 8px;
+    width: calc(var(--base-font, 200px) * 0.015);
 }
 
 .chat-messages::-webkit-scrollbar-track {
@@ -187,7 +197,7 @@
 
 .chat-messages::-webkit-scrollbar-thumb {
     background: #00ff00;
-    border-radius: 4px;
+    border-radius: calc(var(--base-font, 200px) * 0.008);
 }
 
 .message {
@@ -210,7 +220,7 @@
     font-size: calc(var(--base-font, 200px) * 0.03);
     color: #00ff00;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: calc(var(--base-font, 200px) * 0.01);
     text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
 }
 
@@ -221,7 +231,7 @@
     margin: 0;
     line-height: 1.5;
     padding-left: calc(var(--base-font, 200px) * 0.02);
-    border-left: 2px solid rgba(0, 255, 0, 0.3);
+    border-left: calc(var(--base-font, 200px) * 0.004) solid rgba(0, 255, 0, 0.3);
 }
 
 .user-message .message-prefix {
@@ -248,7 +258,7 @@
 .chat-input-container {
     background: rgba(0, 20, 0, 0.8);
     padding: calc(var(--base-font, 200px) * 0.02);
-    border-top: 2px solid #00ff00;
+    border-top: calc(var(--base-font, 200px) * 0.004) solid #00ff00;
     flex-shrink: 0;
 }
 
@@ -268,17 +278,19 @@
 .chat-input {
     flex: 1;
     background: rgba(0, 0, 0, 0.5);
-    border: 2px solid #00ff00;
+    border: calc(var(--base-font, 200px) * 0.004) solid #00ff00;
     color: #00ff00;
     font-family: 'Courier New', monospace;
     font-size: calc(var(--base-font, 200px) * 0.03);
     padding: calc(var(--base-font, 200px) * 0.015) calc(var(--base-font, 200px) * 0.02);
     outline: none;
     transition: all 0.3s ease;
+    /* Évite le zoom sur iOS */
+    font-size: max(calc(var(--base-font, 200px) * 0.03), 16px);
 }
 
 .chat-input:focus {
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    box-shadow: 0 0 calc(var(--base-font, 200px) * 0.03) rgba(0, 255, 0, 0.5);
     background: rgba(0, 20, 0, 0.7);
 }
 
@@ -301,7 +313,7 @@
 
 .send-btn:hover {
     background: #00cc00;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+    box-shadow: 0 0 calc(var(--base-font, 200px) * 0.04) rgba(0, 255, 0, 0.8);
     transform: scale(1.05);
 }
 
@@ -312,15 +324,4 @@
 .send-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .chat-title {
-        font-size: calc(var(--base-font, 150px) * 0.04);
-    }
-
-    .message p {
-        font-size: calc(var(--base-font, 150px) * 0.028);
-    }
 }
