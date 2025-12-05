@@ -1,6 +1,6 @@
 from flask import Flask
 
-from backend.services.score_service import init_db
+from services.score_service import init_db
 from config import Config, FRONTEND_DIR
 from routes import register_blueprints
 
