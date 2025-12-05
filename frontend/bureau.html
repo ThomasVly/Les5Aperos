@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bureau - Sonneries Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bureau.css') }}">
+</head>
+<body class="background-gif-container">
+
+    <!-- Background GIF -->
+    <div class="background-gif-container">
+        <div class="tenor-gif-embed" data-postid="22552632" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%">
+            <a href="https://tenor.com/view/sunset-retro-retro-synthwave-gif-22552632">
+                Sunset Retro Retro GIF
+            </a>
+            from 
+            <a href="https://tenor.com/search/sunset+retro-gifs">
+                Sunset Retro GIFs
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    
+    <!-- Overlay pour assombrir légèrement le fond -->
+    <div class="overlay"></div>
+
+    <!-- Contenu principal -->
+    <section class="computer-section">
+        <div class="computer-wrapper">
+            <img src="{{ url_for('static', filename='src/Computer_pixel_art.png') }}" 
+                    alt="Computer Pixel Art" 
+                    class="computer-image">
+            
+            <!-- Interface sur l'écran de l'ordinateur -->
+            <div class="screen-interface">
+                <!-- Bureau avec icônes -->
+                <div class="desktop">
+                    <div class="desktop-icons">
+                        <a href="/visualizer" class="desktop-icon">
+                            <div class="icon-image">🎵</div>
+                            <div class="icon-label">Sonneries Explorer</div>
+                        </a>
+                        
+                        <a href="/chatbot" class="desktop-icon">
+                            <div class="icon-image">🤖</div>
+                            <div class="icon-label">Chat Bot</div>
+                        </a>
+                        
+                        <a href="/game/play" class="desktop-icon">
+                            <div class="icon-image">🎮</div>
+                            <div class="icon-label">Jeu interactif</div>
+                        </a>
+                        
+                        <a href="/nird" class="desktop-icon">
+                            <div class="icon-image">🌐</div>
+                            <div class="icon-label">NIRD</div>
+                        </a>
+
+                        <a href="/zerguemContreGoliath" class="desktop-icon">
+                            <div class="icon-image">🔫</div>
+                            <div class="icon-label">Laser Game</div>
+                        </a>
+                    </div>
+                    
+                    <!-- Bouton d'aide / contact -->
+                    <a href="/contact" class="help-button" title="Contactez-nous">?</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="{{ url_for('static', filename='js/activity.js') }}"></script>
+</body>
+</html>

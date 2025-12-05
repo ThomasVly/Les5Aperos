@@ -1,0 +1,366 @@
+/* Style Wikipedia pour la page NIRD */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #202122;
+    background-color: #f8f9fa;
+}
+
+a {
+    color: #0645ad;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #0b0080;
+}
+
+/* Container principal */
+.wiki-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #a2a9b1;
+    min-height: 100vh;
+}
+
+/* Header */
+.wiki-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #a2a9b1;
+    background: #fbfbfb;
+}
+
+.wiki-logo {
+    margin-right: 20px;
+}
+
+.nird-logo {
+    width: 80px;
+    height: auto;
+}
+
+.wiki-title h1 {
+    font-size: 1.8em;
+    font-weight: normal;
+    color: #000;
+    border: none;
+    margin: 0;
+}
+
+.wiki-subtitle {
+    font-size: 0.85em;
+    color: #54595d;
+    font-style: italic;
+}
+
+/* Navigation tabs */
+.wiki-tabs {
+    background: #f8f9fa;
+    border-bottom: 1px solid #a2a9b1;
+    padding-left: 20px;
+}
+
+.wiki-tabs ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.wiki-tabs li {
+    margin-right: 0;
+}
+
+.wiki-tabs a {
+    display: block;
+    padding: 8px 15px;
+    color: #0645ad;
+    border: 1px solid transparent;
+    border-bottom: none;
+    margin-bottom: -1px;
+    font-size: 0.9em;
+}
+
+.wiki-tabs li.active a {
+    background: #fff;
+    border-color: #a2a9b1;
+    border-bottom-color: #fff;
+    color: #202122;
+}
+
+.wiki-tabs a:hover {
+    text-decoration: none;
+    background: #eaecf0;
+}
+
+/* Content area */
+.wiki-content {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Infobox (sidebar droite style Wikipedia) */
+.wiki-infobox {
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.wiki-infobox table {
+    width: 100%;
+    border: 1px solid #a2a9b1;
+    border-collapse: collapse;
+    background: #f8f9fa;
+    font-size: 0.9em;
+}
+
+.wiki-infobox caption {
+    background: #cef2e0;
+    padding: 8px;
+    font-weight: bold;
+    border: 1px solid #a2a9b1;
+    border-bottom: none;
+    text-align: center;
+}
+
+.wiki-infobox th,
+.wiki-infobox td {
+    padding: 6px 10px;
+    border: 1px solid #a2a9b1;
+    vertical-align: top;
+}
+
+.wiki-infobox th {
+    background: #eaecf0;
+    text-align: left;
+    width: 40%;
+    font-weight: normal;
+}
+
+.wiki-infobox .infobox-image {
+    text-align: center;
+    padding: 15px;
+    background: #fff;
+}
+
+.wiki-infobox .infobox-image img {
+    max-width: 150px;
+    height: auto;
+}
+
+/* Article principal */
+.wiki-article {
+    flex: 1;
+    min-width: 0;
+}
+
+.wiki-intro {
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+/* Titres de sections */
+.wiki-article h2 {
+    font-size: 1.5em;
+    font-weight: normal;
+    border-bottom: 1px solid #a2a9b1;
+    margin: 25px 0 10px 0;
+    padding-bottom: 5px;
+    color: #000;
+}
+
+.wiki-article h2:first-of-type {
+    margin-top: 0;
+}
+
+.wiki-article h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 15px 0 8px 0;
+    color: #000;
+}
+
+.mw-headline {
+    /* Style Wikipedia pour les titres - conservé pour compatibilité */
+    display: inline;
+}
+
+/* Table des matières */
+.wiki-toc {
+    display: inline-block;
+    background: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    padding: 10px 20px;
+    margin: 15px 0;
+}
+
+.wiki-toc h2 {
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    margin: 0 0 10px 0;
+    padding: 0;
+    text-align: center;
+}
+
+.wiki-toc ol {
+    margin: 0;
+    padding-left: 25px;
+}
+
+.wiki-toc li {
+    margin: 3px 0;
+}
+
+.wiki-toc a {
+    color: #0645ad;
+}
+
+/* Paragraphes */
+.wiki-article p {
+    margin: 10px 0;
+}
+
+/* Listes */
+.wiki-list {
+    margin: 10px 0 10px 25px;
+}
+
+.wiki-list li {
+    margin: 5px 0;
+}
+
+/* Liste de définitions */
+.wiki-definition {
+    margin: 15px 0;
+}
+
+.wiki-definition dt {
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.05em;
+}
+
+.wiki-definition dd {
+    margin-left: 25px;
+    margin-top: 5px;
+}
+
+/* Note encadrée */
+.wiki-note {
+    background: #f8f9fa;
+    border-left: 3px solid #36c;
+    padding: 10px 15px;
+    margin: 15px 0;
+    font-size: 0.95em;
+}
+
+/* Liens externes */
+.wiki-external-links {
+    background: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.wiki-external-links h3 {
+    margin-top: 0;
+}
+
+.wiki-external-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.wiki-external-links li {
+    margin: 8px 0;
+    padding-left: 5px;
+}
+
+/* Footer */
+.wiki-footer {
+    background: #f8f9fa;
+    border-top: 1px solid #a2a9b1;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 0.85em;
+    color: #54595d;
+}
+
+.wiki-footer a {
+    color: #0645ad;
+}
+
+.footer-nav {
+    margin: 10px 0;
+}
+
+.footer-nav a {
+    font-weight: bold;
+}
+
+.wiki-license {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eaecf0;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .wiki-content {
+        flex-direction: column;
+    }
+    
+    .wiki-infobox {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .wiki-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .wiki-logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .wiki-tabs ul {
+        flex-wrap: wrap;
+    }
+}
+
+/* Scrollbar style simple */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a2a9b1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #72777d;
+}

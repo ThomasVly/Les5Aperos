@@ -1,29 +1,364 @@
 {
   "scenario_1": {
-    "name": "Test - Premier scénario",
+    "name": "Clavier en détresse",
     "type": "mail",
-    "source": "Utilisateur Test",
-    "title": "Objet : Ceci est un test",
-    "content": "Bonjour,\n\nCeci est un scénario de test pour vérifier que le système fonctionne correctement.\n\nVeuillez choisir une option ci-dessous.",
+    "source": "Étudiant anonyme",
+    "title": "Objet : SOS - La touch  st part i n vacanccs",
+    "content": "Bonjour Monsiur l Provisur,\n\nJ vous contact car j'ai prdu dux touchs sur mon clavir. Impossibl d'écrir corrctmnt mon rapport d stag, surtout dpuis qu la touch E a décidé d fair séccssion.\n\nRésultat : mon txt rssml à un xrcic d cryptographi façon Da Vinci Cod, t mêm moi j n comprds plus c qu j'ai écrit. Mon maîtr d stag pns qu j'ai inventé un nouvau langag.\n\nCordialmnt (nfin, cordialmnt sans ls...),\nUn·e étudiant·e au bout du rouleau (de scotch et de patience)\n\nPS : J'ai ssayé d tapér avc un stylo sur l'écran, ça n march pas.",
     "choices": [
       {
-        "text": "Bon choix (effet positif)",
-        "next": "scenario_2",
-        "effect": "good"
+        "text": "Faire réparer le clavier",
+        "response": "Bonjour,\n\nJ'ai bien reçu votre message (décodage effectué avec succès).\n\nJe transmets immédiatement à notre service technique. On devrait pouvoir récupérer des touches sur un ancien clavier.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_1A",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Évite la production d'un nouveau clavier et ses émissions CO2",
+          "economique": "Coût minimal - réutilisation de pièces existantes",
+          "social": "Valorise les compétences techniques locales",
+          "souverainete": "Autonomie de réparation sans dépendance aux fournisseurs"
+        }
       },
       {
-        "text": "Mauvais choix (effet négatif)",
-        "next": "scenario_2",
-        "effect": "bad"
+        "text": "Fournir un clavier neuf",
+        "response": "Bonjour,\n\nProblème résolu : vous pouvez passer à l'intendance récupérer un clavier tout neuf.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_1B",
+        "effect": "neutral",
+        "nird_impact": {
+          "environnement": "Consommation de ressources et émissions liées à la production",
+          "economique": "Dépense budgétaire pour achat neuf",
+          "social": "Solution rapide mais ne développe pas l'économie circulaire",
+          "souverainete": "Dépendance aux chaînes d'approvisionnement internationales"
+        }
       }
     ]
   },
-  "scenario_2": {
-    "name": "Test - Fin",
+  "scenario_1A": {
+    "name": "Clavier réparé",
+    "type": "mail",
+    "source": "Technicien réseau",
+    "title": "RE: Clavier en détresse – Mission accomplie",
+    "content": "Bonjour,\n\nSUCCÈS ! J'ai retrouvé deux touches E et N dans les archives du sous-sol.\n\nL'étudiant a maintenant un clavier style Frankenstein qui fonctionne parfaitement.\n\nPetite réflexion : si on organisait un mini-stock de pièces détachées, ça éviterait de jouer à l'archéologue numérique à chaque fois.\n\nQu'en dites-vous ?\n\nCordialement,\nVotre technicien",
+    "choices": [
+      {
+        "text": "Lancer le projet reconditionnement",
+        "response": "Excellente idée ! Organisez un inventaire des pièces récupérables.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_2A",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Mise en place d'une filière de réemploi durable",
+          "economique": "Réduction des coûts d'achat à long terme",
+          "social": "Création d'une culture de réparation et responsabilité",
+          "souverainete": "Autonomie accrue du lycée sur son parc informatique"
+        }
+      }
+    ]
+  },
+  "scenario_1B": {
+    "name": "Demandes matériel",
+    "type": "mail",
+    "source": "Gestionnaire",
+    "title": "RE: Demandes de matériel",
+    "content": "Bonjour,\n\nClavier neuf livré. C'est la cinquième demande ce mois-ci.\n\nLe budget se porte bien à 30% consommé. Je continue de surveiller.\n\nCordialement,\nLa gestionnaire",
+    "choices": [
+      {
+        "text": "Explorer le réemploi",
+        "response": "Merci. Réfléchissons à des alternatives plus durables pour l'avenir.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_2B",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Prise de conscience et changement de stratégie",
+          "economique": "Anticipation des économies futures",
+          "social": "Sensibilisation aux enjeux environnementaux",
+          "souverainete": "Développement d'une stratégie indépendante"
+        }
+      },
+      {
+        "text": "Continuer les achats neufs",
+        "response": "Continuez sur cette lancée.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_2B",
+        "effect": "bad",
+        "nird_impact": {
+          "environnement": "Maintien d'une logique consumériste polluante",
+          "economique": "Dépenses continues sans optimisation",
+          "social": "Perpétuation du modèle jetable",
+          "souverainete": "Dépendance accrue aux fournisseurs externes"
+        }
+      }
+    ]
+  },
+  "scenario_2A": {
+    "name": "Opération Phénix",
+    "type": "mail",
+    "source": "Technicien réseau",
+    "title": "Eurêka ! Idée pour le parc informatique",
+    "content": "Bonjour,\n\nJ'ai eu une idée : mettre en place une clinique pour matériel fatigué !\n\n📋 Recensement des machines encore viables\n🔧 Reconditionnement\n🐧 Installation de systèmes légers (Linux)\n♻️ Réaffectation\n\nJ'appelle ça l'Opération Phénix.\n\nQu'en dites-vous ?\n\nCordialement,\nVotre technicien",
+    "choices": [
+      {
+        "text": "Lancer le projet",
+        "response": "C'est parti ! Lancez l'inventaire.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_3A",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Prolongation durée de vie matériel = réduction déchets électroniques",
+          "economique": "Économies substantielles sur achats neufs",
+          "social": "Valorisation compétences techniques, formation interne",
+          "souverainete": "Maîtrise totale du parc, utilisation de logiciels libres"
+        }
+      },
+      {
+        "text": "Trop compliqué, remplacer",
+        "response": "On va plutôt budgéter des remplacements.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_3",
+        "effect": "bad",
+        "nird_impact": {
+          "environnement": "Mise au rebut prématurée d'équipements fonctionnels",
+          "economique": "Coûts d'acquisition élevés non nécessaires",
+          "social": "Opportunité manquée de développer compétences",
+          "souverainete": "Dépendance maintenue aux constructeurs"
+        }
+      }
+    ]
+  },
+  "scenario_2B": {
+    "name": "Budget sous tension",
+    "type": "notification",
+    "source": "Service comptabilité",
+    "title": "⚠️ Alerte budget informatique",
+    "content": "ATTENTION : Budget matériel informatique à 65% consommé.\n\nNous sommes seulement en mars.\n\nIl reste 7 mois avant la fin d'exercice.\n\nRecommandation : réviser la stratégie d'achat.",
+    "choices": [
+      {
+        "text": "Mettre en place le réemploi",
+        "next": "scenario_2A",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Réduction drastique de l'empreinte carbone",
+          "economique": "Maîtrise budgétaire et économies",
+          "social": "Développement de nouvelles compétences",
+          "souverainete": "Autonomie technique renforcée"
+        }
+      },
+      {
+        "text": "Demander rallonge budgétaire",
+        "next": "scenario_3",
+        "effect": "bad",
+        "nird_impact": {
+          "environnement": "Maintien d'un modèle non durable",
+          "economique": "Dérive budgétaire, coûts croissants",
+          "social": "Pas de changement de pratiques",
+          "souverainete": "Dépendance financière et technique"
+        }
+      }
+    ]
+  },
+  "scenario_3A": {
+    "name": "Inventaire réalisé",
+    "type": "mail",
+    "source": "Technicien réseau",
+    "title": "Bilan Opération Phénix - Phase 1",
+    "content": "Bonjour,\n\nInventaire terminé ! Résultats :\n\n✅ 45 ordinateurs récupérables\n✅ 23 claviers/souris en bon état\n✅ 12 écrans fonctionnels\n\n🔧 Avec Linux léger : 2-3 ans de vie supplémentaire minimum\n💰 Économie estimée : 35 000€\n\nOn passe à la phase reconditionnement ?\n\nCordialement,\nVotre technicien",
+    "choices": [
+      {
+        "text": "Valider le reconditionnement",
+        "response": "Parfait ! Lancez le reconditionnement.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_3",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "45 ordinateurs sauvés = 4.5 tonnes CO2 évitées",
+          "economique": "35 000€ économisés = budget réalloué pédagogie",
+          "social": "Exemple concret d'économie circulaire pour élèves",
+          "souverainete": "Parc autonome avec logiciels libres"
+        }
+      }
+    ]
+  },
+  "scenario_3": {
+    "name": "Appel Google",
+    "type": "chat",
+    "source": "Kévin, Google for Education",
+    "title": "Appel entrant : Google for Education",
+    "content": "Bonjour ! Kévin à l'appareil, champion de la vente cloud chez Google !\n\nON VOUS PROPOSE :\n📧 Gmail pour tous\n☁️ Google Drive illimité\n📝 Suite Google complète\n\n💰 GRATUIT pour l'éducation !\n\n87% des lycées sont déjà chez nous. Alors ?",
+    "choices": [
+      {
+        "text": "Demander documentation complète",
+        "response": "Merci Kévin. J'aimerais d'abord voir la documentation complète et comparer avec d'autres solutions.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_4A",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Temps d'analyser empreinte carbone datacenters",
+          "economique": "Évaluation coûts cachés et lock-in",
+          "social": "Respect vie privée étudiants, RGPD",
+          "souverainete": "Préservation souveraineté données éducatives"
+        }
+      },
+      {
+        "text": "Accepter l'offre",
+        "response": "Banco ! Lancez l'activation.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_4B",
+        "effect": "bad",
+        "nird_impact": {
+          "environnement": "Datacenters énergivores, serveurs US",
+          "economique": "Gratuit aujourd'hui = dépendance demain",
+          "social": "Données élèves exploitées commercialement",
+          "souverainete": "Perte contrôle données, juridiction US"
+        }
+      }
+    ]
+  },
+  "scenario_4A": {
+    "name": "Analyse comparative",
+    "type": "mail",
+    "source": "Charline, Responsable communication",
+    "title": "Analyse solutions Cloud - Synthèse",
+    "content": "Bonjour Arnaud,\n\nVoici mon analyse :\n\n🔴 Google/Microsoft :\n- Gratuit mais dépendance\n- Données hébergées USA\n- Exploitation commerciale\n\n🟢 Solutions souveraines (Framasoft, Apps.education.fr) :\n- Open source\n- Données en France\n- Gratuit ET libre\n\nJe recommande Apps.education.fr du ministère.\n\nCordialement,\nCharline",
+    "choices": [
+      {
+        "text": "Choisir Apps.education.fr",
+        "response": "Excellente analyse ! On adopte Apps.education.fr.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_5A",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Datacenters français, mix énergétique bas carbone",
+          "economique": "Gratuit, pérenne, sans coûts cachés",
+          "social": "Protection données élèves, conformité RGPD totale",
+          "souverainete": "Souveraineté numérique éducative nationale"
+        }
+      },
+      {
+        "text": "Choisir Google quand même",
+        "response": "Je comprends, mais je préfère l'offre Google.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_4B",
+        "effect": "bad",
+        "nird_impact": {
+          "environnement": "Empreinte carbone élevée des datacenters US",
+          "economique": "Futur coût de migration si changement",
+          "social": "Vie privée élèves compromise",
+          "souverainete": "Données éducatives contrôlées par entreprise US"
+        }
+      }
+    ]
+  },
+  "scenario_4B": {
+    "name": "Conséquences Cloud",
+    "type": "mail",
+    "source": "CNIL",
+    "title": "⚠️ Mise en demeure - Données élèves",
+    "content": "Madame, Monsieur,\n\nSuite à contrôle, nous constatons :\n\n❌ Transfert données élèves hors UE\n❌ Non-conformité RGPD\n❌ Absence consentement parental\n\nVous disposez de 3 mois pour régulariser sous peine de sanctions.\n\nCordialement,\nLa CNIL",
+    "choices": [
+      {
+        "text": "Migrer vers solution souveraine",
+        "response": "Nous migrons immédiatement vers Apps.education.fr.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_5A",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Correction d'une erreur, retour à du durable",
+          "economique": "Coût de migration + temps perdu",
+          "social": "Protection restaurée mais confiance entamée",
+          "souverainete": "Retour souveraineté mais après détour coûteux"
+        }
+      }
+    ]
+  },
+  "scenario_5A": {
+    "name": "Ordinateurs lents",
+    "type": "mail",
+    "source": "Jean-Paul Inome, Professeur",
+    "title": "Problème de performance salle 109",
+    "content": "Bonjour,\n\nLes ordinateurs de ma salle sont très lents. Serait-ce possible de les changer ?\n\nCordialement,\nJean-Paul",
+    "choices": [
+      {
+        "text": "Envoyer maintenance",
+        "response": "Nous envoyons un technicien vérifier. On peut peut-être prolonger leur durée de vie.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_5B",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Diagnostic avant remplacement = évite gaspillage",
+          "economique": "Coût maintenance < coût remplacement",
+          "social": "Valorise expertise technique, pédagogie responsable",
+          "souverainete": "Maintien autonomie technique"
+        }
+      },
+      {
+        "text": "Remplacer les ordinateurs",
+        "response": "Nous allons remplacer les ordinateurs.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_windows10",
+        "effect": "bad",
+        "nird_impact": {
+          "environnement": "Remplacement prématuré = déchets électroniques",
+          "economique": "Dépense importante possiblement évitable",
+          "social": "Manque pédagogie réparation/durabilité",
+          "souverainete": "Dépendance renforcée aux fabricants"
+        }
+      }
+    ]
+  },
+  "scenario_5B": {
+    "name": "Diagnostic technique",
+    "type": "mail",
+    "source": "Technicien réseau",
+    "title": "RE: Salle 109 - Diagnostic effectué",
+    "content": "Bonjour,\n\nProblème identifié : RAM saturée + disque fragmenté.\n\n💡 Solution :\n- Ajout 4 Go RAM (récupérée stock)\n- Installation Linux léger\n- Nettoyage disque\n\n⏱️ Résultat : machines 3x plus rapides\n💰 Coût : quasi nul\n\nOn valide ?\n\nCordialement,\nVotre technicien",
+    "choices": [
+      {
+        "text": "Valider l'optimisation",
+        "response": "Parfait ! Procédez à l'optimisation.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_windows10",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Prolongation vie matériel sans production neuve",
+          "economique": "Économie maximale, réemploi pièces stock",
+          "social": "Démonstration économie circulaire concrète",
+          "souverainete": "Totale autonomie technique et logicielle"
+        }
+      }
+    ]
+  },
+  "scenario_windows10": {
+    "name": "Fin de Windows 10",
+    "type": "mail",
+    "source": "Cellule numérique du rectorat",
+    "title": "⚠️ ALERTE - Windows 10 tire sa révérence",
+    "content": "Bonjour,\n\n🪦 WINDOWS 10 VA MOURIR en octobre 2025.\n\nPlus de mises à jour de sécurité après cette date.\n\nQue comptez-vous faire ?\n\nCordialement,\nLa Cellule Numérique",
+    "choices": [
+      {
+        "text": "Reconditionnement + Linux",
+        "response": "Nous allons reconditionner et installer Linux sur les machines compatibles.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_fin_good",
+        "effect": "good",
+        "nird_impact": {
+          "environnement": "Évite obsolescence programmée, zéro déchet",
+          "economique": "Économie licences Windows = dizaines de milliers €",
+          "social": "Formation communauté au libre, autonomie",
+          "souverainete": "Indépendance totale vis-à-vis Microsoft"
+        }
+      },
+      {
+        "text": "Renouvellement du parc",
+        "response": "Nous allons renouveler tout le parc avec du Windows 11.\n\nCordialement,\nArnaud Psolescence",
+        "next": "scenario_fin_bad",
+        "effect": "bad",
+        "nird_impact": {
+          "environnement": "Déchets électroniques massifs, production neuve",
+          "economique": "Budget écrasé : matériel + licences",
+          "social": "Perpétuation dépendance, pas d'éducation alternative",
+          "souverainete": "Verrouillage Microsoft renforcé"
+        }
+      }
+    ]
+  },
+  "scenario_fin_good": {
+    "name": "Fin - Approche durable",
     "type": "notification",
     "source": "Système",
-    "title": "Fin du test",
-    "content": "Bravo ! Vous avez terminé le scénario de test.\n\nLe système fonctionne correctement.",
+    "title": "🌱 BRAVO - NUMÉRIQUE RESPONSABLE EXEMPLAIRE !",
+    "content": "═══════════════════════════════════════\n🏆 BILAN NIRD - EXCELLENCE NUMÉRIQUE RESPONSABLE\n═══════════════════════════════════════\n\n📊 SCORE GLOBAL : 95/100 ⭐⭐⭐⭐⭐\n\n🌍 ENVIRONNEMENT : 98/100\n✅ 45 ordinateurs reconditionnés\n✅ 4,5 tonnes CO2 évitées\n✅ 850 kg déchets électroniques évités\n✅ Prolongation durée vie : +3 ans minimum\n✅ Systèmes légers = consommation énergétique -40%\n\n💰 ÉCONOMIQUE : 94/100\n✅ 78 000€ économisés (matériel + licences)\n✅ Budget réalloué : projets pédagogiques\n✅ Coûts maintenance : quasi nuls\n✅ Pas de dépendance financière\n\n👥 SOCIAL : 92/100\n✅ Étudiants formés au numérique responsable\n✅ Culture réparation développée\n✅ Données personnelles 100% protégées\n✅ Inclusion : matériel accessible à tous\n✅ Compétences techniques valorisées\n\n🇫🇷 SOUVERAINETÉ : 96/100\n✅ Logiciels libres (Linux, LibreOffice)\n✅ Données hébergées en France (Apps.education.fr)\n✅ Indépendance totale Microsoft/Google\n✅ Autonomie technique du lycée\n✅ Conformité RGPD exemplaire\n\n═══════════════════════════════════════\n📈 VOS EXCELLENTS CHOIX :\n═══════════════════════════════════════\n\n✨ Réparation clavier → Lancé économie circulaire\n✨ Opération Phénix → 45 machines sauvées\n✨ Apps.education.fr → Souveraineté données\n✨ Maintenance avant achat → Évité gaspillage\n✨ Linux sur W10 → Indépendance logicielle\n\n═══════════════════════════════════════\n🎯 IMPACT CONCRET :\n═══════════════════════════════════════\n\n🌱 Empreinte carbone : -65%\n💸 Budget économisé : +78 000€\n⏱️ Durée vie matériel : +60%\n🔒 Protection données : 100%\n🆓 Logiciels libres : 100% du parc\n\n═══════════════════════════════════════\n🏅 RECONNAISSANCE :\n═══════════════════════════════════════\n\nVotre établissement est un MODÈLE de transition numérique responsable !\n\nVous démontrez qu'excellence éducative rime avec sobriété numérique.\n\n🎓 Label « Lycée Numérique Responsable » obtenu !\n\n📢 Votre démarche sera présentée comme exemple lors de la prochaine conférence académique.\n\nContinuez sur cette voie exemplaire ! 🌟",
+    "ending": true
+  },
+  "scenario_fin_bad": {
+    "name": "Fin - Modèle non durable",
+    "type": "notification",
+    "source": "Système",
+    "title": "⚠️ BILAN - NUMÉRIQUE NON RESPONSABLE",
+    "content": "═══════════════════════════════════════\n📊 BILAN NIRD - ANALYSE DE VOS CHOIX\n═══════════════════════════════════════\n\n📉 SCORE GLOBAL : 32/100 ⚠️\n\n🌍 ENVIRONNEMENT : 28/100 ❌\n❌ 120+ ordinateurs mis au rebut prématurément\n❌ 12 tonnes CO2 émises (production neufs)\n❌ 2,4 tonnes déchets électroniques générés\n❌ Obsolescence programmée acceptée\n❌ Consommation énergétique élevée maintenue\n\n💡 Ce que vous auriez dû faire :\nReconditionner avec Linux = 4,5 tonnes CO2 évitées\n\n💰 ÉCONOMIQUE : 35/100 ❌\n❌ 125 000€ dépensés (matériel neuf)\n❌ 18 000€/an licences Windows\n❌ Budget épuisé à 95%\n❌ Dépendance financière Microsoft\n❌ Coûts récurrents incompressibles\n\n💡 Ce que vous auriez économisé :\n78 000€ avec reconditionnement + logiciels libres\n\n👥 SOCIAL : 31/100 ❌\n❌ Aucune sensibilisation numérique responsable\n❌ Culture « jetable » perpétuée\n❌ Données élèves exposées (Cloud US)\n❌ Vie privée compromise (Google)\n❌ Compétences techniques non développées\n\n💡 Impact sur les élèves :\nOpportunité manquée d'éducation à la sobriété\n\n🇫🇷 SOUVERAINETÉ : 34/100 ❌\n❌ Dépendance Microsoft/Google totale\n❌ Données hébergées aux USA\n❌ Lock-in technologique\n❌ Conformité RGPD douteuse\n❌ Zéro autonomie technique\n\n💡 Conséquences :\nPerte contrôle données + risques juridiques CNIL\n\n═══════════════════════════════════════\n❌ VOS MAUVAIS CHOIX ET LEURS CONSÉQUENCES :\n═══════════════════════════════════════\n\n🔴 Choix 1 : Achats neufs systématiques\n→ Gaspillage ressources + budget explosé\n\n🔴 Choix 2 : Google/Microsoft acceptés\n→ Données élèves exploitées commercialement\n→ Mise en demeure CNIL\n\n🔴 Choix 3 : Remplacement sans diagnostic\n→ Matériel fonctionnel jeté prématurément\n\n🔴 Choix 4 : Renouvellement parc Windows 11\n→ 125k€ + 18k€/an + dépendance totale\n\n═══════════════════════════════════════\n📉 BILAN COMPARATIF :\n═══════════════════════════════════════\n\nVOS CHOIX vs APPROCHE RESPONSABLE :\n\n🌱 Émissions CO2 : +800% ❌\n💸 Coûts : +165% ❌\n🗑️ Déchets : +280% ❌\n🔒 Protection données : -75% ❌\n🆓 Indépendance : -95% ❌\n\n═══════════════════════════════════════\n⚖️ CONSÉQUENCES CONCRÈTES :\n═══════════════════════════════════════\n\n⚠️ Budget 2026 : aucune marge pour projets pédagogiques\n⚠️ Enquête CNIL en cours : risque d'amende\n⚠️ Dépendance Microsoft : impossible de changer\n⚠️ Empreinte carbone : objectifs climat non atteints\n⚠️ Image établissement : mauvais exemple donné\n\n═══════════════════════════════════════\n💭 RÉFLEXION :\n═══════════════════════════════════════\n\nVous avez suivi le modèle consumériste classique :\n- Achat neuf par défaut\n- Dépendance aux GAFAM\n- Obsolescence programmée acceptée\n- Budget non optimisé\n\n🎓 Un lycée devrait être exemplaire en matière de sobriété numérique et former les citoyens responsables de demain.\n\n📚 Pour aller plus loin :\n- Référentiel GR491 (Numérique Responsable)\n- Label NR (Numérique Responsable)\n- Guide Apps.education.fr du Ministère\n\n🔄 Il n'est jamais trop tard pour changer de cap !\n\nRecommandation : formation NIRD pour l'équipe.",
     "ending": true
   }
 }
