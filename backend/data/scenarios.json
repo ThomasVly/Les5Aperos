@@ -1,0 +1,29 @@
+{
+  "scenario_1": {
+    "name": "Test - Premier scénario",
+    "type": "mail",
+    "source": "Utilisateur Test",
+    "title": "Objet : Ceci est un test",
+    "content": "Bonjour,\n\nCeci est un scénario de test pour vérifier que le système fonctionne correctement.\n\nVeuillez choisir une option ci-dessous.",
+    "choices": [
+      {
+        "text": "Bon choix (effet positif)",
+        "next": "scenario_2",
+        "effect": "good"
+      },
+      {
+        "text": "Mauvais choix (effet négatif)",
+        "next": "scenario_2",
+        "effect": "bad"
+      }
+    ]
+  },
+  "scenario_2": {
+    "name": "Test - Fin",
+    "type": "notification",
+    "source": "Système",
+    "title": "Fin du test",
+    "content": "Bravo ! Vous avez terminé le scénario de test.\n\nLe système fonctionne correctement.",
+    "ending": true
+  }
+}

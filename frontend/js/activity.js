@@ -71,4 +71,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Réajuster lors du redimensionnement de la fenêtre
     window.addEventListener('resize', adjustScreenPosition);
+    
+    // Gestion des boutons du menu
+    const btnYes = document.getElementById('btn-yes');
+    const btnNo = document.getElementById('btn-no');
+    
+    if (btnYes) {
+        btnYes.addEventListener('click', function() {
+            // Rediriger vers le jeu
+            window.location.href = '/game';
+        });
+    }
+    
+    if (btnNo) {
+        btnNo.addEventListener('click', function() {
+            // Retourner à l'accueil
+            window.location.href = '/';
+        });
+    }
 });

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ scenario.name }} - Jeu Narratif{% endblock %}
+
+{% block content %}
+<div class="scenario-window" data-type="{{ scenario.type }}">
+    
+    <!-- Header du scénario -->
+    <div class="scenario-header">
+        <span class="scenario-type">{{ scenario.type | upper }}</span>
+        <span class="scenario-source">{{ scenario.source }}</span>
+    </div>
+    
+    <!-- Titre -->
+    {% if scenario.title %}
+    <div class="scenario-title">
+        {{ scenario.title }}
+    </div>
+    {% endif %}
+    
+    <!-- Contenu -->
+    <div class="scenario-content">
+        {{ scenario.content | replace('\n', '<br>') | safe }}
+    </div>
+    
+    <!-- Choix -->
+    {% if scenario.choices %}
+    <div class="scenario-choices">
+        {% for choice in scenario.choices %}
+        <form action="/game/choose" method="POST" class="choice-form">
+            <input type="hidden" name="choice" value="{{ loop.index0 }}">
+            <button type="submit" class="choice-btn">
+                {{ choice.text }}
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+</div>
+{% endblock %}
