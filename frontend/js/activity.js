@@ -39,9 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Calculer le décalage de l'image dans le wrapper
-        // L'image est centrée avec object-position: center
+        // L'image utilise object-position: bottom center
         const offsetLeft = (wrapperRect.width - displayedWidth) / 2;
-        const offsetTop = (wrapperRect.height - displayedHeight) / 2;
+        // L'image est alignée en bas, pas au centre
+        const offsetTop = wrapperRect.height - displayedHeight;
         
         // Pourcentages de positionnement de l'écran sur l'image originale
         // Ces valeurs correspondent à la zone d'écran dans l'image pixel art

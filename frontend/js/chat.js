@@ -143,7 +143,7 @@ function adjustScreenPosition() {
         displayedHeight = wrapperRect.height;
         displayedWidth = displayedHeight * imgAspect;
         offsetX = (wrapperRect.width - displayedWidth) / 2; // Centré horizontalement
-        offsetY = 0; // En bas (object-position: bottom)
+        offsetY = wrapperRect.height - displayedHeight; // En bas (object-position: bottom)
     } else {
         // Contrainte par la largeur
         displayedWidth = wrapperRect.width;

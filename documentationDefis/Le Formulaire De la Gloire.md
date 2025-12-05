@@ -1,6 +1,11 @@
 # 📧 Documentation de la Page Contact - Les5Aperos
 
-> Un formulaire de contact qui n'est pas vraiment un formulaire de contact...
+> Un formulaire de contact qui n'est pas juste un formulaire de contact...
+
+## Accéder au formulaire
+
+Ouvrez votre navigateur à l'adresse : `http://localhost:5000/contact`
+Ou cliquez sur le bouton "?" en bas a droite de l'écran depuis le `/bureau`
 
 ## 🎯 Aperçu
 
