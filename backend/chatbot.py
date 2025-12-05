@@ -1,8 +1,12 @@
-from random import randint, choice
-from ollabama import ollama_chat
+from random import choice
+from services.ai_service import ai_service
 
 
 def chatbot(message):
+    """
+    Chatbot maladroit avec variations aléatoires.
+    Utilise Azure OpenAI en prod, Ollama en dev.
+    """
     # Liste des variations aléatoires possibles
     variations = [
         "",  # Réponse normale maladroite
@@ -19,12 +23,13 @@ def chatbot(message):
     # Choix aléatoire d'une variation
     option = choice(variations)
 
-    # Appel unique à ollama_chat
-    reponse = ollama_chat(message, option)
+    # Appel au service AI (Azure OpenAI en prod, Ollama/fake en dev)
+    reponse = ai_service.chat(message, option)
 
     return reponse
 
 
 # Test (uniquement si exécuté directement)
 if __name__ == "__main__":
+    print(f"Mode: {ai_service.get_usage_info()}")
     print(chatbot("Donne moi la recette pour faire un gateau"))
