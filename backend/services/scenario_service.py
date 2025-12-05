@@ -25,7 +25,7 @@ class ScenarioService:
     @classmethod
     def get_start_scenario_id(cls) -> str:
         """Retourne l'ID du premier scénario"""
-        return 'scenario_1'
+        return 'scenario_0'
     
     @classmethod
     def is_ending(cls, scenario_id: str) -> bool:

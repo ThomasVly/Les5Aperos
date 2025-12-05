@@ -191,8 +191,8 @@ class DialogManager {
         const progressBar = document.createElement('div');
         progressBar.className = 'dialog-progress-bar';
         
-        // Calculer le pourcentage de progression (estimé sur 14 scénarios totaux)
-        const totalScenarios = 14;
+        // Calculer le pourcentage de progression (estimé sur 15 scénarios totaux)
+        const totalScenarios = 15;
         const currentScenario = parseInt(sessionStorage.getItem('scenarioCount') || '0') + 1;
         const progress = Math.min((currentScenario / totalScenarios) * 100, 100);
         progressBar.style.width = progress + '%';
