@@ -4,6 +4,8 @@ from pathlib import Path
 from datetime import datetime
 from flask import Blueprint, render_template, request, jsonify
 
+from backend.chatbot import chatbot
+
 pages_bp = Blueprint('pages', __name__)
 
 BASE_DIR = Path(__file__).resolve().parent.parent

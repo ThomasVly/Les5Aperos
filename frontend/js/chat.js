@@ -88,7 +88,7 @@ async function sendMessage() {
 
     try {
         // Appel à ton API Flask
-        const response = await fetch('/api/chat', {
+        const response = await fetch('/api/chatbot', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
