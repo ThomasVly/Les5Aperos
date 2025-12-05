@@ -1,4 +1,4 @@
-from flask import Blueprint, session, render_template, request, redirect, url_for
+from flask import Blueprint, session, render_template, request, redirect, url_for, jsonify
 from services import ScenarioService
 
 game_bp = Blueprint('game', __name__)
@@ -55,19 +55,19 @@ def play():
 def choose():
     """Traite le choix du joueur"""
     if 'scenario' not in session:
-        return redirect(url_for('game.start'))
+        return {'error': 'Session invalide'}, 400
     
     choice_index = int(request.form.get('choice', 0))
     current_id = session['scenario']
     scenario = ScenarioService.get_scenario(current_id)
     
     if not scenario or 'choices' not in scenario:
-        return redirect(url_for('game.play'))
+        return {'error': 'Scénario invalide'}, 400
     
     # Récupérer le choix
     choices = scenario['choices']
     if choice_index < 0 or choice_index >= len(choices):
-        return redirect(url_for('game.play'))
+        return {'error': 'Choix invalide'}, 400
     
     choice = choices[choice_index]
     
@@ -88,9 +88,16 @@ def choose():
     session['score'] = score
     
     # Passer au scénario suivant
-    session['scenario'] = choice.get('next', current_id)
+    next_scenario_id = choice.get('next', current_id)
+    session['scenario'] = next_scenario_id
     
-    return redirect(url_for('game.play'))
+    # Retourner le nouveau scénario en JSON
+    next_scenario = ScenarioService.get_scenario(next_scenario_id)
+    return {
+        'scenario': next_scenario,
+        'history': history,
+        'score': score
+    }
 
 
 @game_bp.route('/game/reset')

@@ -28,22 +28,85 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Enregistrer les callbacks AVANT d'afficher les dialogs pour chaque choix
     choices.forEach((choice, index) => {
-        dialogManager.on(`choice_${index}`, () => {
+        dialogManager.on(`choice_${index}`, async () => {
             console.log('Choix sélectionné:', index, choice);
             
-            // Soumettre le formulaire correspondant
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/game/choose';
+            // Envoyer le choix via AJAX
+            try {
+                const formData = new FormData();
+                formData.append('choice', index);
+                
+                const response = await fetch('/game/choose', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erreur lors du chargement du scénario');
+                }
+                
+                const data = await response.json();
+                console.log('Nouveau scénario reçu:', data);
+                
+                // Charger le nouveau scénario
+                loadScenario(data.scenario, dialogManager);
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement du scénario');
+            }
+        });
+    });
+    
+    // Charger le premier scénario
+    loadScenario(scenario, dialogManager);
+});
+
+// Fonction pour charger et afficher un scénario
+function loadScenario(scenario, dialogManager) {
+    console.log('Chargement du scénario:', scenario);
+    
+    // Si c'est une fin, rediriger vers la page de fin
+    if (scenario.ending) {
+        window.location.href = '/game/play';
+        return;
+    }
+    
+    // Préparer les choix
+    const choices = scenario.choices ? scenario.choices.map((choice, index) => ({
+        text: choice.text,
+        action: `choice_${index}`
+    })) : [];
+    
+    // Enregistrer les callbacks pour chaque choix
+    choices.forEach((choice, index) => {
+        dialogManager.on(`choice_${index}`, async () => {
+            console.log('Choix sélectionné:', index, choice);
             
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'choice';
-            input.value = index;
-            
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
+            // Envoyer le choix via AJAX
+            try {
+                const formData = new FormData();
+                formData.append('choice', index);
+                
+                const response = await fetch('/game/choose', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erreur lors du chargement du scénario');
+                }
+                
+                const data = await response.json();
+                console.log('Nouveau scénario reçu:', data);
+                
+                // Charger le nouveau scénario
+                loadScenario(data.scenario, dialogManager);
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur lors du chargement du scénario');
+            }
         });
     });
     
@@ -92,4 +155,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 scenarioId: scenario.name
             });
     }
-});
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Maladroit - Les5Aperos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+<body class="chat-page">
+
+    <!-- Background GIF -->
+    <div class="background-gif-container">
+        <div class="tenor-gif-embed" data-postid="22552632" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%">
+            <a href="https://tenor.com/view/sunset-retro-retro-synthwave-gif-22552632">Sunset Retro GIF</a>
+        </div>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+    <div class="overlay"></div>
+
+    <!-- Interface de chat sur ordinateur rétro -->
+    <section class="computer-section">
+        <div class="computer-wrapper">
+            <img src="{{ url_for('static', filename='src/Computer_pixel_art.png') }}"
+                 alt="Computer Pixel Art"
+                 class="computer-image">
+
+            <!-- Interface de chat sur l'écran -->
+            <div class="screen-interface">
+                <!-- Header du chat -->
+                <div class="chat-header">
+                    <h1 class="chat-title">ASSISTANT MALADROIT v1.0</h1>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="status-text">ONLINE</span>
+                    </div>
+                </div>
+
+                <!-- Zone de messages -->
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <span class="message-prefix">&gt; BOT:</span>
+                        <p>Salut ! Je suis ton assistant maladroit. Je vais probablement répondre à côté de la plaque... 😅</p>
+                    </div>
+                </div>
+
+                <!-- Zone de saisie -->
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <span class="input-prefix">&gt;</span>
+                        <input type="text"
+                               id="userInput"
+                               class="chat-input"
+                               placeholder="Tape ta question ici..."
+                               autocomplete="off">
+                        <button id="sendBtn" class="send-btn">SEND</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
