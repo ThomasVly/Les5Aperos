@@ -147,3 +147,4 @@ cython_debug/
 Thumbs.db
 .env.example
 /contacts
+frontend/src/favicon_io.zip

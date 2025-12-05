@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIRD - Numérique Inclusif, Responsable et Durable</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='src/favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='src/favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='src/favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='src/favicon_io/site.webmanifest') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='src/favicon_io/favicon.ico') }}">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nird.css') }}">
+</head>
+<body>
+    <div class="wiki-container">
+        <!-- Header style Wikipedia -->
+        <header class="wiki-header">
+            <div class="wiki-logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='src/NIRDLogo.png') }}" alt="Logo NIRD" class="nird-logo">
+                </a>
+            </div>
+            <div class="wiki-title">
+                <h1>La démarche NIRD</h1>
+                <p class="wiki-subtitle">L'encyclopédie libre du numérique écoresponsable</p>
+            </div>
+        </header>
+
+        <!-- Navigation tabs Wikipedia style -->
+        <nav class="wiki-tabs">
+            <ul>
+                <li class="active"><a href="#article">Article</a></li>
+            </ul>
+        </nav>
+
+        <div class="wiki-content">
+            <!-- Sidebar infobox -->
+            <aside class="wiki-infobox">
+                <table>
+                    <caption>Démarche NIRD</caption>
+                    <tr>
+                        <td colspan="2" class="infobox-image">
+                            <img src="{{ url_for('static', filename='src/NIRDLogo.png') }}" alt="Logo NIRD">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Signification</th>
+                        <td>Numérique Inclusif, Responsable et Durable</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>Initiative éducative</td>
+                    </tr>
+                    <tr>
+                        <th>Fondation</th>
+                        <td>Lycée Carnot de Bruay-la-Buissière</td>
+                    </tr>
+                    <tr>
+                        <th>Objectif</th>
+                        <td>Numérique libre et écocitoyen dans les établissements scolaires</td>
+                    </tr>
+                    <tr>
+                        <th>Site officiel</th>
+                        <td><a href="https://nird.forge.apps.education.fr/" target="_blank">nird.forge.apps.education.fr</a></td>
+                    </tr>
+                </table>
+            </aside>
+
+            <!-- Main article -->
+            <article class="wiki-article">
+                <p class="wiki-intro">
+                    <strong>La démarche NIRD</strong> (pour <strong>N</strong>umérique <strong>I</strong>nclusif, <strong>R</strong>esponsable et <strong>D</strong>urable) est une initiative éducative française visant à promouvoir un numérique libre et écocitoyen dans les établissements scolaires. Elle est issue d'un collectif enseignant réuni sur la forge des communs numériques éducatifs.
+                </p>
+
+                <div class="wiki-toc">
+                    <h2>Sommaire</h2>
+                    <ol>
+                        <li><a href="#contexte">Contexte</a></li>
+                        <li><a href="#piliers">Les trois piliers</a></li>
+                        <li><a href="#demarche">La démarche en trois jalons</a></li>
+                        <li><a href="#linux">Le choix Linux</a></li>
+                        <li><a href="#participer">Comment participer</a></li>
+                        <li><a href="#liens">Liens externes</a></li>
+                    </ol>
+                </div>
+
+                <section id="contexte">
+                    <h2><span class="mw-headline">Contexte</span></h2>
+                    <p>
+                        À l'heure où la fin du support de Windows 10 rappelle la dépendance technologique des établissements scolaires et oblige à faire des choix, un collectif enseignant invite les établissements scolaires et les collectivités qui les accompagnent à s'engager progressivement vers un numérique plus responsable.
+                    </p>
+                    <p>
+                        Au carrefour du double objectif de <strong>transformation numérique</strong> et de <strong>transition écologique</strong>, la démarche NIRD propose une alternative concrète et pragmatique.
+                    </p>
+                </section>
+
+                <section id="piliers">
+                    <h2><span class="mw-headline">Les trois piliers</span></h2>
+                    <p>La démarche NIRD repose sur trois piliers fondamentaux :</p>
+                    <dl class="wiki-definition">
+                        <dt>🤝 Inclusion</dt>
+                        <dd>Accès équitable au numérique, réduction de la fracture numérique pour tous les élèves et familles.</dd>
+                        
+                        <dt>⚖️ Responsabilité</dt>
+                        <dd>Usage raisonné et réflexif de technologies souveraines et respectueuses des données personnelles.</dd>
+                        
+                        <dt>♻️ Durabilité</dt>
+                        <dd>Lutte contre l'obsolescence programmée par le choix de Linux pour l'équipement, maîtrise des coûts et reconditionnement.</dd>
+                    </dl>
+                </section>
+
+                <section id="demarche">
+                    <h2><span class="mw-headline">La démarche en trois jalons</span></h2>
+                    <p>La démarche se déroule en trois étapes progressives :</p>
+                    <ol class="wiki-list">
+                        <li><strong>Mobilisation</strong> – Sensibilisation et engagement initial de l'établissement</li>
+                        <li><strong>Expérimentation</strong> – Tests et déploiement progressif des solutions</li>
+                        <li><strong>Intégration</strong> – Adoption complète et pérennisation</li>
+                    </ol>
+                    <p>
+                        Cette démarche est volontairement peu détaillée pour être co-construite avec les participants. Elle s'inspire directement de la réussite du projet d'établissement NIRD du lycée Carnot de Bruay-la-Buissière.
+                    </p>
+                </section>
+
+                <section id="linux">
+                    <h2><span class="mw-headline">Le choix Linux</span></h2>
+                    <p>
+                        Condition nécessaire mais non suffisante, et parti-pris assumé, l'adoption concrète et graduelle du système d'exploitation libre <strong>Linux</strong> au sein de l'établissement scolaire constitue à la fois le socle et le premier levier de cette démarche.
+                    </p>
+                    <p>
+                        Ce choix permet :
+                    </p>
+                    <ul class="wiki-list">
+                        <li>D'équiper le parc informatique de manière économique</li>
+                        <li>De mener des projets de <strong>reconditionnement</strong> avec les élèves</li>
+                        <li>D'équiper également les familles ou les écoles aux alentours</li>
+                        <li>D'ouvrir le champ des possibles pédagogiques</li>
+                        <li>D'engager l'établissement vers un usage frugal et qualitatif du numérique</li>
+                    </ul>
+                    <div class="wiki-note">
+                        <strong>Note :</strong> Une distribution « démarche NIRD » est disponible à l'installation et à l'utilisation sur le site officiel.
+                    </div>
+                </section>
+
+                <section id="participer">
+                    <h2><span class="mw-headline">Comment participer</span></h2>
+                    <p>
+                        La démarche s'adresse dans un premier temps aux enseignantes et enseignants intéressés en leur proposant de rejoindre le forum Tchap dédié pour échanger, mutualiser, témoigner et aider à engager leur établissement scolaire en tant que pilote de la démarche.
+                    </p>
+                    <div class="wiki-external-links">
+                        <h3>Ressources</h3>
+                        <ul>
+                            <li>🐝 <a href="https://edurl.fr/tchap-laforgeedu-nird" target="_blank">Rejoindre le forum Tchap</a></li>
+                            <li>🏫 <a href="https://nird.forge.apps.education.fr/pilotes/" target="_blank">Liste des établissements pilotes</a></li>
+                            <li>🧰 <a href="https://nird.forge.apps.education.fr/tools/" target="_blank">Boîte à outils</a></li>
+                            <li>🏛️ <a href="https://nird.forge.apps.education.fr/collectivites/" target="_blank">Page dédiée aux collectivités</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="liens">
+                    <h2><span class="mw-headline">Liens externes</span></h2>
+                    <ul class="wiki-list">
+                        <li><a href="https://nird.forge.apps.education.fr/" target="_blank">Site officiel de la démarche NIRD</a></li>
+                        <li><a href="https://forge.apps.education.fr/nird" target="_blank">GitLab de la Forge</a></li>
+                        <li><a href="https://mastodon.mim-libre.fr/@demarchenird" target="_blank">Compte Mastodon</a></li>
+                        <li><a href="https://docs.forge.apps.education.fr/" target="_blank">Forge des communs numériques éducatifs</a></li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+
+        <!-- Footer Wikipedia style -->
+        <footer class="wiki-footer">
+            <p>
+                Ce contenu est inspiré du site officiel de la <a href="https://nird.forge.apps.education.fr/" target="_blank">Démarche NIRD</a>, 
+                hébergé sur la Forge des communs numériques éducatifs sous licence Creative Commons BY.
+            </p>
+            <p class="footer-nav">
+                <a href="/">← Retour à l'accueil Les5Aperos</a>
+            </p>
+            <p class="wiki-license">
+                &copy; 2025 Les5Aperos - INSA | Contenu sous licence libre
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
