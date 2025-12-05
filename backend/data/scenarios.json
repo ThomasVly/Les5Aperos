@@ -1,4 +1,18 @@
 {
+  "scenario_0": {
+    "name": "Bienvenue",
+    "type": "narrative",
+    "source": "Système",
+    "title": "SYSTÈME DÉMARRÉ",
+    "content": "> SYSTÈME DÉMARRÉ...\n> CHARGEMENT DU PROFIL UTILISATEUR...\n\n> BIENVENUE, ARNAUD PSOLESCENCE\n> PROVISEUR - INSA HAUTS DE FRANCE\n\n> ALERTE: NOUVEAU MESSAGE SYSTÈME\n> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nVous êtes proviseur de l'INSA Hauts de France,\nécole de grande renommée nationale.\n\nDans un contexte de dépendance numérique aux\ngrandes sociétés et d'obsolescence programmée,\nvous serez confronté à des décisions capitales\npour l'avenir de votre établissement.\n\nAu cours de cette journée spéciale, vos choix\naffecteront les aspects économiques, sociaux,\nculturels et la confidentialité de l'école,\ndes enseignants, des étudiants et de vous-même.\n\n> ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n⚠️  FAITES LES BONS CHOIX ⚠️",
+    "choices": [
+      {
+        "text": "APPUYER SUR ENTRÉE POUR CONTINUER",
+        "next": "scenario_1",
+        "effect": "neutral"
+      }
+    ]
+  },
   "scenario_1": {
     "name": "Clavier en détresse",
     "type": "mail",
