@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (wrapper && wrapper.classList.contains('game-mode')) return;
         
         // Obtenir les dimensions réelles affichées de l'image
-        const imgRect = computerImage.getBoundingClientRect();
         const wrapperRect = wrapper.getBoundingClientRect();
         
         // Dimensions affichées de l'image (après object-fit: contain)
@@ -45,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const offsetTop = (wrapperRect.height - displayedHeight) / 2;
         
         // Pourcentages de positionnement de l'écran sur l'image originale
+        // Ces valeurs correspondent à la zone d'écran dans l'image pixel art
         const screenTopPercent = 8.5 / 100;
         const screenLeftPercent = 16.8 / 100;
         const screenWidthPercent = 66.4 / 100;
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const screenWidth = displayedWidth * screenWidthPercent;
         const screenHeight = displayedHeight * screenHeightPercent;
         
-        // Appliquer les styles
+        // Appliquer les styles directement (pas de délai)
         screenInterface.style.top = screenTop + 'px';
         screenInterface.style.left = screenLeft + 'px';
         screenInterface.style.width = screenWidth + 'px';
@@ -70,14 +70,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Attendre que l'image soit chargée
-    if (computerImage.complete) {
+    if (computerImage.complete && computerImage.naturalWidth > 0) {
         adjustScreenPosition();
     } else {
         computerImage.addEventListener('load', adjustScreenPosition);
     }
     
-    // Réajuster lors du redimensionnement de la fenêtre
+    // Réajuster lors du redimensionnement de la fenêtre (sans délai)
     window.addEventListener('resize', adjustScreenPosition);
+    
+    // Observer les changements de taille du wrapper (sans délai)
+    if (typeof ResizeObserver !== 'undefined') {
+        const wrapper = document.querySelector('.computer-wrapper');
+        if (wrapper) {
+            const resizeObserver = new ResizeObserver(adjustScreenPosition);
+            resizeObserver.observe(wrapper);
+        }
+    }
     
     // Éléments principaux
     const computerWrapper = document.querySelector('.computer-wrapper');

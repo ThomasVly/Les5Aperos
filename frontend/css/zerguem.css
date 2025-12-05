@@ -1,6 +1,8 @@
 
 /* =========================================
    1. STYLES DE L'INTERFACE DE JEU (HUD & ÉLÉMENTS)
+   Utilise les variables CSS calculées par activity.js:
+   --base-font, --screen-width, --screen-height
    ========================================= */
 
 /* Style du HUD (Score et Vie en haut) */
@@ -11,12 +13,12 @@
     width: 100%;
     background: rgba(0, 50, 0, 0.8);
     color: #0f0; /* Vert hacker */
-    padding: 5px 10px;
+    padding: calc(var(--base-font, 300px) * 0.015) calc(var(--base-font, 300px) * 0.03);
     display: flex;
     justify-content: space-between;
     font-family: 'Courier New', monospace;
     font-weight: bold;
-    font-size: 14px; /* Ajuste si besoin selon la taille de l'écran */
+    font-size: calc(var(--base-font, 300px) * 0.045);
     z-index: 20;
     border-bottom: 1px solid #0f0;
     display: none; /* Caché au début */
@@ -39,22 +41,32 @@
     width: 80%;
     z-index: 30;
     background: rgba(0, 0, 0, 0.9);
-    padding: 20px;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 15px #0f0;
+    padding: calc(var(--base-font, 300px) * 0.06);
+    border: calc(var(--base-font, 300px) * 0.004) solid #0f0;
+    box-shadow: 0 0 calc(var(--base-font, 300px) * 0.03) #0f0;
+}
+
+#start-screen h2 {
+    font-size: calc(var(--base-font, 300px) * 0.07);
+    margin-bottom: calc(var(--base-font, 300px) * 0.03);
+}
+
+#start-screen p {
+    font-size: calc(var(--base-font, 300px) * 0.04);
+    margin-bottom: calc(var(--base-font, 300px) * 0.02);
 }
 
 #start-btn {
     background: #0f0;
     color: black;
     border: none;
-    padding: 10px 20px;
+    padding: calc(var(--base-font, 300px) * 0.03) calc(var(--base-font, 300px) * 0.06);
     font-family: 'Courier New', monospace;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: calc(var(--base-font, 300px) * 0.04);
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: calc(var(--base-font, 300px) * 0.05);
 }
 
 #start-btn:hover {
@@ -75,11 +87,11 @@
 .retro-btn {
     background: #333;
     color: white;
-    padding: 10px;
+    padding: calc(var(--base-font, 300px) * 0.016) calc(var(--base-font, 300px) * 0.02);
     text-decoration: none;
     font-family: sans-serif;
-    border: 2px solid white;
-    font-size: 12px;
+    border: calc(var(--base-font, 300px) * 0.004) solid white;
+    font-size: calc(var(--base-font, 300px) * 0.025);
     display: inline-block;
 }
 .retro-btn:hover {
@@ -89,11 +101,11 @@
 /* Les Virus / Popups (Ennemis) */
 .virus-popup {
     position: absolute;
-    width: 60px;
-    height: 50px;
+    width: calc(var(--base-font, 300px) * 0.18);
+    height: calc(var(--base-font, 300px) * 0.15);
     background: #ccc;
-    border: 2px outset #fff;
-    box-shadow: 2px 2px 0 #000;
+    border: calc(var(--base-font, 300px) * 0.004) outset #fff;
+    box-shadow: calc(var(--base-font, 300px) * 0.004) calc(var(--base-font, 300px) * 0.004) 0 #000;
     display: flex;
     flex-direction: column;
     z-index: 10;
@@ -104,16 +116,16 @@
 
 .virus-header {
     background: #000080; /* Bleu Windows 95 */
-    height: 15px;
+    height: calc(var(--base-font, 300px) * 0.045);
     display: flex;
     justify-content: flex-end;
-    padding-right: 2px;
+    padding-right: calc(var(--base-font, 300px) * 0.005);
 }
 
 .virus-close {
     color: white;
-    font-size: 10px;
-    line-height: 12px;
+    font-size: calc(var(--base-font, 300px) * 0.03);
+    line-height: calc(var(--base-font, 300px) * 0.04);
     font-weight: bold;
 }
 
@@ -122,7 +134,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: calc(var(--base-font, 300px) * 0.06);
 }
 
 /* Animation d'apparition du virus */
@@ -210,9 +222,9 @@ body.game-active .screen-interface {
     bottom: 0;
     left: 50%;
 
-    /* Dimensions de base */
-    width: 4px;
-    margin-left: -2px; /* Centrage pivot */
+    /* Dimensions de base - responsive */
+    width: calc(var(--base-font, 300px) * 0.008);
+    margin-left: calc(var(--base-font, 300px) * -0.004); /* Centrage pivot */
 
     /* Couleur Cœur */
     background: rgba(255, 230, 230, 1);
@@ -223,14 +235,14 @@ body.game-active .screen-interface {
     display: none;
 
     /* Arrondir le bout */
-    border-radius: 2px 2px 0 0;
+    border-radius: calc(var(--base-font, 300px) * 0.004) calc(var(--base-font, 300px) * 0.004) 0 0;
 
     /* Lumière initiale */
     box-shadow:
-        0 0 4px #fff,
-        0 0 10px #ff0000,
-        0 0 20px #ff0000,
-        0 0 100px 20px rgba(255, 0, 0, 0.4);
+        0 0 calc(var(--base-font, 300px) * 0.008) #fff,
+        0 0 calc(var(--base-font, 300px) * 0.02) #ff0000,
+        0 0 calc(var(--base-font, 300px) * 0.04) #ff0000,
+        0 0 calc(var(--base-font, 300px) * 0.2) calc(var(--base-font, 300px) * 0.04) rgba(255, 0, 0, 0.4);
 
     mix-blend-mode: screen;
 }
@@ -251,7 +263,7 @@ body.game-active .screen-interface {
     }
     25% {
         opacity: 1;
-        width: 6px; margin-left: -3px; /* Plus large = on ajuste la marge pour rester centré */
+        width: 6px; margin-left: -3px;
         box-shadow: 0 0 8px #fff, 0 0 20px #f00, 0 0 150px 40px rgba(255, 0, 0, 0.6);
     }
     30% {
@@ -335,39 +347,51 @@ body.game-active .screen-interface {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 85%;
-    padding: 20px;
+    padding: calc(var(--base-font) * 0.04);
     background: rgba(0, 0, 0, 0.95);
-    border: 4px double; /* Bordure style rétro */
+    border: calc(var(--base-font) * 0.008) double; /* Bordure style rétro */
     text-align: center;
     z-index: 100;
     font-family: 'Courier New', monospace;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    font-size: calc(var(--base-font) * 0.035);
+    box-shadow: 0 0 calc(var(--base-font) * 0.04) rgba(0,0,0,0.8);
+}
+
+#end-screen h2 {
+    font-size: calc(var(--base-font) * 0.06);
+    margin-bottom: calc(var(--base-font) * 0.02);
+}
+
+#end-screen p {
+    font-size: calc(var(--base-font) * 0.03);
+    margin: calc(var(--base-font) * 0.015) 0;
 }
 
 /* Style VICTOIRE */
 #end-screen.win {
     border-color: #0f0;
     color: #0f0;
-    box-shadow: 0 0 15px #0f0;
+    box-shadow: 0 0 calc(var(--base-font) * 0.03) #0f0;
 }
-#end-screen.win h2 { text-shadow: 0 0 5px #0f0; }
+#end-screen.win h2 { text-shadow: 0 0 calc(var(--base-font) * 0.01) #0f0; }
 
 /* Style DÉFAITE */
 #end-screen.lose {
     border-color: #f00;
     color: #f00;
-    box-shadow: 0 0 15px #f00;
+    box-shadow: 0 0 calc(var(--base-font) * 0.03) #f00;
 }
-#end-screen.lose h2 { text-shadow: 0 0 5px #f00; }
+#end-screen.lose h2 { text-shadow: 0 0 calc(var(--base-font) * 0.01) #f00; }
 
 /* Le bouton d'action */
 .retro-btn-action {
-    margin-top: 20px;
+    margin-top: calc(var(--base-font) * 0.04);
     background: transparent;
-    border: 2px solid currentColor; /* Prend la couleur du parent (Rouge ou Vert) */
+    border: calc(var(--base-font) * 0.004) solid currentColor; /* Prend la couleur du parent (Rouge ou Vert) */
     color: currentColor;
-    padding: 10px 20px;
+    padding: calc(var(--base-font) * 0.02) calc(var(--base-font) * 0.04);
     font-family: inherit;
+    font-size: calc(var(--base-font) * 0.03);
     font-weight: bold;
     cursor: pointer;
     text-transform: uppercase;
@@ -378,6 +402,3 @@ body.game-active .screen-interface {
     background: currentColor;
     color: black;
 }
-
-
-
