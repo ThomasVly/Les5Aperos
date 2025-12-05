@@ -75,3 +75,8 @@ def submit_contact():
 def nird():
     """Page de la démarche NIRD"""
     return render_template('nird.html')
+
+@pages_bp.route('/zerguemContreGoliath')
+def zerguem_contre_goliath():
+    """Page du jeu Zerguem contre Goliath"""
+    return render_template('zerguem.html')

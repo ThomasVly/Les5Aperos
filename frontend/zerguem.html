@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DÉFI ZERGUÈM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/zerguem.css') }}">
+</head>
+<body class="activity-page">
+
+    <div class="background-gif-container">
+        <div class="tenor-gif-embed" data-postid="22552632" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%"></div>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <div class="overlay"></div>
+
+    <div style="position: fixed; top: 10px; left: 10px; z-index: 100;">
+        <a href="/activity" class="retro-btn">⬅ Retour au Bureau</a>
+    </div>
+
+    <section class="computer-section">
+        <div class="computer-wrapper">
+
+            <img id="computer-base-image"
+                 src="{{ url_for('static', filename='src/Computer_pixel_art.png') }}"
+                 alt="Computer Base"
+                 class="computer-image">
+
+            <div class="screen-interface">
+                <div id="damage-overlay"></div>
+
+                <div id="game-hud">
+                    <span id="score-display">SCORE: 0</span>
+                    <span id="health-display">SYS.INTEGRITY: 100%</span>
+                </div>
+                <div id="laser-beam"></div>
+
+                <div id="start-screen">
+                    <h2 class="blink-text">⚠️ INTRUSION ⚠️</h2>
+                    <p>Système compromis.</p>
+                    <button id="start-btn" onclick="startGame()">LANCER PROTOCOLE</button>
+                </div>
+
+                <div id="end-screen" style="display: none;">
+                    <h2 id="end-title">TITRE</h2>
+                    <p id="end-msg">Message</p>
+                    <p id="end-score">SCORE FINAL: 0</p>
+                    <button class="retro-btn-action" onclick="window.location.href='/activity'">QUITTER LE SYSTÈME</button>
+                </div>
+
+
+                <div id="game-area"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/activity.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/zerguem.js') }}"></script>
+</body>
+</html>
