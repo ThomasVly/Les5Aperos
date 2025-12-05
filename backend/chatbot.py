@@ -25,5 +25,6 @@ def chatbot(message):
     return reponse
 
 
-# Test
-print(chatbot("Donne moi la recette pour faire un gateau"))
+# Test (uniquement si exécuté directement)
+if __name__ == "__main__":
+    print(chatbot("Donne moi la recette pour faire un gateau"))
