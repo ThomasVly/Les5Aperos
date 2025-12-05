@@ -18,3 +18,9 @@ def activity():
 def visualizer():
     """Page du visualiseur"""
     return render_template('visualizer.html')
+
+
+@pages_bp.route('/nird')
+def nird():
+    """Page de la démarche NIRD"""
+    return render_template('nird.html')
