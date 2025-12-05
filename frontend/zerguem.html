@@ -46,14 +46,29 @@
                 <div id="start-screen">
                     <h2 class="blink-text">⚠️ INTRUSION ⚠️</h2>
                     <p>Système compromis.</p>
-                    <button id="start-btn" onclick="startGame()">LANCER PROTOCOLE</button>
+                    <button id="start-btn" onclick="startGameLaser()">LANCER LE PROTOCOLE</button>
                 </div>
 
                 <div id="end-screen" style="display: none;">
                     <h2 id="end-title">TITRE</h2>
                     <p id="end-msg">Message</p>
-                    <p id="end-score">SCORE FINAL: 0</p>
-                    <button class="retro-btn-action" onclick="window.location.href='/activity'">QUITTER LE SYSTÈME</button>
+                    <p id="end-score-display" style="font-size: 1.2em; margin: 10px 0;">SCORE: 0</p>
+
+                    <div id="score-form">
+                        <input type="text" id="player-pseudo" placeholder="PSEUDO" maxlength="12" autocomplete="off">
+                        <button class="retro-btn-action" onclick="submitScore()">ENREGISTRER</button>
+                    </div>
+
+                    <div id="leaderboard-container" style="display: none;">
+                        <h3>TOP HACKERS</h3>
+                        <table id="leaderboard-table">
+                            </table>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button class="retro-btn-action small" onclick="window.location.reload()">REJOUER</button>
+                        <button class="retro-btn-action small" onclick="window.location.href='/bureau'">QUITTER</button>
+                    </div>
                 </div>
 
 

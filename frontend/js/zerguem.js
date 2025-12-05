@@ -2,14 +2,18 @@ let score = 0;
 let health = 100;
 let gameActive = false;
 let spawnInterval;
-let difficultySpeed = 1500;
+
+
+// --- NOUVELLES VARIABLES DE DIFFICULTÉ ---
+let difficultySpeed = 1000; // Temps entre l'apparition des virus (ms)
+let damageDelay = 2000;     // Temps avant que le virus n'attaque (ms)
 
 // Variables pour le Cheat Code
 let clickHistory = []; // Historique des timestamps des clics
 let isCheatActive = false; // Est-ce que le mode permanent est activé ?
 let laserTimeout; // Pour gérer la disparition du laser
 
-function startGame() {
+function startGameLaser() {
     gameActive = true;
     score = 0;
     health = 100;
@@ -50,7 +54,7 @@ function updateHUD() {
 function gameLoop() {
     if (!gameActive) return;
     spawnVirus();
-    if (difficultySpeed > 400) difficultySpeed -= 30;
+
     spawnInterval = setTimeout(gameLoop, difficultySpeed);
 }
 
@@ -74,7 +78,7 @@ function spawnVirus() {
             damageSystem();
             virus.remove();
         }
-    }, 2000);
+    }, damageDelay);
 }
 
 // Fonction appelée quand le laser touche un virus
@@ -82,14 +86,25 @@ function burnVirus(v) {
     if (v.dataset.alive === "false") return;
     v.dataset.alive = "false";
 
-    score += 100; // On ajoute les points
+    score += 100;
 
-    // --- VÉRIFICATION VICTOIRE ---
-    if (score >= 2000) {
+    // --- DIFFICULTÉ SANS LIMITE (NO LIMIT) ---
+
+    // On retire le Math.max(...). La vitesse descend purement linéairement.
+    difficultySpeed = 1500 - (score / 5);
+    damageDelay = 2000 - (score / 5);
+
+    // Petite sécurité technique : on ne descend pas en dessous de 1ms
+    // (Sinon à 30 000 points, le jeu deviendrait négatif et buguerait)
+    if (difficultySpeed < 1) difficultySpeed = 1;
+    if (damageDelay < 1) damageDelay = 1;
+
+    // ------------------------------------------
+
+    if (score >= 50000) {
         gameWin();
-        return; // On arrête là pour ne pas mettre à jour le HUD inutilement
+        return;
     }
-    // -----------------------------
 
     v.classList.add('burning');
     setTimeout(() => v.remove(), 300);
@@ -233,6 +248,7 @@ document.addEventListener('mousedown', (e) => {
     // Si 5 clics ou plus en 1  sec -> Activation CHEAT
     if (clickHistory.length >= 5 && !isCheatActive) {
         isCheatActive = true;
+
         // Petit effet sonore ou visuel console
         console.log("CHEAT ACTIVATED: INFINITE LASER");
         updateHUD(); // Pour changer la couleur du HUD
@@ -277,41 +293,36 @@ document.addEventListener('mousemove', (e) => {
 
 // --- GESTION DE L'ÉCRAN DE FIN ---
 function showEndScreen(type) {
-    // 1. Arrêt du jeu
     gameActive = false;
     clearTimeout(spawnInterval);
     document.querySelectorAll('.virus-popup').forEach(v => v.remove());
-
-    // Cacher le HUD et le Laser
     document.getElementById('game-hud').style.display = 'none';
     document.getElementById('laser-beam').style.display = 'none';
 
-    // 2. Préparation de l'écran
     const endScreen = document.getElementById('end-screen');
     const endTitle = document.getElementById('end-title');
     const endMsg = document.getElementById('end-msg');
-    const endScore = document.getElementById('end-score');
 
-    // Reset des classes
     endScreen.className = '';
+
+    // Reset Formulaire
+    document.getElementById('score-form').style.display = 'block';
+    document.getElementById('leaderboard-container').style.display = 'none';
+    document.getElementById('player-pseudo').value = '';
+    document.getElementById('player-pseudo').disabled = false;
 
     if (type === 'win') {
         endScreen.classList.add('win');
         endTitle.innerText = "MISSION ACCOMPLIE";
-        endMsg.innerText = "Le système est purifié. Goliath a été repoussé.";
-        // Petit son de victoire si tu en as un jour
+        endMsg.innerText = "Système purifié.";
     } else {
         endScreen.classList.add('lose');
         endTitle.innerText = "ÉCHEC CRITIQUE";
-        endMsg.innerText = "Le système a été corrompu par les Big Tech.";
+        endMsg.innerText = "Système corrompu.";
     }
 
-    endScore.innerText = `SCORE FINAL: ${score}`;
-
-    // 3. Affichage
+    document.getElementById('end-score-display').innerText = `SCORE FINAL: ${score}`;
     endScreen.style.display = 'block';
-
-    // On retire le mode "Jeu Actif" pour arrêter les animations de fond éventuelles
     document.body.classList.remove('game-active');
 }
 
@@ -325,6 +336,57 @@ function gameOver() {
     // Appel de la nouvelle fonction avec le paramètre 'lose'
     showEndScreen('lose');
 }
+
+
+function submitScore() {
+    const pseudoInput = document.getElementById('player-pseudo');
+    const pseudo = pseudoInput.value.trim() || 'ANONYME';
+
+    if(pseudo.length === 0) return;
+    pseudoInput.disabled = true;
+
+    // Appel à notre nouvelle route Flask
+    fetch('/api/score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pseudo: pseudo, score: score }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            document.getElementById('score-form').style.display = 'none';
+            loadLeaderboard();
+        } else {
+            alert("Erreur de connexion serveur.");
+            pseudoInput.disabled = false;
+        }
+    });
+}
+
+function loadLeaderboard() {
+    const container = document.getElementById('leaderboard-container');
+    const table = document.getElementById('leaderboard-table');
+
+    container.style.display = 'block';
+    table.innerHTML = '<tr><td colspan="2">CHARGEMENT...</td></tr>';
+
+    fetch('/api/leaderboard')
+    .then(response => response.json())
+    .then(data => {
+        table.innerHTML = '';
+        data.forEach((entry, index) => {
+            const row = document.createElement('tr');
+            let rank = (index + 1) + '.';
+            if(index === 0) rank = '🥇';
+            if(index === 1) rank = '🥈';
+            if(index === 2) rank = '🥉';
+
+            row.innerHTML = `<td>${rank} ${entry.pseudo}</td><td>${entry.score}</td>`;
+            table.appendChild(row);
+        });
+    })
+}
+
 
 
 
