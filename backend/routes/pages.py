@@ -85,7 +85,6 @@ def zerguem_contre_goliath():
     return render_template('zerguem.html')
 
 
-
 @pages_bp.route('/chatbot')
 def chat_page():
     """Page du chatbot"""

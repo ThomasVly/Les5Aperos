@@ -1,7 +1,7 @@
 from flask import Flask
 
-from config import Config, FRONTEND_DIR
-from routes import register_blueprints
+from backend.config import Config, FRONTEND_DIR
+from backend.routes import register_blueprints
 
 
 def create_app():
