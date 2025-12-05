@@ -1,41 +1,63 @@
-{% extends "base.html" %}
-
-{% block title %}{{ scenario.name }} - Jeu Narratif{% endblock %}
-
-{% block content %}
-<div class="scenario-window" data-type="{{ scenario.type }}">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ scenario.name }} - Les5Aperos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dialog.css') }}">
+</head>
+<body class="activity-page">
     
-    <!-- Header du scénario -->
-    <div class="scenario-header">
-        <span class="scenario-type">{{ scenario.type | upper }}</span>
-        <span class="scenario-source">{{ scenario.source }}</span>
+    <!-- Background GIF -->
+    <div class="background-gif-container">
+        <div class="tenor-gif-embed" data-postid="22552632" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%">
+            <a href="https://tenor.com/view/sunset-retro-retro-synthwave-gif-22552632">Sunset Retro Retro GIF</a>
+            from <a href="https://tenor.com/search/sunset+retro-gifs">Sunset Retro GIFs</a>
+        </div>
     </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
     
-    <!-- Titre -->
-    {% if scenario.title %}
-    <div class="scenario-title">
-        {{ scenario.title }}
-    </div>
-    {% endif %}
+    <!-- Overlay -->
+    <div class="overlay"></div>
     
-    <!-- Contenu -->
-    <div class="scenario-content">
-        {{ scenario.content | replace('\n', '<br>') | safe }}
-    </div>
+    <!-- Ordinateur en mode jeu -->
+    <section class="computer-section">
+        <div class="computer-wrapper game-mode">
+            <img src="{{ url_for('static', filename='src/Computer_pixel_art.png') }}" 
+                 alt="Computer Pixel Art" 
+                 class="computer-image">
+            
+            <!-- Interface sur l'écran (dialogs injectés ici) -->
+            <div class="screen-interface"></div>
+        </div>
+    </section>
     
-    <!-- Choix -->
-    {% if scenario.choices %}
-    <div class="scenario-choices">
-        {% for choice in scenario.choices %}
-        <form action="/game/choose" method="POST" class="choice-form">
-            <input type="hidden" name="choice" value="{{ loop.index0 }}">
-            <button type="submit" class="choice-btn">
-                {{ choice.text }}
-            </button>
-        </form>
-        {% endfor %}
-    </div>
-    {% endif %}
+    <!-- Bouton Quitter -->
+    <button class="quit-btn" id="quit-btn">QUITTER</button>
     
-</div>
-{% endblock %}
+        <!-- Données du scénario pour JavaScript -->
+        <script id="scenario-data" type="application/json">
+    {{ scenario | tojson }}
+        </script>
+        <script>
+            (function(){
+                var el = document.getElementById('scenario-data');
+                if (el) {
+                    try {
+                        window.scenarioData = JSON.parse(el.textContent || el.innerText || '{}');
+                    } catch(e) {
+                        window.scenarioData = {};
+                        console.error('Failed to parse scenario data', e);
+                    }
+                } else {
+                    window.scenarioData = {};
+                }
+            })();
+        </script>
+        
+        <script src="{{ url_for('static', filename='js/dialog.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scenario.js') }}"></script>
+</body>
+</html>
