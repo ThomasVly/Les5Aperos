@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonneries Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/windowsxp.css') }}">
+</head>
+<body class="background-gif-container">
+
+    <!-- Background GIF -->
+    <div class="background-gif-container">
+        <div class="tenor-gif-embed" data-postid="22552632" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%">
+            <a href="https://tenor.com/view/sunset-retro-retro-synthwave-gif-22552632">
+                Sunset Retro Retro GIF
+            </a>
+            from 
+            <a href="https://tenor.com/search/sunset+retro-gifs">
+                Sunset Retro GIFs
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    
+    <!-- Overlay pour assombrir légèrement le fond -->
+    <div class="overlay"></div>
+
+    <!-- Contenu principal -->
+    <section class="computer-section">
+        <div class="computer-wrapper">
+            <img src="{{ url_for('static', filename='src/Computer_pixel_art.png') }}" 
+                    alt="Computer Pixel Art" 
+                    class="computer-image">
+            
+            <!-- Interface sur l'écran de l'ordinateur -->
+            <div class="screen-interface">
+                <!-- Menu principal -->
+                <div class="main-container">
+                <!-- Panneau de gauche -->
+                <div class="left-panel">
+                    <div class="left-panel-header">
+                        <h1>Gestionnaire de sonneries</h1>
+                    </div>
+
+                    <button class="add-song-btn" onclick="document.getElementById('file-input').click()">
+                        <span>+</span>
+                        <span>Ajouter un son</span>
+                    </button>
+                    <input type="file" id="file-input" accept="audio/*" multiple>
+
+                    <div class="songs-list" id="songs-list">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">♪♫</div>
+                            <p>Aucun son chargé</p>
+                            <p style="font-size: 0.85em; margin-top: 10px;">Cliquez sur "Ajouter un son" pour commencer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panneau de droite -->
+                <div class="right-panel">
+                    <div id="canvas-container"></div>
+                    
+                    <div class="center-message" id="center-message">
+                        <div class="center-message-icon">🎧</div>
+                        <p>Sélectionnez un morceau pour visualiser</p>
+                    </div>
+
+                    <!-- Barre de contrôle audio -->
+                    <div class="audio-controls" id="audio-controls">
+                        <button class="play-pause-btn" id="play-pause-btn">
+                            <span id="play-pause-icon">▶</span>
+                        </button>
+                        <div class="progress-container">
+                            <div class="time-display">
+                                <span id="current-time">0:00</span>
+                                <span id="total-time">0:00</span>
+                            </div>
+                            <div class="progress-bar" id="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bouton de sélecteur de couleur -->
+                    <div class="color-picker-container">
+                        <button class="color-picker-btn" id="color-picker-btn" title="Choisir une couleur (double-clic pour rainbow)">🎨</button>
+                        <div class="color-slider-panel" id="color-slider-panel">
+                            <input type="range" id="color-slider" min="0" max="360" value="120" step="1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+            }
+        }
+    </script>
+    <script type="module" src="{{ url_for('static', filename='js/visualizer.js') }}"></script>
+</body>
+</html>
